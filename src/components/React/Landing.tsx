@@ -21,7 +21,7 @@ export default function MainIntro({
           </h2>
           <a
             href="/contact"
-            className="mt-8 inline-block bg-dracula-pink text-dracula-bg hover:bg-dracula-dark hover:text-dracula-light px-6 py-3 rounded-md text-lg font-medium transition-transform transform hover:scale-105"
+            className="mt-8 inline-block bg-dracula-pink text-dracula-bg hover:bg-dracula-dark hover:text-dracula-bg  px-6 py-3 rounded-md text-lg font-medium transition-transform transform hover:scale-105"
           >
             Book a consultation
           </a>
