@@ -1,0 +1,27 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import LandingPageHeroReact from "../components/React/Landing";
+import userConfig from "../config/config.json";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <LandingPageHeroReact
+        imageUrl={userConfig.landingPageHeroImages}
+        LandingPageIntroText={userConfig.LandingPageIntroText}
+        LandingPageSecondLineText={userConfig.LandingPageSecondLineText}
+        client:load
+      />
+    </main>
+    <Footer />
+  </body>
+</html>
