@@ -9,8 +9,21 @@ import vercel from "@astrojs/vercel/serverless";
 // https://astro.build/config
 export default defineConfig({
     output: "server",
+    build: {
+        format: "directory",
+    },
+    experimental: {
+        svg: true,
+    },
     site: "https://shafiq-law-associate.vercel.app/",
-    integrations: [mdx(), sitemap(), react(), tailwind()],
+    integrations: [
+        mdx(),
+        sitemap(),
+        react({
+            include: ["**/react/*"],
+        }),
+        tailwind(),
+    ],
     adapter: vercel({
         webAnalytics: {
             enabled: true,
