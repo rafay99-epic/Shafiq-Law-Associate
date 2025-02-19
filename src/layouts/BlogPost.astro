@@ -7,7 +7,7 @@ import FormattedDate from "../components/FormattedDate.astro";
 
 type Props = CollectionEntry<"blog">["data"];
 
-const { title, description, pubDate } = Astro.props;
+const { title, description, pubDate, tags } = Astro.props;
 ---
 
 <html lang="en">
@@ -25,17 +25,25 @@ const { title, description, pubDate } = Astro.props;
           <p class="text-base text-dracula-comment">
             <FormattedDate date={pubDate} />
           </p>
+          {
+            tags && tags.length > 0 && (
+              <div class="mt-4 flex flex-wrap justify-center gap-2">
+                {tags.map((tag) => (
+                  <span class="px-3 py-1 text-lg font-semibold text-white bg-dracula-pink  rounded-lg">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )
+          }
         </div>
-
         <!-- Title -->
         <h1
           class="text-5xl font-extrabold text-gray-900 leading-snug text-center mb-6"
         >
           {title}
         </h1>
-
         <hr class="border-dracula-current-line my-6 w-24 mx-auto" />
-
         <!-- Blog Content (Justified) -->
         <div
           class="blog-content text-[20px] text-gray-800 leading-[1.8] text-justify"

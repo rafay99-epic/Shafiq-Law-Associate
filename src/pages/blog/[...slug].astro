@@ -35,7 +35,9 @@ const { Content } = await render(post).catch((error) => {
 const postData = {
   title: post.data.title ?? "Untitled Post",
   description: post.data.description ?? "No description available.",
-  pubDate: post.data.pubDate ?? new Date(0), // Default to Unix epoch if missing
+  pubDate: post.data.pubDate ?? new Date(0),
+  draft: post.data.draft ?? false,
+  tags: post.data.tags ?? [],
 };
 ---
 
