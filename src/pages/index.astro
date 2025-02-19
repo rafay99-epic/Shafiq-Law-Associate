@@ -2,10 +2,29 @@
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import LandingPageHeroReact from "../components/React/Landing";
+import LandingPageHeroReact from "../components/React/Home/Landing";
 import userConfig from "../config/config.json";
 import Analytics from "@vercel/analytics/astro";
+import WhyChooseUS from "../components/React/Home/WhyChooseUS";
+import Services from "../components/React/Services/Services";
+import ContactForm from "../components/React/Home/Contact";
+import LastestBlog from "../components/React/Home/LatestBlog";
+import FAQ from "../components/React/Home/FAQ";
 export const prerender = true;
+
+import { getCollection } from "astro:content";
+const rawPosts = await getCollection("blog");
+
+const posts = rawPosts
+  .filter((post) => !post.data.draft)
+  .map((post) => ({
+    id: post.id,
+    title: post.data.title,
+    description: post.data.description,
+    pubDate: new Date(post.data.pubDate),
+    tags: post.data.tags || [],
+  }))
+  .sort((a, b) => b.pubDate.getTime() - a.pubDate.getTime());
 ---
 
 <!doctype html>
@@ -19,26 +38,40 @@ export const prerender = true;
   </head>
   <body>
     <Header />
-    <main>
-      <!-- Landing Page Hero -->
-      <LandingPageHeroReact
-        imageUrl={userConfig.landingPageHeroImages}
-        LandingPageIntroText={userConfig.LandingPageIntroText}
-        LandingPageSecondLineText={userConfig.LandingPageSecondLineText}
-        client:load
-      />
-      <!--What we do section-->
+    <main class="bg-dracula-bg">
+      <div class="max-w-10xl mx-auto px-6">
+        <section>
+          <!-- Landing Page Hero -->
+          <LandingPageHeroReact
+            imageUrl={userConfig.landingPageHeroImages}
+            LandingPageIntroText={userConfig.LandingPageIntroText}
+            LandingPageSecondLineText={userConfig.LandingPageSecondLineText}
+            client:load
+          />
+        </section>
+        <section>
+          <!--  Why Choose Us section -->
+          <WhyChooseUS client:load />
+        </section>
 
-      <!--  Why Choose Us section -->
-
-      <!-- Testimonials section -->
-
-      <!-- Top Case Studies section AKA Blogs -->
-
-      <!-- FAQ section -->
-
-      <!-- Call to action section -->
+        <section>
+          <!-- Services Section -->
+          <Services client:load />
+        </section>
+        <section>
+          <!-- Top Case Studies section AKA Blogs -->
+          <LastestBlog posts={posts} client:load />
+        </section>
+        <section>
+          <!-- FAQ section -->
+          <FAQ client:load />
+        </section>
+        <section>
+          <!-- Call to action section -->
+          <ContactForm client:load />
+        </section>
+      </div>
+      <Footer />
     </main>
-    <Footer />
   </body>
 </html>

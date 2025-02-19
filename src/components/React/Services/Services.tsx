@@ -57,8 +57,8 @@ const services = [
 const ServicesPage: React.FC = () => {
   return (
     <section className="bg-dracula-bg py-16 px-6">
-      <div className="max-w-6xl mx-auto text-center">
-        <h1 className="text-4xl font-extrabold text-dracula-foreground mb-4">
+      <div className="max-w-7xl mx-auto text-center">
+        <h1 className="text-5xl font-extrabold text-dracula-foreground mb-4">
           Our Legal Services
         </h1>
         <p className="text-lg text-dracula-comment mb-12">
