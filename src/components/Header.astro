@@ -7,17 +7,18 @@ import userConfig from "../config/config.json";
   <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 h-full">
     <div class="relative flex items-center justify-between h-full">
       <!-- Logo & Site Title -->
-      <div class="flex-shrink-0 flex items-center">
-        <img
-          class="h-16 w-auto rounded-full"
-          src={userConfig.organizationLogo}
-          alt="Shafiq Law Chamber"
-        />
-        <span class="text-dracula-foreground text-lg font-bold ml-2">
-          {userConfig.SITE_TITLE}
-        </span>
-      </div>
-
+      <a href="/">
+        <div class="flex-shrink-0 flex items-center">
+          <img
+            class="h-16 w-auto rounded-full"
+            src={userConfig.organizationLogo}
+            alt="Shafiq Law Chamber"
+          />
+          <span class="text-dracula-foreground text-lg font-bold ml-2">
+            {userConfig.SITE_TITLE}
+          </span>
+        </div>
+      </a>
       <!-- Mobile Menu Button -->
       <div class="absolute inset-y-0 right-0 flex items-center sm:hidden">
         <button
@@ -46,10 +47,11 @@ import userConfig from "../config/config.json";
 
       <!-- Desktop Navigation -->
       <div class="hidden sm:flex sm:items-center sm:space-x-4">
-        <a href="/" class="nav-link">Home</a>
         <a href="/about" class="nav-link">About</a>
         <a href="/services" class="nav-link">Services</a>
-        <a href="/caselaw" class="nav-link">Case Law</a>
+        <a href="/blog" class="nav-link">Case Law</a>
+        <a href="/contact" class="nav-link">Contact</a>
+        <a href="/pricing" class="nav-link">Pricing</a>
       </div>
 
       <!-- Appointment Button (Desktop) -->
@@ -65,7 +67,9 @@ import userConfig from "../config/config.json";
       <a href="/" class="mobile-link">Home</a>
       <a href="/about" class="mobile-link">About</a>
       <a href="/services" class="mobile-link">Services</a>
-      <a href="/caselaw" class="mobile-link">Case Law</a>
+      <a href="/blog" class="mobile-link">Case Law</a>
+      <a href="/contact" class="nav-link">Contact</a>
+      <a href="/pricing" class="nav-link">Pricing</a>
       <a href="/contact" class="btn-primary block text-center">Appointment</a>
     </div>
   </div>
@@ -83,9 +87,9 @@ import userConfig from "../config/config.json";
       mobileMenu.classList.toggle("hidden");
 
       if (isOpen) {
-        menuIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>`; // Close icon
+        menuIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>`;
       } else {
-        menuIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>`; // Menu icon
+        menuIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>`;
       }
     });
   });
