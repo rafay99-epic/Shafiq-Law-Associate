@@ -1,6 +1,6 @@
 export default function HeroSection() {
   return (
-    <section className="relative py-24 text-center bg-gradient-to-b from-dracula-background to-gray-900">
+    <section className="relative py-24 text-center bg-dracula-bg to-gray-900">
       <div className="container mx-auto max-w-3xl">
         <h1 className="text-5xl font-extrabold text-dracula-foreground">
           About <span className="text-dracula-pink">Shafiq Law Chamber</span>

@@ -45,6 +45,7 @@ export default function IntroductionSection({ CEOImage }: CEOImageProps) {
             trusted advisor in the legal community.
           </p>
         </div>
+        <div className="absolute left-1/2 -bottom-6 w-24 h-1 bg-dracula-pink rounded-full transform -translate-x-1/2"></div>
       </section>
     </>
   );
