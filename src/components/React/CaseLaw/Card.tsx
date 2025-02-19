@@ -1,8 +1,16 @@
 import React from "react";
 
-const Card: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+interface CardProps {
+  children: React.ReactNode;
+  onClick?: () => void; // Added onClick support
+}
+
+const Card: React.FC<CardProps> = ({ children, onClick }) => {
   return (
-    <div className="rounded-2xl overflow-hidden shadow-lg bg-dracula-bg dark:bg-dracula-foreground transition-all duration-300 hover:shadow-xl p-6 border border-dracula-current-line">
+    <div
+      className="rounded-2xl overflow-hidden shadow-lg bg-white dark:bg-gray-900 transition-all duration-300 hover:shadow-xl p-6"
+      onClick={onClick} // Attach onClick handler
+    >
       {children}
     </div>
   );

@@ -12,6 +12,18 @@
     --dracula-yellow: #222222;
 }
 
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+}
+
+main {
+    flex-grow: 1;
+}
+
 /* General Typography */
 .blog-content {
     font-family: "Arial", sans-serif;
