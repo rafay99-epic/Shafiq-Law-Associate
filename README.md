@@ -1,68 +1,79 @@
-# Astro Starter Kit: Blog
+# Shafiq Law Associate
 
-```sh
-npm create astro@latest -- --template blog
+Shafiq Law Associate is a professional law firm based in Pakistan. This website was developed using **Astro**, **React**, and **Tailwind CSS** to ensure a fast, modern, and responsive user experience.
+
+## 🚀 Technologies Used
+
+- **Astro** - Static Site Generator for high-performance websites
+- **React** - Used for dynamic and interactive components
+- **Tailwind CSS** - Utility-first CSS framework for styling
+
+## 📂 Project Structure
+
+```
+/ ─ src/
+   ├── components/        # Reusable React components
+   ├── layouts/           # Page layouts
+   ├── pages/             # Website pages
+   ├── styles/            # Custom Tailwind CSS styles
+   ├── content/           # Any static content (like legal documents, blog posts)
+   ├── public/            # Static assets (images, icons, etc.)
+   ├── astro.config.mjs   # Astro configuration file
+   ├── package.json       # Dependencies and scripts
+   ├── tailwind.config.js # Tailwind CSS configuration
+   └── README.md          # Project documentation
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/blog)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/blog)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/blog/devcontainer.json)
+## 🛠️ Installation & Setup
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+To run this project locally, follow these steps:
 
-![blog](https://github.com/withastro/astro/assets/2244813/ff10799f-a816-4703-b967-c78997e8323d)
+### 1️⃣ Clone the Repository
 
-Features:
-
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and OpenGraph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-├── public/
-├── src/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   └── pages/
-├── astro.config.mjs
-├── README.md
-├── package.json
-└── tsconfig.json
+```bash
+git clone https://github.com/rafay99-epic/Shafiq-Law-Associate
+cd Shafiq-Law-Associate
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+### 2️⃣ Install Dependencies
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+```bash
+npm install
+```
 
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
+### 3️⃣ Start the Development Server
 
-Any static assets, like images, can be placed in the `public/` directory.
+```bash
+npm run dev
+```
 
-## 🧞 Commands
+The site will be available at **http://localhost:4321** (or the port displayed in your terminal).
 
-All commands are run from the root of the project, from a terminal:
+## 🔧 Build for Production
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+To generate a static production build, run:
 
-## 👀 Want to learn more?
+```bash
+npm run build
+```
 
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+The output will be available in the **dist/** folder, ready to be deployed.
 
-## Credit
+## 🌐 Deployment
 
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+The site is fully static and can be deployed to platforms like:
+
+- **Vercel** (Recommended)
+- **Netlify**
+- **GitHub Pages**
+- **Cloudflare Pages**
+
+## 📜 License
+
+This project is proprietary and owned by **Shafiq Law Associate**. Unauthorized use, copying, or distribution is prohibited. For any inquiries, please contact **Shafiq Law Associate** [directly](www.shafiqlawchamber.com/contact) or through detail checkout the [License](LICENSE).
+
+---
+
+### 💡 Need Help?
+
+For any inquiries or support, contact **Shafiq Law Associate** through their official website.

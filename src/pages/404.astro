@@ -1,0 +1,27 @@
+---
+import NotFoundPage from "../components/React/404/NotFoundPage";
+import BaseHead from "../components/BaseHead.astro";
+import userConfig from "../config/config.json";
+import Analytics from "@vercel/analytics/astro";
+export const prerender = true;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <BaseHead
+      title={userConfig.SITE_TITLE}
+      description={userConfig.SITE_DESCRIPTION}
+    />
+    <Analytics />
+  </head>
+
+  <body>
+    <main>
+      <NotFoundPage />
+    </main>
+  </body>
+</html>
