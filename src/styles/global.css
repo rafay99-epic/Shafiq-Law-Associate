@@ -1,22 +1,179 @@
-/*
-  The CSS in this style tag is based off of Bear Blog's default CSS.
-  https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
-  License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
- */
-
-
-@font-face {
-    font-family: 'Atkinson';
-    src: url('/fonts/atkinson-regular.woff') format('woff');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
+:root {
+    --dracula-bg: #ffffff;
+    --dracula-current-line: #d9d9d9;
+    --dracula-foreground: #222222;
+    --dracula-comment: #888888;
+    --dracula-cyan: #3a506b;
+    --dracula-green: #d35400;
+    --dracula-orange: #4a4a4a;
+    --dracula-pink: #d35400;
+    --dracula-purple: #3a506b;
+    --dracula-red: #c0392b;
+    --dracula-yellow: #222222;
 }
 
-@font-face {
-    font-family: 'Atkinson';
-    src: url('/fonts/atkinson-bold.woff') format('woff');
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
+/* General Typography */
+.blog-content {
+    font-family: "Arial", sans-serif;
+    line-height: 1.8;
+    color: var(--dracula-foreground);
+    background-color: var(--dracula-bg);
+}
+
+/* Headings */
+.blog-content h1,
+.blog-content h2,
+.blog-content h3,
+.blog-content h4,
+.blog-content h5,
+.blog-content h6 {
+    font-weight: bold;
+    margin: 1.2em 0 0.8em;
+    color: var(--dracula-foreground);
+}
+
+.blog-content h1 {
+    font-size: 2rem;
+    border-bottom: 2px solid var(--dracula-current-line);
+    padding-bottom: 0.3rem;
+}
+
+.blog-content h2 {
+    font-size: 1.75rem;
+    color: var(--dracula-cyan);
+}
+
+.blog-content h3 {
+    font-size: 1.5rem;
+    color: var(--dracula-green);
+}
+
+.blog-content h4 {
+    font-size: 1.25rem;
+    color: var(--dracula-orange);
+}
+
+/* Paragraphs */
+.blog-content p {
+    font-size: 1rem;
+    margin: 0 0 1.5em;
+    color: var(--dracula-foreground);
+}
+
+/* Links */
+.blog-content a {
+    color: var(--dracula-green);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease-in-out;
+}
+
+.blog-content a:hover {
+    color: var(--dracula-pink);
+    text-decoration: underline;
+}
+
+/* Blockquotes */
+.blog-content blockquote {
+    border-left: 4px solid var(--dracula-cyan);
+    padding: 0.5em 1em;
+    color: var(--dracula-comment);
+    background-color: var(--dracula-current-line);
+    font-style: italic;
+    margin: 1.5em 0;
+}
+
+/* Lists */
+.blog-content ul,
+.blog-content ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1.5em;
+}
+
+.blog-content li {
+    margin-bottom: 0.5em;
+}
+
+/* Tables */
+.blog-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5em 0;
+    background: var(--dracula-bg);
+}
+
+.blog-content th,
+.blog-content td {
+    border: 1px solid var(--dracula-current-line);
+    padding: 0.75em;
+    text-align: left;
+}
+
+.blog-content th {
+    background: var(--dracula-cyan);
+    color: var(--dracula-bg);
+    font-weight: bold;
+}
+
+.blog-content td {
+    background: var(--dracula-bg);
+    color: var(--dracula-foreground);
+}
+
+/* Striped Table Rows */
+.blog-content tr:nth-child(even) {
+    background-color: var(--dracula-current-line);
+}
+
+/* Code Blocks */
+.blog-content pre {
+
+    padding: 1rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 0.95rem;
+}
+
+.blog-content code {
+
+
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-family: "Courier New", monospace;
+}
+
+/* Inline Code */
+.blog-content p code,
+.blog-content li code,
+.blog-content td code {
+    font-size: 0.9rem;
+
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+}
+
+/* Horizontal Rule */
+.blog-content hr {
+    border: 0;
+    height: 1px;
+    background: var(--dracula-current-line);
+    margin: 2rem 0;
+}
+
+/* Images */
+.blog-content img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1.5em auto;
+    border-radius: 8px;
+}
+
+/* Highlighted Text */
+.blog-content mark {
+    background-color: var(--dracula-yellow);
+    color: var(--dracula-bg);
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-weight: bold;
 }

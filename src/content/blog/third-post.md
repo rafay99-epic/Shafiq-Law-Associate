@@ -1,8 +1,7 @@
 ---
-title: 'Third post'
-description: 'Lorem ipsum dolor sit amet'
-pubDate: 'Jul 22 2022'
-heroImage: '/blog-placeholder-2.jpg'
+title: "Third post"
+description: "Lorem ipsum dolor sit amet"
+pubDate: "Jul 22 2022"
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
@@ -14,3 +13,50 @@ Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque. Diam s
 Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id cursus metus aliquam eleifend mi.
 
 Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
+
+| Month    | Savings |
+| -------- | ------- |
+| January  | $250    |
+| February | $80     |
+| March    | $420    |
+
+```js
+import { type CollectionEntry, getCollection } from "astro:content";
+import BlogPost from "../../layouts/BlogPost.astro";
+export const prerender = true;
+import { render } from "astro:content";
+
+export async function getStaticPaths() {
+  try {
+    const posts = await getCollection("blog");
+    return posts.map((post) => ({
+      params: { slug: post.id },
+      props: post,
+    }));
+  } catch (error) {
+    console.error("Error fetching blog posts:", error);
+    return [];
+  }
+}
+
+type Props = CollectionEntry<"blog">;
+
+const post = Astro.props;
+
+if (!post || !post.data) {
+  console.error("Invalid post data:", post);
+  throw new Error("Blog post data is missing or corrupted.");
+}
+
+const { Content } = await render(post).catch((error) => {
+  console.error("Error rendering content:", error);
+  return { Content: null };
+});
+
+// Ensure required props have fallback values
+const postData = {
+  title: post.data.title ?? "Untitled Post",
+  description: post.data.description ?? "No description available.",
+  pubDate: post.data.pubDate ?? new Date(0), // Default to Unix epoch if missing
+};
+```

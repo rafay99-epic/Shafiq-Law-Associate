@@ -8,27 +8,33 @@ import tailwind from "@astrojs/tailwind";
 import vercel from "@astrojs/vercel/serverless";
 // https://astro.build/config
 export default defineConfig({
-    output: "server",
-    build: {
-        format: "directory",
+  output: "server",
+  build: {
+    format: "directory",
+  },
+  experimental: {
+    svg: true,
+  },
+  markdown: {
+    shikiConfig: {
+      theme: "tokyo-night",
     },
-    experimental: {
-        svg: true,
-    },
-    site: "https://shafiq-law-associate.vercel.app/",
-    integrations: [
-        mdx(),
-        sitemap(),
-        react({
-            include: ["**/react/*"],
-        }),
-        tailwind(),
-    ],
-    adapter: vercel({
-        webAnalytics: {
-            enabled: true,
-        },
-        imageService: true,
-        maxDuration: 8,
+  },
+
+  site: "https://shafiq-law-associate.vercel.app/",
+  integrations: [
+    mdx(),
+    sitemap(),
+    react({
+      include: ["**/react/*"],
     }),
+    tailwind(),
+  ],
+  adapter: vercel({
+    webAnalytics: {
+      enabled: true,
+    },
+    imageService: true,
+    maxDuration: 8,
+  }),
 });
