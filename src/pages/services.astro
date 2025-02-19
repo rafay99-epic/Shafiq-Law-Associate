@@ -5,6 +5,7 @@ import Footer from "../components/Footer.astro";
 import userConfig from "../config/config.json";
 import Analytics from "@vercel/analytics/astro";
 export const prerender = true;
+import ServicesPage from "../components/React/Services/Services";
 ---
 
 <!doctype html>
@@ -18,7 +19,9 @@ export const prerender = true;
   </head>
   <body>
     <Header />
-    <main></main>
+    <main>
+      <ServicesPage client:load />
+    </main>
     <Footer />
   </body>
 </html>
