@@ -5,6 +5,7 @@ import Footer from "../components/Footer.astro";
 import userConfig from "../config/config.json";
 import Analytics from "@vercel/analytics/astro";
 export const prerender = true;
+import PricingPage from "../components/React/Pricing/PricingPackage";
 ---
 
 <!doctype html>
@@ -18,7 +19,13 @@ export const prerender = true;
   </head>
   <body>
     <Header />
-    <main></main>
+    <main>
+      <div>
+        <section>
+          <PricingPage client:load />
+        </section>
+      </div>
+    </main>
     <Footer />
   </body>
 </html>
