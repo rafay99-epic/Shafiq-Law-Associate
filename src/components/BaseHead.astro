@@ -13,7 +13,7 @@ interface Props {
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const { title, description, image = "/ShafiqLawAssociates.png" } = Astro.props;
-// import { ClientRouter } from "astro:transitions";
+import { ClientRouter } from "astro:transitions";
 ---
 
 <!-- Global Metadata -->
@@ -44,7 +44,7 @@ const { title, description, image = "/ShafiqLawAssociates.png" } = Astro.props;
   type="font/woff"
   crossorigin
 /> -->
-<!-- <ClientRouter /> -->
+<ClientRouter />
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
 
