@@ -1,27 +1,21 @@
 import { ShieldCheck, Users, Scale } from "lucide-react";
 
-const WhyChooseUs = () => {
-  const reasons = [
-    {
-      icon: <ShieldCheck className="w-10 h-10 text-dracula-cyan" />,
-      title: "Proven Legal Expertise",
-      description:
-        "With years of experience, we have successfully handled complex cases across various legal domains.",
-    },
-    {
-      icon: <Users className="w-10 h-10 text-dracula-green" />,
-      title: "Client-Centered Approach",
-      description:
-        "We prioritize our clients' needs, offering personalized legal strategies for the best outcomes.",
-    },
-    {
-      icon: <Scale className="w-10 h-10 text-dracula-purple" />,
-      title: "Trusted & Respected",
-      description:
-        "Our reputation is built on integrity, professionalism, and a commitment to justice.",
-    },
-  ];
+const iconMap: { [key: string]: React.ElementType } = {
+  ShieldCheck,
+  Users,
+  Scale,
+};
 
+interface Reason {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+interface WhyChooseUsProps {
+  reasons: Reason[];
+}
+const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ reasons }) => {
   return (
     <section className="bg-dracula-bg py-16 px-6 md:px-12">
       <div className="max-w-7xl mx-auto text-center">

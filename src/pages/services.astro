@@ -20,7 +20,7 @@ import ServicesPage from "../components/React/Services/Services";
   <body>
     <Header />
     <main>
-      <ServicesPage client:load />
+      <ServicesPage services={userConfig.services} client:load />
     </main>
     <Footer />
   </body>

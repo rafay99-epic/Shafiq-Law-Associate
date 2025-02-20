@@ -10,7 +10,7 @@ import Services from "../components/React/Services/Services";
 import ContactForm from "../components/React/Home/Contact";
 import LastestBlog from "../components/React/Home/LatestBlog";
 import FAQ from "../components/React/Home/FAQ";
-import Pricing from "../components/React/Home/Pricing";
+// import PricingPage from "../components/React/Pricing/PricingPackage";
 export const prerender = true;
 
 import { getCollection } from "astro:content";
@@ -52,12 +52,12 @@ const posts = rawPosts
         </section>
         <section>
           <!--  Why Choose Us section -->
-          <WhyChooseUS client:load />
+          <WhyChooseUS reasons={userConfig.WhyChooseUs} client:load />
         </section>
 
         <section>
           <!-- Services Section -->
-          <Services client:load />
+          <Services services={userConfig.services} client:load />
         </section>
         <section>
           <!-- Top Case Studies section AKA Blogs -->
@@ -65,14 +65,14 @@ const posts = rawPosts
         </section>
         <section>
           <!-- FAQ section -->
-          <FAQ client:load />
+          <FAQ faqData={userConfig.faq} client:load />
         </section>
         <!-- <section>
-          <Pricing client:load />
+          <PricingPage pricingPlans={userConfig.pricingPlans} client:load />
         </section> -->
         <section>
           <!-- Call to action section -->
-          <ContactForm client:load />
+          <ContactForm offices={userConfig.offices} client:load />
         </section>
       </div>
       <Footer />
