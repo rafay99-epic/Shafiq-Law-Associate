@@ -8,7 +8,6 @@ import vercel from "@astrojs/vercel";
 
 export default defineConfig({
   site: "https://www.shafiqlawchamber.com",
-  output: "server",
   build: {
     format: "directory",
   },
