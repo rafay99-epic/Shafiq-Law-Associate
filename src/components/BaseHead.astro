@@ -1,7 +1,4 @@
 ---
-// Import the global.css file here so that it is included on
-// all pages through the use of the <BaseHead /> component.
-import "../styles/global.css";
 import UserConfig from "../config/config.json";
 
 interface Props {
@@ -10,41 +7,19 @@ interface Props {
   image?: string;
 }
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-
 const { title, description, image = "/ShafiqLawAssociates.png" } = Astro.props;
-import { ClientRouter } from "astro:transitions";
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const siteUrl = Astro.site;
+const fullImageUrl = new URL(image, siteUrl);
 ---
 
-<!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <link rel="icon" type="image/svg+xml" href="/shafiqLawchamber.svg" />
 <link rel="sitemap" href="/sitemap-index.xml" />
-<link
-  rel="alternate"
-  type="application/rss+xml"
-  title={UserConfig.SITE_TITLE}
-  href={new URL("rss.xml", Astro.site)}
-/>
+<link rel="alternate" type="application/rss+xml" title={UserConfig.SITE_TITLE} href={new URL("rss.xml", siteUrl)} />
 <meta name="generator" content={Astro.generator} />
 
-<!-- Font preloads
-<link
-  rel="preload"
-  href="/fonts/atkinson-regular.woff"
-  as="font"
-  type="font/woff"
-  crossorigin
-/>
-<link
-  rel="preload"
-  href="/fonts/atkinson-bold.woff"
-  as="font"
-  type="font/woff"
-  crossorigin
-/> -->
-<!-- <ClientRouter /> -->
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
 
@@ -53,16 +28,49 @@ import { ClientRouter } from "astro:transitions";
 <meta name="title" content={title} />
 <meta name="description" content={description} />
 
-<!-- Open Graph / Facebook -->
+<!-- Open Graph / Facebook / LinkedIn / Instagram -->
 <meta property="og:type" content="website" />
-<meta property="og:url" content={Astro.url} />
+<meta property="og:url" content={siteUrl} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={new URL(image, Astro.url)} />
+<meta property="og:image" content={fullImageUrl} />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content={Astro.url} />
+<meta property="twitter:url" content={siteUrl} />
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={new URL(image, Astro.url)} />
+<meta property="twitter:image" content={fullImageUrl} />
+
+<!-- LinkedIn -->
+<meta property="linkedin:title" content={title} />
+<meta property="linkedin:description" content={description} />
+<meta property="linkedin:image" content={fullImageUrl} />
+<meta property="linkedin:url" content={siteUrl} />
+
+<!-- Instagram -->
+<meta property="instagram:title" content={title} />
+<meta property="instagram:description" content={description} />
+<meta property="instagram:image" content={fullImageUrl} />
+<meta property="instagram:url" content={siteUrl} />
+
+<!-- JSON-LD Structured Data for Google -->
+<script is:inline  lang="json" type="application/ld+json">
+{JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": title,
+  "description": description,
+  "url": siteUrl,
+  "image": fullImageUrl,
+  "author": {
+    "@type": "Person",
+    "name": "Syntax Lab",
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Shafiq Law Associates",
+    "logo": `${siteUrl}/shafiqLawchamber.svg`
+  }
+})}
+</script>
