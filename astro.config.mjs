@@ -21,7 +21,7 @@ export default defineConfig({
     },
   },
 
-  site: "https://shafiq-law-associate.vercel.app/",
+  site: "https://shafiqlawchamber.com",
   integrations: [
     mdx(),
     sitemap(),
