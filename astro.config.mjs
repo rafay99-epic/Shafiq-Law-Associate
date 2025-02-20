@@ -4,7 +4,7 @@ import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import react from "@astrojs/react";
 import tailwind from "@astrojs/tailwind";
-import vercel from "@astrojs/vercel/serverless";
+import vercelServerless from "@astrojs/vercel";
 
 export default defineConfig({
   site: "https://www.shafiqlawchamber.com",
@@ -31,7 +31,7 @@ export default defineConfig({
     }),
     tailwind(),
   ],
-  adapter: vercel({
+  adapter: vercelServerless({
     webAnalytics: {
       enabled: true,
     },
