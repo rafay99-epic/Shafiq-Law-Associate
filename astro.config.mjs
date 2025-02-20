@@ -8,7 +8,7 @@ import vercelServerless from "@astrojs/vercel";
 
 export default defineConfig({
   site: "https://www.shafiqlawchamber.com",
-  output: "server",
+  output: "static",
   build: {
     format: "directory",
   },
