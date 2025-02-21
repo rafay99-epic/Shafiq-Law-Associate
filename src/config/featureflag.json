@@ -1,0 +1,29 @@
+{
+    "HomePage": true,
+    "HomePageComponent": [
+        {
+            "LandingPage": true,
+            "WhyChooseUs": true,
+            "LatestBlog": true,
+            "FAQ": true,
+            "Contact-US": true
+        }
+    ],
+    "AboutUs": true,
+    "AboutUsComponent": [
+        {
+            "AboutHer": true,
+            "CEOIntro": true,
+            "CoreValues": true,
+            "CTA": true
+        }
+    ],
+    "Services": true,
+    "CaseLaw": true,
+    "ContactUS": true,
+    "Pricing": true,
+    "Footer": true,
+    "Header": true,
+    "PrivatePolicy": true,
+    "TermsAndConditions": true
+}

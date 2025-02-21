@@ -7,6 +7,9 @@
     "LandingPageSecondLineText": "Get the legal help and advice you need from Shafiq Law Chamber",
     "organizationLogo": "/Images/shafiqLawchamber.jpeg",
     "CEoImage": "/Images/slc-Copy.png",
+    "EmailAdress": "slclaw@gmail.com",
+    "PhoneNumber01": "03009817389",
+    "PhoneNumber02": "0321 5134315",
     "FacebookLink": "",
     "InstagramLink": "",
     "TwitterLink": "",
@@ -14,7 +17,7 @@
     "offices": [
         {
             "name": "Morning Office",
-            "address": "",
+            "address": "16 Ground Floor, Zamrud Block, District Court, Rawalpindi, Pakistan",
             "phone": "+92 0300 9817389",
             "hours": "9:00 AM - 2:00 PM"
         },
