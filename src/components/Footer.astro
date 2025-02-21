@@ -1,6 +1,15 @@
 ---
 import SocialIcons from "../components/React/SocialIcon/SocialIcon";
 import UserConfig from "../config/config.json";
+import FeatureFlag from "../config/featureflag.json";
+
+try {
+  if (!FeatureFlag.Footer) {
+    return Astro.redirect("/access-denied");
+  }
+} catch (error) {
+  return Astro.redirect("/404");
+}
 ---
 
 <footer class="bg-dracula-bg text-black py-10">
@@ -9,8 +18,8 @@ import UserConfig from "../config/config.json";
       <!-- Left: Built by Info -->
       <div>
         <h2 class="text-xl font-semibold text-dracula-pink">Built By</h2>
-        <a href="" class="text-black hover:text-dracula-pink"
-          >Binary Bridge Technology</a
+        <a href="https://rafay99.com" class="text-black hover:text-dracula-pink"
+          >Syntax Lab Technologies</a
         >
       </div>
 
@@ -29,27 +38,47 @@ import UserConfig from "../config/config.json";
       <div>
         <h2 class="text-xl font-semibold text-dracula-pink">More</h2>
         <ul>
-          <!-- <li>
-            <a href="/privacy-policy" class="text-black hover:text-dracula-pink"
-              >Privacy Policy</a
-            >
-          </li> -->
           <li>
-            <a
-              href="https://astro.build/"
-              target="_blank"
-              class="text-black hover:text-dracula-pink"
-            >
-              Built with Astro 🌟
-            </a>
+            {
+              FeatureFlag.TermsAndConditions && (
+                <a
+                  href="/terms-and-conditions"
+                  class="text-black hover:text-dracula-pink"
+                >
+                  Terms and Conditions
+                </a>
+              )
+            }
+
+            <li>
+              {
+                FeatureFlag.PrivatePolicy && (
+                  <a
+                    href="/privacy-policy"
+                    class="text-black hover:text-dracula-pink"
+                  >
+                    Privacy Policy
+                  </a>
+                )
+              }
+            </li>
+            <li>
+              <a
+                href="https://astro.build/"
+                target="_blank"
+                class="text-black hover:text-dracula-pink"
+              >
+                Built with Astro 🌟
+              </a>
+            </li>
           </li>
         </ul>
       </div>
-    </div>
 
-    <!-- Bottom: Copyright -->
-    <div class="text-center mt-8 text-gray">
-      &copy; {new Date().getFullYear()} Shafiq Law Associates. All rights reserved.
+      <!-- Bottom: Copyright -->
+      <div class="text-center mt-8 text-gray">
+        &copy; {new Date().getFullYear()} Shafiq Law Associates. All rights reserved.
+      </div>
     </div>
   </div>
 </footer>

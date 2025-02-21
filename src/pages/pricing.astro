@@ -6,6 +6,15 @@ import userConfig from "../config/config.json";
 import Analytics from "@vercel/analytics/astro";
 export const prerender = true;
 import PricingPage from "../components/React/Pricing/PricingPackage";
+import FeatureFlag from "../config/featureflag.json";
+
+try {
+  if (!FeatureFlag.Pricing) {
+    return Astro.redirect("/access-denied");
+  }
+} catch (error) {
+  return Astro.redirect("/404");
+}
 ---
 
 <!doctype html>

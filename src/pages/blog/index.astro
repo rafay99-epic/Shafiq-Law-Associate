@@ -4,8 +4,17 @@ import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
 import userConfig from "../../config/config.json";
 import CaseLawReact from "../../components/React/CaseLaw/CaseLaw";
+import FeatureFlag from "../../config/featureflag.json";
 
 import { getCollection } from "astro:content";
+
+try {
+  if (!FeatureFlag.CaseLaw) {
+    return Astro.redirect("/access-denied");
+  }
+} catch (error) {
+  return Astro.redirect("/404");
+}
 const rawPosts = await getCollection("blog");
 
 const posts = rawPosts

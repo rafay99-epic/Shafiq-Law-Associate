@@ -4,7 +4,6 @@
         {
             "LandingPage": true,
             "WhyChooseUs": true,
-            "LatestBlog": true,
             "FAQ": true,
             "Contact-US": true
         }

@@ -6,6 +6,15 @@ import userConfig from "../config/config.json";
 import Analytics from "@vercel/analytics/astro";
 import ContactForm from "../components/React/Contact/ContactForm";
 export const prerender = true;
+import FeatureFlag from "../config/featureflag.json";
+
+try {
+  if (!FeatureFlag.ContactUS) {
+    return Astro.redirect("/access-denied");
+  }
+} catch (error) {
+  return Astro.redirect("/404");
+}
 ---
 
 <!doctype html>

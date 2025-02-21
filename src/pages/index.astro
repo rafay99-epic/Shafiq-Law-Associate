@@ -10,7 +10,17 @@ import Services from "../components/React/Services/Services";
 import ContactForm from "../components/React/Home/Contact";
 import LastestBlog from "../components/React/Home/LatestBlog";
 import FAQ from "../components/React/Home/FAQ";
-// import PricingPage from "../components/React/Pricing/PricingPackage";
+import PricingPage from "../components/React/Pricing/PricingPackage";
+import FeatureFlag from "../config/featureflag.json";
+
+try {
+  if (!FeatureFlag.HomePage) {
+    return Astro.redirect("/access-denied");
+  }
+} catch (error) {
+  return Astro.redirect("/404");
+}
+
 export const prerender = true;
 
 import { getCollection } from "astro:content";
@@ -43,39 +53,56 @@ const posts = rawPosts
       <div class="max-w-10xl mx-auto px-6">
         <section>
           <!-- Landing Page Hero -->
-          <LandingPageHeroReact
-            imageUrl={userConfig.landingPageHeroImages}
-            LandingPageIntroText={userConfig.LandingPageIntroText}
-            LandingPageSecondLineText={userConfig.LandingPageSecondLineText}
-            client:load
-          />
+          {
+            FeatureFlag.HomePageComponent[0].LandingPage && (
+              <LandingPageHeroReact
+                imageUrl={userConfig.landingPageHeroImages}
+                LandingPageIntroText={userConfig.LandingPageIntroText}
+                LandingPageSecondLineText={userConfig.LandingPageSecondLineText}
+                client:load
+              />
+            )
+          }
         </section>
         <section>
-          <!--  Why Choose Us section -->
-          <WhyChooseUS reasons={userConfig.WhyChooseUs} client:load />
+          <!-- Why Choose Us section -->
+          {
+            FeatureFlag.HomePageComponent[0].WhyChooseUs && (
+              <WhyChooseUS reasons={userConfig.WhyChooseUs} client:load />
+            )
+          }
         </section>
-
         <section>
           <!-- Services Section -->
           <Services services={userConfig.services} client:load />
         </section>
         <section>
           <!-- Top Case Studies section AKA Blogs -->
-          <LastestBlog posts={posts} client:load />
+          {FeatureFlag.CaseLaw && <LastestBlog posts={posts} client:load />}
         </section>
         <section>
           <!-- FAQ section -->
-          <FAQ faqData={userConfig.faq} client:load />
+          {
+            FeatureFlag.HomePageComponent[0].FAQ && (
+              <FAQ faqData={userConfig.faq} client:load />
+            )
+          }
         </section>
-        <!-- <section>
-          <PricingPage pricingPlans={userConfig.pricingPlans} client:load />
-        </section> -->
         <section>
-          <!-- Call to action section -->
-          <ContactForm offices={userConfig.offices} client:load />
+          {
+            FeatureFlag.Pricing && (
+              <PricingPage pricingPlans={userConfig.pricingPlans} client:load />
+            )
+          }
         </section>
+        <!-- Call to action section -->
+        {
+          FeatureFlag.HomePageComponent[0]["Contact-US"] && (
+            <ContactForm offices={userConfig.offices} client:load />
+          )
+        }
       </div>
-      <Footer />
     </main>
+    <Footer />
   </body>
 </html>

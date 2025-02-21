@@ -3,7 +3,16 @@ import { type CollectionEntry, getCollection } from "astro:content";
 import BlogPost from "../../layouts/BlogPost.astro";
 export const prerender = true;
 import { render } from "astro:content";
+import FeatureFlag from "../../config/featureflag.json";
+import ErrorPage from "../../components/React/404/ErrorPage";
 
+try {
+  if (!FeatureFlag.CaseLaw) {
+    return Astro.redirect("/access-denied");
+  }
+} catch (error) {
+  return Astro.redirect("/404");
+}
 export async function getStaticPaths() {
   try {
     const posts = await getCollection("blog");
@@ -42,5 +51,11 @@ const postData = {
 ---
 
 <BlogPost {...postData}>
-  {Content ? <Content /> : <p style="color:red;">Content not found</p>}
+  {
+    Content ? (
+      <Content />
+    ) : (
+      <ErrorPage error="An unexpected error occurred. Please try again later." />
+    )
+  }
 </BlogPost>

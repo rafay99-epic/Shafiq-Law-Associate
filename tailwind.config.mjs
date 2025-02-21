@@ -24,17 +24,17 @@ export default {
       },
 
       colors: {
-        "dracula-bg": "#FFFFFFFF", // Lighter grayish white for a clean, professional background
-        "dracula-current-line": "#D9D9D9", // Softer gray for subtle dividers
-        "dracula-foreground": "#222222", // Darker gray for stronger contrast in text
-        "dracula-comment": "#888888", // Slightly darker for better readability
-        "dracula-cyan": "#3A506B", // Deep muted blue for accents (trustworthy & professional)
-        "dracula-green": "#D35400", // Warm dark orange for CTA buttons (law firms avoid bright greens)
-        "dracula-orange": "#4A4A4A", // Neutral dark gray for muted secondary text
-        "dracula-pink": "#D35400", // Matched to `dracula-green` for consistent action colors
-        "dracula-purple": "#3A506B", // Matched to `dracula-cyan` for uniform branding
-        "dracula-red": "#C0392B", // Deep professional red for warnings/errors
-        "dracula-yellow": "#222222", // Dark gray instead of yellow (yellow often doesn’t work well in law designs)
+        "dracula-bg": "#FFFFFFFF",
+        "dracula-current-line": "#D9D9D9",
+        "dracula-foreground": "#222222",
+        "dracula-comment": "#888888",
+        "dracula-cyan": "#3A506B",
+        "dracula-green": "#D35400",
+        "dracula-orange": "#4A4A4A",
+        "dracula-pink": "#D35400",
+        "dracula-purple": "#3A506B",
+        "dracula-red": "#C0392B",
+        "dracula-yellow": "#222222",
       },
     },
   },
