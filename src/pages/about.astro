@@ -1,5 +1,5 @@
 ---
-import userConfig from "../config/config.json";
+import userConfig from "../config//SiteConfig/config.json";
 import Analytics from "@vercel/analytics/astro";
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
@@ -8,7 +8,7 @@ import AboutHerSection from "../components/React/AboutUS/hero";
 import CEOIntroReact from "../components/React/AboutUS/CEOIntro";
 import CoreValueSection from "../components/React/AboutUS/CoreValues";
 import CallItAction from "../components/React/AboutUS/CallItAction";
-import FeatureFlag from "../config/featureflag.json";
+import FeatureFlag from "../config/FeatureFlag/featureflag.json";
 try {
   if (!FeatureFlag.AboutUs) {
     return Astro.redirect("/access-denied");

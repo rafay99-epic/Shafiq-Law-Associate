@@ -1,4 +1,4 @@
-import { ShieldCheck, Users, Scale } from "lucide-react";
+import { ShieldCheck, Users, Scale, HelpCircle } from "lucide-react";
 
 const iconMap: { [key: string]: React.ElementType } = {
   ShieldCheck,
@@ -15,6 +15,7 @@ interface Reason {
 interface WhyChooseUsProps {
   reasons: Reason[];
 }
+
 const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ reasons }) => {
   return (
     <section className="bg-dracula-bg py-16 px-6 md:px-12">
@@ -27,20 +28,26 @@ const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ reasons }) => {
           clients with a dedication that sets us apart.
         </p>
         <div className="grid md:grid-cols-3 gap-8">
-          {reasons.map((reason, index) => (
-            <div
-              key={index}
-              className="p-6 bg-white shadow-lg rounded-lg text-center"
-            >
-              <div className="flex justify-center mb-4">{reason.icon}</div>
-              <h3 className="text-xl font-semibold text-dracula-foreground mb-2">
-                {reason.title}
-              </h3>
-              <p className="text-dracula-orange text-sm">
-                {reason.description}
-              </p>
-            </div>
-          ))}
+          {reasons.map((reason, index) => {
+            const IconComponent = iconMap[reason.icon] || HelpCircle;
+
+            return (
+              <div
+                key={index}
+                className="p-6 bg-white shadow-lg rounded-lg text-center"
+              >
+                <div className="flex justify-center mb-4">
+                  <IconComponent className="w-12 h-12 text-dracula-foreground" />
+                </div>
+                <h3 className="text-xl font-semibold text-dracula-foreground mb-2">
+                  {reason.title}
+                </h3>
+                <p className="text-dracula-orange text-sm">
+                  {reason.description}
+                </p>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
