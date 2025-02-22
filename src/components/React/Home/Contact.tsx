@@ -1,22 +1,17 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 
-const offices = [
-  {
-    name: "Morning Office",
-    address: "123 Legal Street, City, Country",
-    phone: "+123 456 7890",
-    hours: "9:00 AM - 1:00 PM",
-  },
-  {
-    name: "Evening Office",
-    address: "456 Justice Avenue, City, Country",
-    phone: "+987 654 3210",
-    hours: "5:00 PM - 9:00 PM",
-  },
-];
+interface Office {
+  name: string;
+  address: string;
+  phone: string;
+  hours: string;
+}
 
-export default function ContactSection() {
+interface ContactSectionProps {
+  offices: Office[];
+}
+export default function ContactSection({ offices }: ContactSectionProps) {
   const [currentOffice, setCurrentOffice] = useState(0);
 
   return (

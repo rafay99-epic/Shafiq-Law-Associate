@@ -1,0 +1,192 @@
+---
+import Analytics from "@vercel/analytics/astro";
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+import userConfig from "../config//SiteConfig/config.json";
+import FeatureFlag from "../config/FeatureFlag/featureflag.json";
+import SpeedInsights from "@vercel/speed-insights/astro";
+
+try {
+  if (!FeatureFlag.TermsAndConditions) {
+    return Astro.redirect("/access-denied");
+  }
+} catch (error) {
+  return Astro.redirect("/404");
+}
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <SpeedInsights />
+    <BaseHead
+      title="Terms and Conditions | Shafiq Law Associate"
+      description="Terms and Conditions for Shafiq Law Associates"
+    />
+    <Analytics />
+  </head>
+
+  <body class="bg-dracula-bg text-dracula-foreground leading-relaxed">
+    <Header />
+
+    <main class="max-w-5xl mx-auto px-8 sm:px-14 py-20">
+      <div class="blog-content">
+        <article class="relative bg-white shadow-lg rounded-2xl p-10 sm:p-14">
+          <div class="text-center mb-6">
+            <p class="text-base text-dracula-comment">February 21, 2025</p>
+
+            <div class="mt-4 flex flex-wrap justify-center gap-2">
+              <span
+                class="px-3 py-1 text-lg font-semibold text-white bg-dracula-pink rounded-lg"
+              >
+                Terms and Conditions
+              </span>
+            </div>
+          </div>
+          <h1
+            class="text-5xl font-extrabold text-gray-900 leading-snug text-center mb-6"
+          >
+            Terms and Conditions of Shafiq Law Chamber
+          </h1>
+
+          <div
+            class="blog-content text-[20px] text-gray-800 leading-[1.8] text-justify"
+          >
+            <p>
+              Welcome to <span class="font-bold">Shafiq Law Chamber</span>. By
+              accessing and using this website (shafiqlawchamber.com), you agree
+              to comply with the following terms and conditions. If you do not
+              agree with any part of these terms, please discontinue your use of
+              the website.
+            </p>
+
+            <h3 class="font-weight-bold text-dracula-foreground">
+              1. Intellectual Property Rights
+            </h3>
+            <p>
+              All blog posts, articles, and written content on this website are
+              <span class="font-bold">copyrighted</span> and are the intellectual
+              property of <span class="font-bold">Shafiq Law Chamber</span>. You
+              <span class="font-bold">may not</span>:
+            </p>
+            <ul>
+              <li>
+                Reproduce, modify, distribute, or republish any blog post
+                without explicit permission.
+              </li>
+              <li>
+                Use the blog content for commercial or public purposes without
+                authorization.
+              </li>
+            </ul>
+            <p>
+              Exceptions: You may share links to blog posts on social media or
+              quote small excerpts (with proper attribution), but copying entire
+              articles is strictly prohibited.
+            </p>
+
+            <h3 class="font-weight-bold text-dracula-foreground">
+              2. Open-Source Code (MIT License)
+            </h3>
+            <p>
+              The code snippets, examples, and other technical resources shared
+              on this website are licensed under the <span class="font-bold"
+                >MIT License</span
+              >, meaning you are free to:
+            </p>
+            <ul>
+              <li>
+                Use, modify, and distribute the code in personal or commercial
+                projects.
+              </li>
+              <li>Share and improve upon the code without restriction.</li>
+            </ul>
+            <p>
+              However, we are not liable for any issues, damages, or misuse
+              resulting from the use of our code.
+            </p>
+
+            <h3 class="font-weight-bold text-dracula-foreground">
+              3. User Responsibilities
+            </h3>
+            <p>By using this website, you agree that you will not:</p>
+            <ul>
+              <li>Violate any applicable laws or regulations.</li>
+              <li>Use automated bots or scrapers to extract data.</li>
+              <li>
+                Attempt to exploit security vulnerabilities or interfere with
+                the website’s functionality.
+              </li>
+            </ul>
+
+            <h3 class="font-weight-bold text-dracula-foreground">
+              4. External Links
+            </h3>
+            <p>
+              This website may contain links to third-party websites for
+              additional resources. We are <span class="font-bold"
+                >not responsible</span
+              > for the content, privacy policies, or practices of these external
+              sites.
+            </p>
+
+            <h3 class="font-weight-bold text-dracula-foreground">
+              5. Disclaimers & Liability Limitations
+            </h3>
+            <ul>
+              <li>
+                All content is provided <span class="font-bold">"as is"</span> without
+                warranties of any kind.
+              </li>
+              <li>
+                We do not guarantee accuracy, completeness, or reliability of
+                the information on this website.
+              </li>
+              <li>
+                We are <span class="font-bold">not responsible</span> for any damages
+                or losses incurred from using this website.
+              </li>
+            </ul>
+
+            <h3 class="font-weight-bold text-dracula-foreground">
+              6. Changes to Terms & Conditions
+            </h3>
+            <p>
+              We reserve the right to update or modify these terms at any time.
+              Any changes will be posted on this page with an updated
+              <span class="font-bold">Effective Date</span>. Your continued use
+              of the website signifies acceptance of the revised terms.
+            </p>
+
+            <h3 class="font-weight-bold text-dracula-foreground">
+              7. Contact Information
+            </h3>
+            <p>
+              If you have any questions regarding these terms, please contact us
+              at:
+            </p>
+            <p>
+              <span class="font-bold">Shafiq Law Chamber</span><br />
+
+              <span class="font-bold">Office 1:</span><br />
+              {userConfig.offices[0].address}<br />
+
+              <span class="font-bold">Office 2:</span><br />
+              {userConfig.offices[1].address}<br /><br />
+
+              <span class="font-bold">Email:</span>
+              {userConfig.EmailAdress}<br />
+
+              <span class="font-bold">Phone:</span>
+              {userConfig.PhoneNumber01}, {userConfig.PhoneNumber02}
+            </p>
+          </div>
+        </article>
+      </div>
+
+      <Footer />
+    </main>
+  </body>
+</html>

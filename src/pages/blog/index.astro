@@ -2,10 +2,19 @@
 import BaseHead from "../../components/BaseHead.astro";
 import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
-import userConfig from "../../config/config.json";
+import userConfig from "../../config/SiteConfig/config.json";
 import CaseLawReact from "../../components/React/CaseLaw/CaseLaw";
-
+import FeatureFlag from "../../config/FeatureFlag/featureflag.json";
+import SpeedInsights from "@vercel/speed-insights/astro";
 import { getCollection } from "astro:content";
+
+try {
+  if (!FeatureFlag.CaseLaw) {
+    return Astro.redirect("/access-denied");
+  }
+} catch (error) {
+  return Astro.redirect("/404");
+}
 const rawPosts = await getCollection("blog");
 
 const posts = rawPosts
@@ -25,6 +34,7 @@ const posts = rawPosts
 <!doctype html>
 <html lang="en">
   <head>
+    <SpeedInsights />
     <BaseHead
       title={`CaseLaw | ${userConfig.SITE_TITLE}`}
       description="A CaseLaw page provides detailed information about a specific legal case, including its summary, facts, issues, holding, reasoning, and related legal citations."
@@ -34,10 +44,12 @@ const posts = rawPosts
   <body>
     <Header />
     <main>
-      <CaseLawReact posts={posts} client:load />
+      <section>
+        <CaseLawReact posts={posts} client:load />
+      </section>
+      <footer>
+        <Footer />
+      </footer>
     </main>
-    <footer>
-      <Footer />
-    </footer>
   </body>
 </html>

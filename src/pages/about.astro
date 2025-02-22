@@ -1,5 +1,5 @@
 ---
-import userConfig from "../config/config.json";
+import userConfig from "../config//SiteConfig/config.json";
 import Analytics from "@vercel/analytics/astro";
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
@@ -8,6 +8,15 @@ import AboutHerSection from "../components/React/AboutUS/hero";
 import CEOIntroReact from "../components/React/AboutUS/CEOIntro";
 import CoreValueSection from "../components/React/AboutUS/CoreValues";
 import CallItAction from "../components/React/AboutUS/CallItAction";
+import FeatureFlag from "../config/FeatureFlag/featureflag.json";
+import SpeedInsights from "@vercel/speed-insights/astro";
+try {
+  if (!FeatureFlag.AboutUs) {
+    return Astro.redirect("/access-denied");
+  }
+} catch (error) {
+  return Astro.redirect("/404");
+}
 ---
 
 <!doctype html>
@@ -15,7 +24,7 @@ import CallItAction from "../components/React/AboutUS/CallItAction";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    <SpeedInsights />
     <BaseHead
       title={`About US | ${userConfig.SITE_TITLE}`}
       description="Learn more about us and our team."
@@ -25,10 +34,30 @@ import CallItAction from "../components/React/AboutUS/CallItAction";
   <body>
     <Header />
     <main class="bg-dracula-bg">
-      <AboutHerSection client:load />
-      <CEOIntroReact CEOImage={userConfig.CEoImage} client:load />
-      <CoreValueSection client:load />
-      <CallItAction client:load />
+      <section>
+        {
+          FeatureFlag.AboutUsComponent[0].AboutHer && (
+            <AboutHerSection client:load />
+          )
+        }
+      </section>
+      <section>
+        {
+          FeatureFlag.AboutUsComponent[0].CEOIntro && (
+            <CEOIntroReact CEOImage={userConfig.CEoImage} client:load />
+          )
+        }
+      </section>
+      <section>
+        {
+          FeatureFlag.AboutUsComponent[0].CoreValues && (
+            <CoreValueSection client:load />
+          )
+        }
+      </section>
+      <section>
+        {FeatureFlag.AboutUsComponent[0].CTA && <CallItAction client:load />}
+      </section>
     </main>
     <Footer />
   </body>

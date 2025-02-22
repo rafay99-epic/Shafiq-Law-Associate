@@ -1,35 +1,15 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+interface FAQ {
+  question: string;
+  answer: string;
+}
 
-const faqData = [
-  {
-    question: "How can I register a company in Pakistan?",
-    answer:
-      "To register a company in Pakistan, you need to submit an application to SECP, reserve a company name, draft the memorandum and articles of association, and complete the incorporation process.",
-  },
-  {
-    question: "What are the legal requirements for divorce in Pakistan?",
-    answer:
-      "In Pakistan, divorce procedures vary by personal law. Muslim couples must follow the Talaq process, including notification to the Union Council. For other faiths, legal separation follows civil court procedures.",
-  },
-  {
-    question: "How do I resolve a property dispute in Pakistan?",
-    answer:
-      "Property disputes are resolved through civil courts. If you have valid ownership documents, you can file a case under the Transfer of Property Act or Specific Relief Act.",
-  },
-  {
-    question: "Can a foreigner own property in Pakistan?",
-    answer:
-      "Yes, foreigners can own property in Pakistan with special approval from the Board of Investment and compliance with local land laws.",
-  },
-  {
-    question: "What are the steps for filing a criminal case in Pakistan?",
-    answer:
-      "To file a criminal case, visit your local police station to register an FIR. If the police refuse, you can approach the Magistrate under Section 22-A of the CrPC for complaint registration.",
-  },
-];
+interface FAQSectionProps {
+  faqData: FAQ[];
+}
 
-const FAQSection = () => {
+const FAQSection: React.FC<FAQSectionProps> = ({ faqData }) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggleFAQ = (index: number) => {

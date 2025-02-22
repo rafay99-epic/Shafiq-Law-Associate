@@ -1,3 +1,197 @@
 ---
+import Analytics from "@vercel/analytics/astro";
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+import userConfig from "../config//SiteConfig/config.json";
+import FeatureFlag from "../config/FeatureFlag/featureflag.json";
+import SpeedInsights from "@vercel/speed-insights/astro";
 
+try {
+  if (!FeatureFlag.PrivatePolicy) {
+    return Astro.redirect("/access-denied");
+  }
+} catch (error) {
+  return Astro.redirect("/404");
+}
 ---
+
+<html lang="en">
+  <head>
+    <SpeedInsights />
+    <BaseHead
+      title="Privacy Policy | Shafiq Law Associate"
+      description="Privacy Policy for Shafiq Law Associates"
+    />
+    <Analytics />
+  </head>
+
+  <body class="bg-dracula-bg text-dracula-foreground leading-relaxed">
+    <Header />
+
+    <main class="max-w-5xl mx-auto px-8 sm:px-14 py-20">
+      <div class="blog-content">
+        <article class="relative bg-white shadow-lg rounded-2xl p-10 sm:p-14">
+          <div class="text-center mb-6">
+            <p class="text-base text-dracula-comment">Febuary 21 2025</p>
+
+            <div class="mt-4 flex flex-wrap justify-center gap-2">
+              <span
+                class="px-3 py-1 text-lg font-semibold text-white bg-dracula-pink rounded-lg"
+              >
+                Privacy Policy
+              </span>
+            </div>
+          </div>
+          <h1
+            class="text-5xl font-extrabold text-gray-900 leading-snug text-center mb-6"
+          >
+            Privacy Policy of Shafiq Law Chamber
+          </h1>
+
+          <div
+            class="blog-content text-[20px] text-gray-800 leading-[1.8] text-justify"
+          >
+            <p>
+              Shafiq Law Chamber ("we," "our," or "us") respects your privacy
+              and is committed to protecting any personal information you
+              provide while using our website. This Privacy Policy outlines how
+              we collect, use, and safeguard your data.
+            </p>
+
+            <h3 class="font-weight-bold, text-dracula-foreground">
+              1. Information We Collect
+            </h3>
+            <p>
+              We do not collect personal information from visitors except in the
+              following cases:
+            </p>
+            <ul>
+              <li>
+                <strong>Subscription Model:</strong> If you subscribe to our legal
+                services, we may collect your name, email address, and payment details
+                through a third-party payment system.
+              </li>
+              <li>
+                <strong>Blog & Hiring Section:</strong> If you submit an application
+                for employment or interact with our blog, you may provide basic personal
+                details voluntarily.
+              </li>
+              <li>
+                <strong>Third-Party Payment System:</strong> We use a third-party
+                payment processor to handle transactions. Your payment information
+                is not stored on our servers but is processed securely by our payment
+                partner.
+              </li>
+            </ul>
+
+            <hr />
+
+            <h3>2. How We Use Your Information</h3>
+            <p>
+              We use the information you provide only for the following
+              purposes:
+            </p>
+            <ul>
+              <li>
+                To process your subscription payments securely via third-party
+                payment services.
+              </li>
+              <li>
+                To communicate with you regarding legal services, blog updates,
+                or hiring opportunities.
+              </li>
+              <li>To improve our website and services.</li>
+            </ul>
+            <p>
+              We do not sell, rent, or share your information with third parties
+              except as required by law or necessary to fulfill our services.
+            </p>
+
+            <hr />
+
+            <h3>3. Third-Party Services</h3>
+            <p>
+              Our website may contain links to third-party websites or services,
+              such as payment processors and external blogs. We are not
+              responsible for their privacy practices. Please review their
+              privacy policies before providing personal information.
+            </p>
+
+            <hr />
+
+            <h3>4. Data Security</h3>
+            <p>
+              We implement reasonable security measures to protect your personal
+              information. However, no online transmission or storage method is
+              completely secure. We encourage you to use strong passwords and
+              safeguard your account information.
+            </p>
+
+            <hr />
+
+            <h3>5. Cookies and Tracking</h3>
+            <p>
+              We do not use cookies or tracking technologies to collect personal
+              data.
+            </p>
+
+            <hr />
+
+            <h3>6. Your Rights</h3>
+            <p>
+              Depending on your location, you may have rights regarding your
+              personal data, such as:
+            </p>
+            <ul>
+              <li>Accessing or requesting a copy of your data.</li>
+              <li>Requesting correction or deletion of your data.</li>
+              <li>Objecting to the processing of your data.</li>
+            </ul>
+            <p>
+              To exercise your rights, please contact us at [Insert Contact
+              Email].
+            </p>
+
+            <hr />
+
+            <h3>7. Changes to This Policy</h3>
+            <p>
+              We may update this Privacy Policy from time to time. Any changes
+              will be posted on this page with an updated effective date.
+            </p>
+
+            <hr />
+
+            <h3>8. Contact Us</h3>
+            <p>
+              If you have any questions regarding this Privacy Policy, you can
+              contact us at:
+            </p>
+            <p>
+              <strong>Shafiq Law Chamber</strong><br />
+
+              <strong>Office 1:</strong><br />
+              {userConfig.offices[0].address}
+              <br />
+
+              <strong>Office 2:</strong><br />
+              {userConfig.offices[1].address}
+              <br /><br />
+
+              <strong>Email:</strong>
+              {userConfig.EmailAdress}
+              <br />
+
+              <strong>Phone:</strong>
+              {userConfig.PhoneNumber01}, {userConfig.PhoneNumber02}
+            </p>
+          </div>
+        </article>
+      </div>
+
+      <Footer />
+    </main>
+  </body>
+</html>

@@ -1,27 +1,22 @@
-import { ShieldCheck, Users, Scale } from "lucide-react";
+import { ShieldCheck, Users, Scale, HelpCircle } from "lucide-react";
 
-const WhyChooseUs = () => {
-  const reasons = [
-    {
-      icon: <ShieldCheck className="w-10 h-10 text-dracula-cyan" />,
-      title: "Proven Legal Expertise",
-      description:
-        "With years of experience, we have successfully handled complex cases across various legal domains.",
-    },
-    {
-      icon: <Users className="w-10 h-10 text-dracula-green" />,
-      title: "Client-Centered Approach",
-      description:
-        "We prioritize our clients' needs, offering personalized legal strategies for the best outcomes.",
-    },
-    {
-      icon: <Scale className="w-10 h-10 text-dracula-purple" />,
-      title: "Trusted & Respected",
-      description:
-        "Our reputation is built on integrity, professionalism, and a commitment to justice.",
-    },
-  ];
+const iconMap: { [key: string]: React.ElementType } = {
+  ShieldCheck,
+  Users,
+  Scale,
+};
 
+interface Reason {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+interface WhyChooseUsProps {
+  reasons: Reason[];
+}
+
+const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ reasons }) => {
   return (
     <section className="bg-dracula-bg py-16 px-6 md:px-12">
       <div className="max-w-7xl mx-auto text-center">
@@ -33,20 +28,26 @@ const WhyChooseUs = () => {
           clients with a dedication that sets us apart.
         </p>
         <div className="grid md:grid-cols-3 gap-8">
-          {reasons.map((reason, index) => (
-            <div
-              key={index}
-              className="p-6 bg-white shadow-lg rounded-lg text-center"
-            >
-              <div className="flex justify-center mb-4">{reason.icon}</div>
-              <h3 className="text-xl font-semibold text-dracula-foreground mb-2">
-                {reason.title}
-              </h3>
-              <p className="text-dracula-orange text-sm">
-                {reason.description}
-              </p>
-            </div>
-          ))}
+          {reasons.map((reason, index) => {
+            const IconComponent = iconMap[reason.icon] || HelpCircle;
+
+            return (
+              <div
+                key={index}
+                className="p-6 bg-white shadow-lg rounded-lg text-center"
+              >
+                <div className="flex justify-center mb-4">
+                  <IconComponent className="w-12 h-12 text-dracula-foreground" />
+                </div>
+                <h3 className="text-xl font-semibold text-dracula-foreground mb-2">
+                  {reason.title}
+                </h3>
+                <p className="text-dracula-orange text-sm">
+                  {reason.description}
+                </p>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

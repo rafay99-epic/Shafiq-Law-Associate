@@ -4,11 +4,13 @@ import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import react from "@astrojs/react";
 import tailwind from "@astrojs/tailwind";
+import vercel from "@astrojs/vercel";
+import dotenv from "dotenv";
 
-import vercel from "@astrojs/vercel/serverless";
-// https://astro.build/config
+dotenv.config();
+
 export default defineConfig({
-  output: "server",
+  site: "https://www.shafiqlawchamber.com",
   build: {
     format: "directory",
   },
@@ -20,8 +22,9 @@ export default defineConfig({
       theme: "tokyo-night",
     },
   },
-
-  site: "https://shafiq-law-associate.vercel.app/",
+  security: {
+    checkOrigin: true,
+  },
   integrations: [
     mdx(),
     sitemap(),
@@ -37,4 +40,9 @@ export default defineConfig({
     imageService: true,
     maxDuration: 8,
   }),
+  vite: {
+    optimizeDeps: {
+      include: ["react-icons/fa"],
+    },
+  },
 });

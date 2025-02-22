@@ -1,20 +1,11 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
-import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import userConfig from "../config//SiteConfig/config.json";
 import Analytics from "@vercel/analytics/astro";
-export const prerender = true;
-import PricingPage from "../components/React/Pricing/PricingPackage";
-import FeatureFlag from "../config/FeatureFlag/featureflag.json";
+import AccessDeniedPage from "../components/React/404/Access-Deined";
 import SpeedInsights from "@vercel/speed-insights/astro";
-try {
-  if (!FeatureFlag.Pricing) {
-    return Astro.redirect("/access-denied");
-  }
-} catch (error) {
-  return Astro.redirect("/404");
-}
+export const prerender = true;
 ---
 
 <!doctype html>
@@ -28,14 +19,11 @@ try {
     <Analytics />
   </head>
   <body>
-    <Header />
-    <main>
-      <div>
-        <section>
-          <PricingPage pricingPlans={userConfig.pricingPlans} client:load />
-        </section>
+    <main class="bg-dracula-bg">
+      <div class="max-w-10xl mx-auto px-6">
+        <AccessDeniedPage client:load />
       </div>
+      <Footer />
     </main>
-    <Footer />
   </body>
 </html>

@@ -1,43 +1,17 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 
-const pricingPlans = [
-  {
-    name: "Basic",
-    monthly: "PKR 5,000/month",
-    yearly: "PKR 50,000/year",
-    features: [
-      "Legal Consultation (2 Sessions)",
-      "Drafting Basic Legal Documents",
-      "Email Support",
-    ],
-  },
-  {
-    name: "Professional",
-    monthly: "PKR 15,000/month",
-    yearly: "PKR 150,000/year",
-    features: [
-      "Legal Consultation (5 Sessions)",
-      "Contract Drafting & Review",
-      "Priority Email Support",
-      "Court Representation (Limited)",
-    ],
-  },
-  {
-    name: "Premium",
-    monthly: "PKR 35,000/month",
-    yearly: "PKR 350,000/year",
-    features: [
-      "Unlimited Legal Consultation",
-      "Comprehensive Contract Drafting",
-      "24/7 Legal Support",
-      "Full Court Representation",
-      "Dedicated Legal Advisor",
-    ],
-  },
-];
+interface PricingPlan {
+  name: string;
+  monthly: string;
+  yearly: string;
+  features: string[];
+}
+interface PricingSectionProps {
+  pricingPlans: PricingPlan[];
+}
 
-export default function PricingPage() {
+export default function PricingPage({ pricingPlans }: PricingSectionProps) {
   const [billingCycle, setBillingCycle] = useState<"monthly" | "yearly">(
     "monthly"
   );

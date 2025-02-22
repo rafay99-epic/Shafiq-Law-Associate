@@ -1,0 +1,142 @@
+{
+    "SITE_TITLE": "Shafiq Law Associate",
+    "SITE_DESCRIPTION": "Shafiq Law Associate is a legal consulting firm focused on providing personalized advice and legal services.",
+    "SITE_KEYWORDS": "legal services, personalized advice, Shafiq Law Chamber",
+    "landingPageHeroImages": "/Images/landing_image.png",
+    "LandingPageIntroText": "Protect Your Rights",
+    "LandingPageSecondLineText": "Get the legal help and advice you need from Shafiq Law Chamber",
+    "organizationLogo": "/Images/shafiqLawchamber.jpeg",
+    "CEoImage": "/Images/slc-Copy.png",
+    "EmailAdress": "slclaw@gmail.com",
+    "PhoneNumber01": "03009817389",
+    "PhoneNumber02": "0321 5134315",
+    "FacebookLink": "",
+    "InstagramLink": "",
+    "TwitterLink": "",
+    "LinkedInLink": "",
+    "offices": [
+        {
+            "name": "Morning Office",
+            "address": "16 Ground Floor, Zamrud Block, District Court, Rawalpindi, Pakistan",
+            "phone": "+92 0300 9817389",
+            "hours": "9:00 AM - 2:00 PM"
+        },
+        {
+            "name": "Evening Office",
+            "address": "Office # 02, 2nd Floor, City Center, Bank Road, Saddar, Rawalpindi, Pakistan",
+            "phone": "+92 0300 9817389",
+            "hours": "6:00 PM - 9:00 PM"
+        }
+    ],
+    "faq": [
+        {
+            "question": "How can I register a company in Pakistan?",
+            "answer": "To register a company in Pakistan, you need to submit an application to SECP, reserve a company name, draft the memorandum and articles of association, and complete the incorporation process."
+        },
+        {
+            "question": "What are the legal requirements for divorce in Pakistan?",
+            "answer": "In Pakistan, divorce procedures vary by personal law. Muslim couples must follow the Talaq process, including notification to the Union Council. For other faiths, legal separation follows civil court procedures."
+        },
+        {
+            "question": "How do I resolve a property dispute in Pakistan?",
+            "answer": "Property disputes are resolved through civil courts. If you have valid ownership documents, you can file a case under the Transfer of Property Act or Specific Relief Act."
+        },
+        {
+            "question": "Can a foreigner own property in Pakistan?",
+            "answer": "Yes, foreigners can own property in Pakistan with special approval from the Board of Investment and compliance with local land laws."
+        },
+        {
+            "question": "What are the steps for filing a criminal case in Pakistan?",
+            "answer": "To file a criminal case, visit your local police station to register an FIR. If the police refuse, you can approach the Magistrate under Section 22-A of the CrPC for complaint registration."
+        }
+    ],
+    "pricingPlans": [
+        {
+            "name": "Basic",
+            "monthly": "PKR 5,000/month",
+            "yearly": "PKR 50,000/year",
+            "features": [
+                "Legal Consultation (2 Sessions)",
+                "Drafting Basic Legal Documents",
+                "Email Support"
+            ]
+        },
+        {
+            "name": "Professional",
+            "monthly": "PKR 15,000/month",
+            "yearly": "PKR 150,000/year",
+            "features": [
+                "Legal Consultation (5 Sessions)",
+                "Contract Drafting & Review",
+                "Priority Email Support",
+                "Court Representation (Limited)"
+            ]
+        },
+        {
+            "name": "Premium",
+            "monthly": "PKR 35,000/month",
+            "yearly": "PKR 350,000/year",
+            "features": [
+                "Unlimited Legal Consultation",
+                "Comprehensive Contract Drafting",
+                "24/7 Legal Support",
+                "Full Court Representation",
+                "Dedicated Legal Advisor"
+            ]
+        }
+    ],
+    "services": [
+        {
+            "title": "Criminal Defense",
+            "description": "Defend your rights with expert legal representation. We ensure the best possible outcome for your case.",
+            "icon": "Shield"
+        },
+        {
+            "title": "Family Law",
+            "description": "Compassionate legal support for divorce, custody, and family matters. We guide you through every step.",
+            "icon": "Users"
+        },
+        {
+            "title": "Personal Injury",
+            "description": "We help you secure the compensation you deserve for injuries caused by negligence or accidents.",
+            "icon": "HandHelping"
+        },
+        {
+            "title": "Civil Corporate Law",
+            "description": "Comprehensive legal guidance for businesses, covering contracts, compliance, and corporate matters.",
+            "icon": "Building"
+        },
+        {
+            "title": "Arbitration & Mediation",
+            "description": "Resolve disputes efficiently outside of court through arbitration and mediation with expert facilitators.",
+            "icon": "Scale"
+        },
+        {
+            "title": "Estate Planning",
+            "description": "Plan for the future with wills, trusts, and estate management services to protect your assets.",
+            "icon": "FileText"
+        },
+        {
+            "title": "Immigration Law",
+            "description": "Navigate the complexities of immigration law with expert assistance for visas, green cards, and citizenship.",
+            "icon": "Globe"
+        }
+    ],
+    "WhyChooseUs": [
+        {
+            "icon": "ShieldCheck",
+            "title": "Proven Legal Expertise",
+            "description": "With years of experience, we have successfully handled complex cases across various legal domains."
+        },
+        {
+            "icon": "Users",
+            "title": "Client-Centered Approach",
+            "description": "We prioritize our clients' needs, offering personalized legal strategies for the best outcomes."
+        },
+        {
+            "icon": "Scale",
+            "title": "Trusted & Respected",
+            "description": "Our reputation is built on integrity, professionalism, and a commitment to justice."
+        }
+    ]
+}
