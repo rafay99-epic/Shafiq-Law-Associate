@@ -4,6 +4,7 @@ import BaseHead from "../components/BaseHead.astro";
 import userConfig from "../config//SiteConfig/config.json";
 import Analytics from "@vercel/analytics/astro";
 export const prerender = true;
+import SpeedInsights from "@vercel/speed-insights/astro";
 ---
 
 <!doctype html>
@@ -11,7 +12,7 @@ export const prerender = true;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    <SpeedInsights />
     <BaseHead
       title={userConfig.SITE_TITLE}
       description={userConfig.SITE_DESCRIPTION}

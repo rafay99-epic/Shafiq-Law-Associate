@@ -9,6 +9,7 @@ import CEOIntroReact from "../components/React/AboutUS/CEOIntro";
 import CoreValueSection from "../components/React/AboutUS/CoreValues";
 import CallItAction from "../components/React/AboutUS/CallItAction";
 import FeatureFlag from "../config/FeatureFlag/featureflag.json";
+import SpeedInsights from "@vercel/speed-insights/astro";
 try {
   if (!FeatureFlag.AboutUs) {
     return Astro.redirect("/access-denied");
@@ -23,7 +24,7 @@ try {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    <SpeedInsights />
     <BaseHead
       title={`About US | ${userConfig.SITE_TITLE}`}
       description="Learn more about us and our team."

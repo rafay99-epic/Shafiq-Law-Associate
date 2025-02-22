@@ -5,6 +5,9 @@ import sitemap from "@astrojs/sitemap";
 import react from "@astrojs/react";
 import tailwind from "@astrojs/tailwind";
 import vercel from "@astrojs/vercel";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export default defineConfig({
   site: "https://www.shafiqlawchamber.com",

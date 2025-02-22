@@ -12,6 +12,7 @@ import LastestBlog from "../components/React/Home/LatestBlog";
 import FAQ from "../components/React/Home/FAQ";
 import PricingPage from "../components/React/Pricing/PricingPackage";
 import FeatureFlag from "../config/FeatureFlag/featureflag.json";
+import SpeedInsights from "@vercel/speed-insights/astro";
 
 try {
   if (!FeatureFlag.HomePage) {
@@ -41,6 +42,7 @@ const posts = rawPosts
 <!doctype html>
 <html lang="en">
   <head>
+    <SpeedInsights />
     <BaseHead
       title={userConfig.SITE_TITLE}
       description={userConfig.SITE_DESCRIPTION}

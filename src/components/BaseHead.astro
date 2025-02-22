@@ -1,5 +1,6 @@
 ---
-import UserConfig from "../config/config.json";
+import UserConfig from "../config/SiteConfig/config.json";
+import  SpeedInsights  from "@vercel/speed-insights/astro"
 
 interface Props {
   title: string;
@@ -12,7 +13,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const siteUrl = Astro.site;
 const fullImageUrl = new URL(image, siteUrl);
 ---
-
+<SpeedInsights />
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <link rel="icon" type="image/svg+xml" href="/shafiqLawchamber.svg" />

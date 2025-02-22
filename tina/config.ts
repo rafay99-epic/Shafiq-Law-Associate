@@ -6,10 +6,8 @@ const branch = "main";
 export default defineConfig({
   branch,
 
-  // Get this from tina.io
-  clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID,
+  clientId: process.env.TINA_CLIENT_ID,
 
-  // Get this from tina.io
   token: process.env.TINA_TOKEN,
 
   build: {
@@ -238,7 +236,7 @@ export default defineConfig({
   },
   search: {
     tina: {
-      indexerToken: "",
+      indexerToken: process.env.SEARCH_TINA,
       stopwordLanguages: ["eng"],
     },
     indexBatchSize: 100,

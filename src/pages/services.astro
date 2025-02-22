@@ -7,6 +7,7 @@ import Analytics from "@vercel/analytics/astro";
 export const prerender = true;
 import ServicesPage from "../components/React/Services/Services";
 import FeatureFlag from "../config/FeatureFlag/featureflag.json";
+import SpeedInsights from "@vercel/speed-insights/astro";
 
 try {
   if (!FeatureFlag.Services) {
@@ -20,6 +21,7 @@ try {
 <!doctype html>
 <html lang="en">
   <head>
+    <SpeedInsights />
     <BaseHead
       title={userConfig.SITE_TITLE}
       description={userConfig.SITE_DESCRIPTION}

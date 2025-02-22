@@ -4,13 +4,14 @@ import Footer from "../components/Footer.astro";
 import userConfig from "../config//SiteConfig/config.json";
 import Analytics from "@vercel/analytics/astro";
 import AccessDeniedPage from "../components/React/404/Access-Deined";
-
+import SpeedInsights from "@vercel/speed-insights/astro";
 export const prerender = true;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
+    <SpeedInsights />
     <BaseHead
       title={userConfig.SITE_TITLE}
       description={userConfig.SITE_DESCRIPTION}

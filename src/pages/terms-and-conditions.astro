@@ -6,6 +6,7 @@ import Footer from "../components/Footer.astro";
 import "../styles/global.css";
 import userConfig from "../config//SiteConfig/config.json";
 import FeatureFlag from "../config/FeatureFlag/featureflag.json";
+import SpeedInsights from "@vercel/speed-insights/astro";
 
 try {
   if (!FeatureFlag.TermsAndConditions) {
@@ -18,6 +19,8 @@ try {
 
 <html lang="en">
   <head>
+    <meta charset="UTF-8" />
+    <SpeedInsights />
     <BaseHead
       title="Terms and Conditions | Shafiq Law Associate"
       description="Terms and Conditions for Shafiq Law Associates"
