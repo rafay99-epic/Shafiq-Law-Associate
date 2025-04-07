@@ -24,5 +24,6 @@
   "Footer": true,
   "Header": true,
   "PrivatePolicy": true,
-  "TermsAndConditions": true
+  "TermsAndConditions": true,
+  "MeetTheTeam": false
 }
