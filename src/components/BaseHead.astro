@@ -1,6 +1,5 @@
 ---
 import UserConfig from "../config/SiteConfig/config.json";
-import  SpeedInsights  from "@vercel/speed-insights/astro"
 
 interface Props {
   title: string;
@@ -13,7 +12,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const siteUrl = Astro.site;
 const fullImageUrl = new URL(image, siteUrl);
 ---
-<SpeedInsights />
+
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <link rel="icon" type="image/svg+xml" href="/shafiqLawchamber.svg" />
@@ -54,6 +53,8 @@ const fullImageUrl = new URL(image, siteUrl);
 <meta property="instagram:description" content={description} />
 <meta property="instagram:image" content={fullImageUrl} />
 <meta property="instagram:url" content={siteUrl} />
+
+<link rel="stylesheet" href="/src/styles/global.css" />
 
 <!-- JSON-LD Structured Data for Google -->
 <script is:inline  lang="json" type="application/ld+json">

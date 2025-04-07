@@ -1,0 +1,37 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import userConfig from "../config//SiteConfig/config.json";
+import FeatureFlag from "../config/FeatureFlag/featureflag.json";
+import SpeedInsights from "@vercel/speed-insights/astro";
+import Analytics from "@vercel/analytics/astro";
+import MeetTeam from "../components/React/MeetTeam/meetTeam";
+
+try {
+  if (!FeatureFlag.MeetTheTeam) {
+    return Astro.redirect("/access-denied");
+  }
+} catch (error) {
+  return Astro.redirect("/404");
+}
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <SpeedInsights />
+    <BaseHead
+      title={userConfig.SITE_TITLE}
+      description={userConfig.SITE_DESCRIPTION}
+    />
+    <Analytics />
+  </head>
+  <body>
+    <Header />
+    <main class="bg-dracula-bg">
+      <MeetTeam client:visible team={userConfig.MeetOurTeam} />
+      <Footer />
+    </main>
+  </body>
+</html>

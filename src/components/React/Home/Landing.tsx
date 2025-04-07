@@ -13,7 +13,7 @@ export default function MainIntro({
     <div className="bg-dracula-bg min-h-screen flex items-center justify-center text-dracula-foreground">
       <div className="max-w-7.5xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center text-center sm:text-left justify-center">
         <div className="relative sm:w-1/2 p-4 flex flex-col justify-center items-center sm:items-start  overflow-hidden">
-          <h1 className="text-3xl sm:text-6xl font-bold text-gray-800 shadow-lg">
+          <h1 className="text-3xl sm:text-6xl font-bold text-gray-800 ">
             {LandingPageIntroText}
           </h1>
           <h2 className="mt-6 text-xl sm:text-4xl font-normal text-gray-600">

@@ -29,6 +29,11 @@ const { title, description, pubDate, tags } = Astro.props;
     <main class="max-w-5xl mx-auto px-8 sm:px-14 py-20">
       <article class="relative bg-white shadow-lg rounded-2xl p-10 sm:p-14">
         <div class="text-center mb-6">
+          <h1
+            class="text-4xl font-extrabold text-gray-900 leading-snug text-center mb-6"
+          >
+            {title}
+          </h1>
           <p class="text-base text-dracula-comment">
             <FormattedDate date={pubDate} />
           </p>
@@ -44,11 +49,7 @@ const { title, description, pubDate, tags } = Astro.props;
             )
           }
         </div>
-        <h1
-          class="text-5xl font-extrabold text-gray-900 leading-snug text-center mb-6"
-        >
-          {title}
-        </h1>
+
         <hr class="border-dracula-current-line my-6 w-24 mx-auto" />
         <div
           class="blog-content text-[20px] text-gray-800 leading-[1.8] text-justify"

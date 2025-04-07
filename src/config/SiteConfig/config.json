@@ -138,5 +138,25 @@
             "title": "Trusted & Respected",
             "description": "Our reputation is built on integrity, professionalism, and a commitment to justice."
         }
+    ],
+    "MeetOurTeam": [
+        {
+            "name": "Saqib Shafiq",
+            "position": "Founder & CEO",
+            "description": "With over 20 years of experience, Shafiq specializes in criminal law and has a proven track record in high-profile cases.",
+            "image": "/Images/slc-Copy.png"
+        },
+        {
+            "name": "Sara Khan",
+            "position": "Family Law Expert",
+            "description": "Sara is dedicated to helping families navigate legal challenges with compassion and expertise.",
+            "image": "/Images/slc-Copy.png"
+        },
+        {
+            "name": "Ali Raza",
+            "position": "Corporate Lawyer",
+            "description": "Ali provides comprehensive legal support for businesses, ensuring compliance and protecting interests.",
+            "image": "/Images/slc-Copy.png"
+        }
     ]
 }

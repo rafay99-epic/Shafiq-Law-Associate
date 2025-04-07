@@ -4,12 +4,13 @@ import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import react from "@astrojs/react";
 import tailwind from "@astrojs/tailwind";
-import vercel from "@astrojs/vercel";
+import vercel from "@astrojs/vercel/serverless";
 import dotenv from "dotenv";
 
 dotenv.config();
 
 export default defineConfig({
+  output: "server",
   site: "https://www.shafiqlawchamber.com",
   build: {
     format: "directory",
