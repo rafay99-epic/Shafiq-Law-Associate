@@ -104,7 +104,7 @@ try {
 
   <!-- Mobile Menu -->
   <div id="mobile-menu" class="hidden sm:hidden bg-dracula-bg h-25">
-    <div class="px-2 pt-2 pb-3 space-y-1">
+    <div class="px-2 pt-2 pb-3 space-y-2">
       {
         FeatureFlag.HomePage && (
           <HeaderLink href="/" class="nav-link">
@@ -147,8 +147,9 @@ try {
 
       {
         FeatureFlag.ContactUS && (
-          <a href="/contact" class="btn-primary">
-            Appointment
+          <a href="/contact" class="btn-primary block">
+            {" "}
+            Appointment{" "}
           </a>
         )
       }
@@ -182,7 +183,7 @@ try {
     @apply text-dracula-foreground hover:bg-dracula-current-line hover:text-dracula-pink px-3 py-3 rounded-md text-lg font-medium;
   }
   .mobile-link {
-    @apply text-dracula-foreground hover:bg-dracula-current-line hover:text-dracula-pink block px-3 py-3 rounded-md text-base font-medium;
+    @apply text-dracula-foreground hover:bg-dracula-current-line hover:text-dracula-pink block px-3 py-3 rounded-md text-base font-medium mb-2; /* Add margin-bottom */
   }
   .btn-primary {
     @apply bg-dracula-pink text-dracula-bg hover:bg-dracula-foreground hover:text-dracula-bg px-3 py-3 rounded-md text-lg font-medium;
