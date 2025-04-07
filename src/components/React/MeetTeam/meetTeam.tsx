@@ -8,7 +8,7 @@ interface TeamMember {
 }
 
 interface MeetTheTeamProps {
-  team: TeamMember[];
+  team: TeamMember[] | null | undefined;
 }
 
 const container = {
@@ -27,6 +27,32 @@ const item = {
 };
 
 export default function MeetTheTeam({ team }: MeetTheTeamProps) {
+  if (!team || team.length === 0) {
+    return (
+      <section className="bg-[var(--dracula-bg)] py-16 px-6">
+        <div className="max-w-7xl mx-auto text-center">
+          <h2 className="text-4xl font-bold text-[var(--dracula-foreground)] mb-4">
+            Meet Our Team
+          </h2>
+          <p className="text-lg text-[var(--dracula-comment)] mb-12">
+            Dedicated professionals shaping justice and making a difference.
+          </p>
+
+          <div className="text-xl text-[var(--dracula-comment)] mb-12">
+            <img
+              src="/Images/noTeam.png"
+              alt="Team Coming Soon"
+              className="mx-auto mt-8 w-48 sm:w-64 md:w-80 lg:w-96 h-auto"
+            />
+            <p className="mt-4 text-lg text-[var(--dracula-comment)]">
+              We are working hard to introduce our incredible team. Stay tuned!
+            </p>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className="bg-[var(--dracula-bg)] py-16 px-6">
       <div className="max-w-7xl mx-auto text-center">
@@ -48,7 +74,7 @@ export default function MeetTheTeam({ team }: MeetTheTeamProps) {
             <motion.div
               key={index}
               variants={item}
-              className="bg-[var(--dracula-current-line)] rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300"
+              className=" rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300"
             >
               <img
                 src={member.image}
