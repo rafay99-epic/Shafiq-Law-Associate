@@ -10,6 +10,7 @@ import CoreValueSection from "../components/React/AboutUS/CoreValues";
 import CallItAction from "../components/React/AboutUS/CallItAction";
 import FeatureFlag from "../config/FeatureFlag/featureflag.json";
 import SpeedInsights from "@vercel/speed-insights/astro";
+export const prerender = true;
 try {
   if (!FeatureFlag.AboutUs) {
     return Astro.redirect("/access-denied");
