@@ -7,7 +7,7 @@ import CaseLawReact from "../../components/React/CaseLaw/CaseLaw";
 import FeatureFlag from "../../config/FeatureFlag/featureflag.json";
 import SpeedInsights from "@vercel/speed-insights/astro";
 import { getCollection } from "astro:content";
-
+export const prerender = true;
 try {
   if (!FeatureFlag.CaseLaw) {
     return Astro.redirect("/access-denied");

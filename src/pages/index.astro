@@ -13,6 +13,7 @@ import FAQ from "../components/React/Home/FAQ";
 import PricingPage from "../components/React/Pricing/PricingPackage";
 import FeatureFlag from "../config/FeatureFlag/featureflag.json";
 import SpeedInsights from "@vercel/speed-insights/astro";
+export const prerender = true;
 
 try {
   if (!FeatureFlag.HomePage) {
@@ -21,8 +22,6 @@ try {
 } catch (error) {
   return Astro.redirect("/404");
 }
-
-export const prerender = true;
 
 import { getCollection } from "astro:content";
 const rawPosts = await getCollection("blog");
