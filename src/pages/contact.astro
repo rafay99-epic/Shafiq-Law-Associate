@@ -7,6 +7,7 @@ import Analytics from "@vercel/analytics/astro";
 import ContactForm from "../components/React/Contact/ContactForm";
 import FeatureFlag from "../config/FeatureFlag/featureflag.json";
 import SpeedInsights from "@vercel/speed-insights/astro";
+import { GoogleFontsOptimizer } from "astro-google-fonts-optimizer";
 export const prerender = true;
 
 try {
@@ -27,11 +28,8 @@ try {
       description="Get in touch with Shafiq Law Chamber for expert legal assistance. Schedule a free consultation today."
     />
     <Analytics />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
-      rel="stylesheet"
+    <GoogleFontsOptimizer
+      url="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
     />
   </head>
   <body class="bg-dracula-bg">

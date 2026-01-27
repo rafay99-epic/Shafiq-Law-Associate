@@ -6,6 +6,7 @@ import Footer from "../components/Footer.astro";
 import FormattedDate from "../components/FormattedDate.astro";
 import FeatureFlag from "../config/FeatureFlag/featureflag.json";
 import { ArrowLeft, Calendar, Clock, Tag } from "lucide-react";
+import { GoogleFontsOptimizer } from "astro-google-fonts-optimizer";
 export const prerender = true;
 
 try {
@@ -25,11 +26,8 @@ const readingTime = "5 min read";
 <html lang="en">
   <head>
     <BaseHead title={title} description={description} />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
-      rel="stylesheet"
+    <GoogleFontsOptimizer
+      url="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
     />
   </head>
 
