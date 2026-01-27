@@ -9,10 +9,9 @@ import tailwind from "@astrojs/tailwind";
 import vercel from "@astrojs/vercel/serverless";
 import dotenv from "dotenv"
 import robotsTxt from "astro-robots-txt";
-
 import yeskunallumami from "@yeskunall/astro-umami";
-
 import playformCompress from "@playform/compress";
+import markdownPrerender from 'astro-markdown-prerender';
 
 dotenv.config();
 
@@ -37,48 +36,53 @@ export default defineConfig({
     security: {
         checkOrigin: true,
     },
-    integrations: [mdx(), sitemap(), react({
-        experimentalDisableStreaming: true,
-        include: ["**/react/*"],
-    }), tailwind(), robotsTxt({
-        sitemap: true,
-        policy: [{
-                userAgent: 'Googlebot',
-                allow: '/',
-                disallow: ['/search'],
-                crawlDelay: 2,
-            },
-            {
-                userAgent: 'OtherBot',
-                allow: ['/allow-for-all-bots', '/allow-only-for-other-bot'],
-                disallow: ['/admin', '/login'],
-                crawlDelay: 2,
-            },
-            {
-                userAgent: '*',
-                allow: '/',
-                disallow: '/search',
-                crawlDelay: 10,
-                cleanParam: 'ref /articles/',
-            },
-        ],
+    integrations: [mdx(), sitemap(),
+        markdownPrerender({
+            prerenderAll: true
+        }),
+        react({
+            experimentalDisableStreaming: true,
+            include: ["**/react/*"],
+        }), tailwind(), robotsTxt({
+            sitemap: true,
+            policy: [{
+                    userAgent: 'Googlebot',
+                    allow: '/',
+                    disallow: ['/search'],
+                    crawlDelay: 2,
+                },
+                {
+                    userAgent: 'OtherBot',
+                    allow: ['/allow-for-all-bots', '/allow-only-for-other-bot'],
+                    disallow: ['/admin', '/login'],
+                    crawlDelay: 2,
+                },
+                {
+                    userAgent: '*',
+                    allow: '/',
+                    disallow: '/search',
+                    crawlDelay: 10,
+                    cleanParam: 'ref /articles/',
+                },
+            ],
 
-    }), yeskunallumami({
-        id: "c75d1132-dfac-451b-b32d-0930c96056cd"
-    }), playformCompress({
-        CSS: true,
-        HTML: {
-            "html-minifier-terser": {
-                removeAttributeQuotes: true,
-                collapseWhitespace: true,
-                removeComments: true,
+        }), yeskunallumami({
+            id: "c75d1132-dfac-451b-b32d-0930c96056cd"
+        }), playformCompress({
+            CSS: true,
+            HTML: {
+                "html-minifier-terser": {
+                    removeAttributeQuotes: true,
+                    collapseWhitespace: true,
+                    removeComments: true,
+                },
             },
-        },
-        Image: true,
-        JavaScript: true,
-        JSON: true,
-        SVG: true,
-    })],
+            Image: true,
+            JavaScript: true,
+            JSON: true,
+            SVG: true,
+        })
+    ],
     adapter: vercel({
         webAnalytics: {
             enabled: true,

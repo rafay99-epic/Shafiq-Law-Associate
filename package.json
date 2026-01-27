@@ -26,6 +26,7 @@
         "@yeskunall/astro-umami": "^0.0.7",
         "astro": "5.16.15",
         "astro-google-fonts-optimizer": "^0.2.2",
+        "astro-markdown-prerender": "^1.0.0",
         "astro-robots-txt": "^1.0.0",
         "astro-seo": "^1.1.0",
         "baseline-browser-mapping": "^2.9.18",

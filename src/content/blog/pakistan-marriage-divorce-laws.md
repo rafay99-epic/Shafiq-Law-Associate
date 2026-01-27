@@ -9,6 +9,7 @@ pubDate: 2025-02-22T19:00:00.000Z
 draft: false
 tags:
   - FamilyLaw
+prerender: true
 ---
 
 Marriage and divorce laws in Pakistan are governed by Islamic principles, statutory laws, and judicial precedents. These laws regulate the rights and responsibilities of spouses, legal procedures for marriage and divorce, and the protection of women and children in case of dissolution.
