@@ -16,7 +16,7 @@
     "Services": true,
     "CaseLaw": true,
     "ContactUS": true,
-    "Pricing": true,
+    "Pricing": false,
     "Footer": true,
     "Header": true,
     "PrivatePolicy": true,
