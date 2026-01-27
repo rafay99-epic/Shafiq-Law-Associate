@@ -113,9 +113,10 @@ const websiteSchema = generateWebSiteSchema(siteUrl, userConfig.SITE_TITLE);
         FeatureFlag.HomePageComponent[0].LandingPage && (
           <section class="px-6">
             <LandingPageHero
-              imageUrl={userConfig.landingPageHeroImages}
-              LandingPageIntroText={userConfig.LandingPageIntroText}
-              LandingPageSecondLineText={userConfig.LandingPageSecondLineText}
+              tagline={userConfig.heroTagline}
+              subheadline={userConfig.heroSubheadline}
+              yearsExperience={20}
+              phoneNumber={userConfig.PhoneNumber01}
               client:load
             />
           </section>
