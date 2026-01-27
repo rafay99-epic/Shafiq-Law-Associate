@@ -31,6 +31,16 @@ export default function MainIntro({
       {/* Subtle vertical line accent */}
       <div className="absolute left-[10%] top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-dracula-cyan/20 to-transparent hidden lg:block" />
 
+      {/* Large decorative watermark - intentional, centered */}
+      <div className="absolute inset-0 flex items-center justify-end overflow-hidden pointer-events-none select-none">
+        <span
+          className="text-[28rem] font-bold text-dracula-bg/[0.02] leading-none tracking-tighter -mr-20"
+          style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+        >
+          SLA
+        </span>
+      </div>
+
       {/* Content */}
       <div className="relative z-10 w-full max-w-6xl mx-auto px-6">
         <div className="max-w-4xl">
@@ -62,29 +72,29 @@ export default function MainIntro({
             </span>
           </motion.h1>
 
-          {/* Subheadline */}
+          {/* Subheadline - bolder, tighter, declaration not whisper */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-xl sm:text-2xl md:text-3xl text-dracula-bg/50 font-light mb-12 max-w-2xl"
+            className="text-xl sm:text-2xl md:text-3xl text-dracula-bg/70 font-medium mb-12 max-w-2xl tracking-tight"
             style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
           >
             {subheadline}
           </motion.p>
 
-          {/* Value line */}
+          {/* Value line - sharper, more emotional */}
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.3 }}
             className="text-dracula-comment text-lg mb-12 max-w-xl leading-relaxed"
           >
-            {yearsExperience} years in High Court and Supreme Court of Pakistan.
-            Criminal defense, family law, corporate litigation.
+            {yearsExperience} years of standing before Pakistan's High Courts and
+            Supreme Court — defending what matters most.
           </motion.p>
 
-          {/* CTA */}
+          {/* CTA - more presence */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -93,7 +103,7 @@ export default function MainIntro({
           >
             <a
               href="/contact"
-              className="group inline-flex items-center justify-center gap-3 bg-dracula-pink text-dracula-foreground font-semibold py-4 px-8 rounded-lg hover:bg-dracula-bg transition-colors"
+              className="group inline-flex items-center justify-center gap-3 bg-dracula-pink text-dracula-foreground font-semibold py-4 px-8 rounded-lg hover:bg-dracula-bg transition-colors shadow-lg shadow-dracula-pink/20 border border-dracula-pink/80"
             >
               Discuss Your Case
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -107,7 +117,7 @@ export default function MainIntro({
             </a>
           </motion.div>
 
-          {/* Trust markers - minimal */}
+          {/* Trust markers */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -124,16 +134,6 @@ export default function MainIntro({
             )}
           </motion.div>
         </div>
-      </div>
-
-      {/* Large decorative text - editorial style */}
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 hidden xl:block pointer-events-none select-none">
-        <span
-          className="text-[18rem] font-bold text-dracula-bg/[0.03] leading-none tracking-tighter"
-          style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-        >
-          SLA
-        </span>
       </div>
 
       {/* Bottom accent */}
