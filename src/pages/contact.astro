@@ -2,12 +2,12 @@
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import userConfig from "../config//SiteConfig/config.json";
+import userConfig from "../config/SiteConfig/config.json";
 import Analytics from "@vercel/analytics/astro";
 import ContactForm from "../components/React/Contact/ContactForm";
-export const prerender = true;
 import FeatureFlag from "../config/FeatureFlag/featureflag.json";
 import SpeedInsights from "@vercel/speed-insights/astro";
+export const prerender = true;
 
 try {
   if (!FeatureFlag.ContactUS) {
@@ -23,18 +23,21 @@ try {
   <head>
     <SpeedInsights />
     <BaseHead
-      title={userConfig.SITE_TITLE}
-      description={userConfig.SITE_DESCRIPTION}
+      title={`Contact Us | ${userConfig.SITE_TITLE}`}
+      description="Get in touch with Shafiq Law Chamber for expert legal assistance. Schedule a free consultation today."
     />
     <Analytics />
-
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body>
+  <body class="bg-dracula-bg">
     <Header />
     <main>
-      <ContactForm client:load />
+      <ContactForm offices={userConfig.offices} client:load />
     </main>
     <Footer />
   </body>

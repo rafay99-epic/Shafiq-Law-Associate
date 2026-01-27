@@ -89,37 +89,106 @@
         {
             "title": "Criminal Defense",
             "description": "Defend your rights with expert legal representation. We ensure the best possible outcome for your case.",
-            "icon": "Shield"
+            "icon": "Shield",
+            "subServices": [
+                { "title": "Bail Applications", "description": "Pre-arrest and post-arrest bail applications in all courts." },
+                { "title": "Trial Defense", "description": "Complete trial representation from filing to judgment." },
+                { "title": "Appeals", "description": "Criminal appeals in High Court and Supreme Court." },
+                { "title": "FIR Quashing", "description": "Applications to quash false or malicious FIRs." },
+                { "title": "White Collar Crimes", "description": "Defense in fraud, embezzlement, and financial crimes." },
+                { "title": "Cybercrime Defense", "description": "Legal defense under PECA and cybercrime laws." }
+            ]
         },
         {
             "title": "Family Law",
             "description": "Compassionate legal support for divorce, custody, and family matters. We guide you through every step.",
-            "icon": "Users"
+            "icon": "Users",
+            "subServices": [
+                { "title": "Divorce & Khula", "description": "Legal proceedings for divorce, khula, and separation." },
+                { "title": "Child Custody", "description": "Custody disputes and visitation rights matters." },
+                { "title": "Maintenance Claims", "description": "Wife and children maintenance applications." },
+                { "title": "Dower Recovery", "description": "Recovery of haq mehr and dowry articles." },
+                { "title": "Domestic Violence", "description": "Protection orders and legal action against abuse." },
+                { "title": "Guardianship", "description": "Legal guardianship for minors and dependents." }
+            ]
         },
         {
             "title": "Personal Injury",
             "description": "We help you secure the compensation you deserve for injuries caused by negligence or accidents.",
-            "icon": "HandHelping"
+            "icon": "HandHelping",
+            "subServices": [
+                { "title": "Motor Accidents", "description": "Claims for road accident injuries and damages." },
+                { "title": "Workplace Injuries", "description": "Compensation for injuries at workplace." },
+                { "title": "Medical Malpractice", "description": "Cases against negligent medical professionals." },
+                { "title": "Product Liability", "description": "Claims for injuries from defective products." },
+                { "title": "Insurance Claims", "description": "Assistance with injury insurance claims." },
+                { "title": "Wrongful Death", "description": "Compensation claims for fatal accidents." }
+            ]
         },
         {
             "title": "Civil Corporate Law",
             "description": "Comprehensive legal guidance for businesses, covering contracts, compliance, and corporate matters.",
-            "icon": "Building"
+            "icon": "Building",
+            "subServices": [
+                { "title": "Company Formation", "description": "Registration of private, public, and SMC companies." },
+                { "title": "Contract Drafting", "description": "Drafting and reviewing commercial contracts." },
+                { "title": "Corporate Compliance", "description": "SECP filings, annual returns, and regulatory compliance." },
+                { "title": "Mergers & Acquisitions", "description": "Legal support for business mergers and acquisitions." },
+                { "title": "Shareholder Disputes", "description": "Resolution of disputes between shareholders." },
+                { "title": "Business Licensing", "description": "Obtaining licenses and permits for businesses." }
+            ]
         },
         {
-            "title": "Arbitration & Mediation",
-            "description": "Resolve disputes efficiently outside of court through arbitration and mediation with expert facilitators.",
-            "icon": "Scale"
+            "title": "Taxation Law",
+            "description": "Expert guidance on income tax, sales tax, FBR matters, tax planning, and compliance for individuals and businesses.",
+            "icon": "Calculator",
+            "subServices": [
+                { "title": "Income Tax", "description": "Personal and corporate income tax filing and planning." },
+                { "title": "Sales Tax", "description": "Sales tax registration, compliance, and returns filing." },
+                { "title": "Tax Audit Defense", "description": "Representation during FBR tax audits and assessments." },
+                { "title": "NTN/STRN Registration", "description": "Tax registration for individuals and businesses." },
+                { "title": "Tax Appeals", "description": "Appeals before Commissioner and Appellate Tribunal." },
+                { "title": "Withholding Tax", "description": "Compliance with withholding tax requirements." }
+            ]
+        },
+        {
+            "title": "Property & Real Estate",
+            "description": "Complete legal services for property transactions, disputes, and real estate matters.",
+            "icon": "Scale",
+            "subServices": [
+                { "title": "Property Disputes", "description": "Litigation for ownership and possession disputes." },
+                { "title": "Sale & Purchase", "description": "Drafting sale agreements and transfer deeds." },
+                { "title": "Title Verification", "description": "Due diligence and title search services." },
+                { "title": "Mutation & Registry", "description": "Property mutation and registration procedures." },
+                { "title": "Tenant Disputes", "description": "Eviction suits and rent recovery matters." },
+                { "title": "Land Acquisition", "description": "Compensation claims for acquired land." }
+            ]
         },
         {
             "title": "Estate Planning",
             "description": "Plan for the future with wills, trusts, and estate management services to protect your assets.",
-            "icon": "FileText"
+            "icon": "FileText",
+            "subServices": [
+                { "title": "Will Drafting", "description": "Preparation of legally valid wills and testaments." },
+                { "title": "Succession Certificates", "description": "Obtaining succession and legal heir certificates." },
+                { "title": "Inheritance Distribution", "description": "Fair distribution of estate as per Islamic law." },
+                { "title": "Trust Formation", "description": "Setting up family and charitable trusts." },
+                { "title": "Probate Matters", "description": "Probate applications and estate administration." },
+                { "title": "Gift Deeds", "description": "Drafting and registration of gift deeds." }
+            ]
         },
         {
             "title": "Immigration Law",
-            "description": "Navigate the complexities of immigration law with expert assistance for visas, green cards, and citizenship.",
-            "icon": "Globe"
+            "description": "Navigate the complexities of immigration law with expert assistance for visas and international matters.",
+            "icon": "Globe",
+            "subServices": [
+                { "title": "Visa Applications", "description": "Assistance with work, study, and family visas." },
+                { "title": "Immigration Appeals", "description": "Appeals against visa refusals and deportation." },
+                { "title": "Citizenship Matters", "description": "Dual nationality and citizenship applications." },
+                { "title": "Work Permits", "description": "Work permit applications for foreigners in Pakistan." },
+                { "title": "Deportation Defense", "description": "Legal defense against deportation orders." },
+                { "title": "Travel Documents", "description": "Emergency travel documents and passport issues." }
+            ]
         }
     ],
     "WhyChooseUs": [
