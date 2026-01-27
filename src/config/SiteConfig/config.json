@@ -211,21 +211,30 @@
     "MeetOurTeam": [
         {
             "name": "Saqib Shafiq",
-            "position": "Founder & CEO",
-            "description": "With over 20 years of experience, Shafiq specializes in criminal law and has a proven track record in high-profile cases.",
-            "image": "/Images/slc-Copy.png"
+            "position": "Founder & Senior Advocate",
+            "description": "With over 20 years of experience, Saqib has built a reputation for excellence in criminal defense and civil litigation. He has successfully represented clients in high-profile cases at the High Court and Supreme Court of Pakistan.",
+            "image": "/Images/slc-Copy.png",
+            "specializations": ["Criminal Defense", "Civil Litigation", "Constitutional Law"],
+            "experience": "20+ Years Experience",
+            "education": "LLB, Punjab University"
         },
         {
             "name": "Sara Khan",
-            "position": "Family Law Expert",
-            "description": "Sara is dedicated to helping families navigate legal challenges with compassion and expertise.",
-            "image": "/Images/slc-Copy.png"
+            "position": "Family Law Specialist",
+            "description": "Sara is dedicated to helping families navigate complex legal challenges with compassion and expertise. She specializes in divorce, custody disputes, and domestic matters with a client-centered approach.",
+            "image": "/Images/slc-Copy.png",
+            "specializations": ["Family Law", "Child Custody", "Divorce"],
+            "experience": "12+ Years Experience",
+            "education": "LLM, International Islamic University"
         },
         {
             "name": "Ali Raza",
-            "position": "Corporate Lawyer",
-            "description": "Ali provides comprehensive legal support for businesses, ensuring compliance and protecting interests.",
-            "image": "/Images/slc-Copy.png"
+            "position": "Corporate & Tax Counsel",
+            "description": "Ali provides comprehensive legal support for businesses, from company formation to complex corporate transactions. He ensures full regulatory compliance and protects business interests.",
+            "image": "/Images/slc-Copy.png",
+            "specializations": ["Corporate Law", "Tax Law", "M&A"],
+            "experience": "15+ Years Experience",
+            "education": "LLB, Quaid-i-Azam University"
         }
     ]
 }

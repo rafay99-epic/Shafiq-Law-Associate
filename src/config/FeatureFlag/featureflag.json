@@ -16,10 +16,10 @@
     "Services": true,
     "CaseLaw": true,
     "ContactUS": true,
-    "Pricing": false,
+    "Pricing": true,
     "Footer": true,
     "Header": true,
     "PrivatePolicy": true,
     "TermsAndConditions": true,
-    "MeetTheTeam": false
+    "MeetTheTeam": true
 }

@@ -10,7 +10,8 @@ import ServicesPreview from "../components/React/Home/ServicesPreview";
 import ContactSection from "../components/React/Home/Contact";
 import LatestBlog from "../components/React/Home/LatestBlog";
 import FAQ from "../components/React/Home/FAQ";
-import PricingSection from "../components/React/Pricing/PricingPackage";
+import PricingPreview from "../components/React/Home/Pricing";
+import TeamPreview from "../components/React/Home/TeamPreview";
 import FeatureFlag from "../config/FeatureFlag/featureflag.json";
 import SpeedInsights from "@vercel/speed-insights/astro";
 import { GoogleFontsOptimizer } from "astro-google-fonts-optimizer";
@@ -157,11 +158,20 @@ const websiteSchema = generateWebSiteSchema(siteUrl, userConfig.SITE_TITLE);
         )
       }
 
+      <!-- Meet Our Team Section -->
+      {
+        FeatureFlag.MeetTheTeam && userConfig.MeetOurTeam && (
+          <section class="px-6">
+            <TeamPreview team={userConfig.MeetOurTeam} client:visible />
+          </section>
+        )
+      }
+
       <!-- Pricing Section -->
       {
         FeatureFlag.Pricing && (
           <section class="px-6">
-            <PricingSection pricingPlans={userConfig.pricingPlans} client:load />
+            <PricingPreview pricingPlans={userConfig.pricingPlans} client:visible />
           </section>
         )
       }

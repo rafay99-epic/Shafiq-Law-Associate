@@ -70,12 +70,8 @@ const pricingSchema = generateServiceSchema(
   </head>
   <body>
     <Header />
-    <main>
-      <div>
-        <section>
-          <PricingPage pricingPlans={userConfig.pricingPlans} client:load />
-        </section>
-      </div>
+    <main class="bg-dracula-bg">
+      <PricingPage pricingPlans={userConfig.pricingPlans} client:load />
     </main>
     <Footer />
   </body>
