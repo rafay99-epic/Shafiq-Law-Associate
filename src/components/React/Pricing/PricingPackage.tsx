@@ -14,12 +14,17 @@ import {
   Sparkles,
   ChevronDown,
   HelpCircle,
+  Loader2,
 } from "lucide-react";
+import { useLemonSqueezy } from "../../../hooks/useLemonSqueezy";
+import type { LemonSqueezyEvent } from "../../../utils/lemonSqueezy";
 
 interface PricingPlan {
   name: string;
   monthly: string;
   yearly: string;
+  monthlyVariantId?: string;
+  yearlyVariantId?: string;
   features: string[];
   description?: string;
   highlight?: string;
@@ -75,10 +80,17 @@ const PricingCard: React.FC<{
   index: number;
   isPopular: boolean;
   billingCycle: "monthly" | "yearly";
-}> = ({ plan, index, isPopular, billingCycle }) => {
+  onCheckout: (plan: PricingPlan, billingCycle: "monthly" | "yearly") => void;
+  isLoading: boolean;
+  loadingPlan: string | null;
+}> = ({ plan, index, isPopular, billingCycle, onCheckout, isLoading, loadingPlan }) => {
   const IconComponent = planIcons[plan.name] || Scale;
   const gradient = planGradients[plan.name] || "from-dracula-cyan to-dracula-green";
   const description = plan.description || planDescriptions[plan.name] || "";
+
+  const variantId = billingCycle === "monthly" ? plan.monthlyVariantId : plan.yearlyVariantId;
+  const hasVariantId = Boolean(variantId);
+  const isThisPlanLoading = isLoading && loadingPlan === `${plan.name}-${billingCycle}`;
 
   return (
     <motion.div
@@ -215,17 +227,41 @@ const PricingCard: React.FC<{
           </div>
 
           {/* CTA Button */}
-          <a
-            href="/contact"
-            className={`w-full inline-flex items-center justify-center gap-2 font-semibold py-4 px-6 rounded-xl transition-all duration-300 ${
-              isPopular
-                ? "bg-gradient-to-r from-dracula-pink to-dracula-cyan text-dracula-bg hover:shadow-lg hover:scale-[1.02]"
-                : "bg-dracula-bg text-dracula-foreground hover:bg-dracula-cyan hover:text-dracula-bg"
-            }`}
-          >
-            Get Started
-            <ArrowRight className="w-4 h-4" />
-          </a>
+          {hasVariantId ? (
+            <button
+              onClick={() => onCheckout(plan, billingCycle)}
+              disabled={isLoading}
+              className={`w-full inline-flex items-center justify-center gap-2 font-semibold py-4 px-6 rounded-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed ${
+                isPopular
+                  ? "bg-gradient-to-r from-dracula-pink to-dracula-cyan text-dracula-bg hover:shadow-lg hover:scale-[1.02]"
+                  : "bg-dracula-bg text-dracula-foreground hover:bg-dracula-cyan hover:text-dracula-bg"
+              }`}
+            >
+              {isThisPlanLoading ? (
+                <>
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                  Processing...
+                </>
+              ) : (
+                <>
+                  Subscribe Now
+                  <ArrowRight className="w-4 h-4" />
+                </>
+              )}
+            </button>
+          ) : (
+            <a
+              href="/contact"
+              className={`w-full inline-flex items-center justify-center gap-2 font-semibold py-4 px-6 rounded-xl transition-all duration-300 ${
+                isPopular
+                  ? "bg-gradient-to-r from-dracula-pink to-dracula-cyan text-dracula-bg hover:shadow-lg hover:scale-[1.02]"
+                  : "bg-dracula-bg text-dracula-foreground hover:bg-dracula-cyan hover:text-dracula-bg"
+              }`}
+            >
+              Contact Us
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          )}
         </div>
       </div>
     </motion.div>
@@ -280,10 +316,102 @@ const FAQItem: React.FC<{
   );
 };
 
-export default function PricingPage({ pricingPlans }: PricingSectionProps) {
-  const [billingCycle, setBillingCycle] = useState<"monthly" | "yearly">(
-    "monthly"
+// Success Modal Component
+const SuccessModal: React.FC<{
+  isOpen: boolean;
+  onClose: () => void;
+  orderData?: LemonSqueezyEvent["data"];
+}> = ({ isOpen, onClose, orderData }) => {
+  if (!isOpen) return null;
+
+  return (
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
+        onClick={onClose}
+      >
+        <motion.div
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.9, opacity: 0 }}
+          className="bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="text-center">
+            <div className="w-16 h-16 bg-dracula-green/20 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Check className="w-8 h-8 text-dracula-green" />
+            </div>
+            <h3
+              className="text-2xl font-bold text-dracula-foreground mb-2"
+              style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+            >
+              Payment Successful!
+            </h3>
+            <p className="text-dracula-comment mb-6">
+              Thank you for subscribing. We'll be in touch shortly to get you started.
+            </p>
+            {orderData && (
+              <p className="text-sm text-dracula-comment mb-6">
+                Order #{orderData.attributes.order_number}
+              </p>
+            )}
+            <button
+              onClick={onClose}
+              className="w-full bg-dracula-cyan text-dracula-bg font-semibold py-3 px-6 rounded-xl hover:bg-dracula-green transition-colors"
+            >
+              Continue
+            </button>
+          </div>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
   );
+};
+
+export default function PricingPage({ pricingPlans }: PricingSectionProps) {
+  const [billingCycle, setBillingCycle] = useState<"monthly" | "yearly">("monthly");
+  const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [orderData, setOrderData] = useState<LemonSqueezyEvent["data"] | undefined>();
+
+  const { checkout, isLoading, isReady, error } = useLemonSqueezy({
+    onSuccess: (event) => {
+      setLoadingPlan(null);
+      setOrderData(event.data);
+      setShowSuccess(true);
+    },
+    onClose: () => {
+      setLoadingPlan(null);
+    },
+    onError: (err) => {
+      setLoadingPlan(null);
+      console.error("Checkout error:", err);
+    },
+  });
+
+  const handleCheckout = async (plan: PricingPlan, cycle: "monthly" | "yearly") => {
+    const variantId = cycle === "monthly" ? plan.monthlyVariantId : plan.yearlyVariantId;
+
+    if (!variantId) {
+      console.error("No variant ID configured for this plan");
+      return;
+    }
+
+    setLoadingPlan(`${plan.name}-${cycle}`);
+
+    try {
+      await checkout({
+        variantId,
+        planName: plan.name,
+        billingCycle: cycle,
+      });
+    } catch (err) {
+      console.error("Failed to initiate checkout:", err);
+    }
+  };
 
   const pricingFAQs = [
     {
@@ -294,7 +422,7 @@ export default function PricingPage({ pricingPlans }: PricingSectionProps) {
     {
       question: "What payment methods do you accept?",
       answer:
-        "We accept bank transfers, online banking, and cash payments. For yearly plans, we also offer flexible payment arrangements.",
+        "We accept all major credit cards, debit cards, and digital payment methods through our secure payment processor.",
     },
     {
       question: "Is there a minimum contract period?",
@@ -310,6 +438,13 @@ export default function PricingPage({ pricingPlans }: PricingSectionProps) {
 
   return (
     <div className="min-h-screen bg-dracula-bg">
+      {/* Success Modal */}
+      <SuccessModal
+        isOpen={showSuccess}
+        onClose={() => setShowSuccess(false)}
+        orderData={orderData}
+      />
+
       {/* Hero Section */}
       <section className="relative bg-dracula-cyan overflow-hidden">
         {/* Decorative elements */}
@@ -456,6 +591,9 @@ export default function PricingPage({ pricingPlans }: PricingSectionProps) {
                 index={index}
                 isPopular={index === 1}
                 billingCycle={billingCycle}
+                onCheckout={handleCheckout}
+                isLoading={isLoading}
+                loadingPlan={loadingPlan}
               />
             ))}
           </motion.div>

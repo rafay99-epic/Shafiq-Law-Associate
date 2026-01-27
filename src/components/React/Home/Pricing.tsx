@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Check,
   ArrowRight,
@@ -7,12 +7,17 @@ import {
   Zap,
   Crown,
   Sparkles,
+  Loader2,
 } from "lucide-react";
+import { useLemonSqueezy } from "../../../hooks/useLemonSqueezy";
+import type { LemonSqueezyEvent } from "../../../utils/lemonSqueezy";
 
 interface PricingPlan {
   name: string;
   monthly: string;
   yearly: string;
+  monthlyVariantId?: string;
+  yearlyVariantId?: string;
   features: string[];
 }
 
@@ -51,13 +56,113 @@ const planGradients: { [key: string]: string } = {
   Premium: "from-dracula-pink to-dracula-cyan",
 };
 
-const PricingPreview: React.FC<PricingPreviewProps> = ({ pricingPlans }) => {
-  const [billingCycle, setBillingCycle] = useState<"monthly" | "yearly">(
-    "monthly"
+// Success Modal Component
+const SuccessModal: React.FC<{
+  isOpen: boolean;
+  onClose: () => void;
+  orderData?: LemonSqueezyEvent["data"];
+}> = ({ isOpen, onClose, orderData }) => {
+  if (!isOpen) return null;
+
+  return (
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
+        onClick={onClose}
+      >
+        <motion.div
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.9, opacity: 0 }}
+          className="bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="text-center">
+            <div className="w-16 h-16 bg-dracula-green/20 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Check className="w-8 h-8 text-dracula-green" />
+            </div>
+            <h3
+              className="text-2xl font-bold text-dracula-foreground mb-2"
+              style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+            >
+              Payment Successful!
+            </h3>
+            <p className="text-dracula-comment mb-6">
+              Thank you for subscribing. We'll be in touch shortly to get you started.
+            </p>
+            {orderData && (
+              <p className="text-sm text-dracula-comment mb-6">
+                Order #{orderData.attributes.order_number}
+              </p>
+            )}
+            <button
+              onClick={onClose}
+              className="w-full bg-dracula-cyan text-dracula-bg font-semibold py-3 px-6 rounded-xl hover:bg-dracula-green transition-colors"
+            >
+              Continue
+            </button>
+          </div>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
   );
+};
+
+const PricingPreview: React.FC<PricingPreviewProps> = ({ pricingPlans }) => {
+  const [billingCycle, setBillingCycle] = useState<"monthly" | "yearly">("monthly");
+  const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [orderData, setOrderData] = useState<LemonSqueezyEvent["data"] | undefined>();
+
+  const { checkout, isLoading } = useLemonSqueezy({
+    onSuccess: (event) => {
+      setLoadingPlan(null);
+      setOrderData(event.data);
+      setShowSuccess(true);
+    },
+    onClose: () => {
+      setLoadingPlan(null);
+    },
+    onError: (err) => {
+      setLoadingPlan(null);
+      console.error("Checkout error:", err);
+    },
+  });
+
+  const handleCheckout = async (plan: PricingPlan, cycle: "monthly" | "yearly") => {
+    const variantId = cycle === "monthly" ? plan.monthlyVariantId : plan.yearlyVariantId;
+
+    if (!variantId) {
+      // If no variant ID, redirect to pricing page
+      window.location.href = "/pricing";
+      return;
+    }
+
+    setLoadingPlan(`${plan.name}-${cycle}`);
+
+    try {
+      await checkout({
+        variantId,
+        planName: plan.name,
+        billingCycle: cycle,
+      });
+    } catch (err) {
+      console.error("Failed to initiate checkout:", err);
+    }
+  };
 
   return (
     <section className="py-20 sm:py-28 -mx-6 bg-dracula-bg relative overflow-hidden">
+      {/* Success Modal */}
+      <SuccessModal
+        isOpen={showSuccess}
+        onClose={() => setShowSuccess(false)}
+        orderData={orderData}
+      />
+
       {/* Decorative elements */}
       <div className="absolute top-0 left-0 w-96 h-96 bg-dracula-cyan/5 rounded-full blur-3xl" />
       <div className="absolute bottom-0 right-0 w-80 h-80 bg-dracula-pink/5 rounded-full blur-3xl" />
@@ -131,6 +236,14 @@ const PricingPreview: React.FC<PricingPreviewProps> = ({ pricingPlans }) => {
             const IconComponent = planIcons[plan.name] || Shield;
             const gradient =
               planGradients[plan.name] || "from-dracula-cyan to-dracula-green";
+
+            const variantId =
+              billingCycle === "monthly"
+                ? plan.monthlyVariantId
+                : plan.yearlyVariantId;
+            const hasVariantId = Boolean(variantId);
+            const isThisPlanLoading =
+              isLoading && loadingPlan === `${plan.name}-${billingCycle}`;
 
             return (
               <motion.div
@@ -236,17 +349,41 @@ const PricingPreview: React.FC<PricingPreviewProps> = ({ pricingPlans }) => {
                     </ul>
 
                     {/* CTA Button */}
-                    <a
-                      href="/pricing"
-                      className={`w-full inline-flex items-center justify-center gap-2 font-semibold py-3 px-6 rounded-xl transition-all duration-300 ${
-                        isPopular
-                          ? "bg-gradient-to-r from-dracula-pink to-dracula-cyan text-dracula-bg hover:shadow-lg"
-                          : "bg-dracula-bg text-dracula-foreground hover:bg-dracula-cyan hover:text-dracula-bg"
-                      }`}
-                    >
-                      View Details
-                      <ArrowRight className="w-4 h-4" />
-                    </a>
+                    {hasVariantId ? (
+                      <button
+                        onClick={() => handleCheckout(plan, billingCycle)}
+                        disabled={isLoading}
+                        className={`w-full inline-flex items-center justify-center gap-2 font-semibold py-3 px-6 rounded-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed ${
+                          isPopular
+                            ? "bg-gradient-to-r from-dracula-pink to-dracula-cyan text-dracula-bg hover:shadow-lg"
+                            : "bg-dracula-bg text-dracula-foreground hover:bg-dracula-cyan hover:text-dracula-bg"
+                        }`}
+                      >
+                        {isThisPlanLoading ? (
+                          <>
+                            <Loader2 className="w-4 h-4 animate-spin" />
+                            Processing...
+                          </>
+                        ) : (
+                          <>
+                            Subscribe
+                            <ArrowRight className="w-4 h-4" />
+                          </>
+                        )}
+                      </button>
+                    ) : (
+                      <a
+                        href="/pricing"
+                        className={`w-full inline-flex items-center justify-center gap-2 font-semibold py-3 px-6 rounded-xl transition-all duration-300 ${
+                          isPopular
+                            ? "bg-gradient-to-r from-dracula-pink to-dracula-cyan text-dracula-bg hover:shadow-lg"
+                            : "bg-dracula-bg text-dracula-foreground hover:bg-dracula-cyan hover:text-dracula-bg"
+                        }`}
+                      >
+                        View Details
+                        <ArrowRight className="w-4 h-4" />
+                      </a>
+                    )}
                   </div>
                 </div>
               </motion.div>
