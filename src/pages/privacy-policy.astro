@@ -7,6 +7,7 @@ import "../styles/global.css";
 import userConfig from "../config//SiteConfig/config.json";
 import FeatureFlag from "../config/FeatureFlag/featureflag.json";
 import SpeedInsights from "@vercel/speed-insights/astro";
+import { SEO } from "astro-seo";
 
 try {
   if (!FeatureFlag.PrivatePolicy) {
@@ -15,14 +16,47 @@ try {
 } catch (error) {
   return Astro.redirect("/404");
 }
+
+const siteUrl = (Astro.site?.toString() || Astro.url.origin) as string;
+const ogImageUrl = new URL("/ShafiqLawAssociates.png", siteUrl).toString();
 ---
 
 <html lang="en">
   <head>
     <SpeedInsights />
-    <BaseHead
-      title="Privacy Policy | Shafiq Law Associate"
-      description="Privacy Policy for Shafiq Law Associates"
+    <BaseHead />
+    <SEO
+      title="Privacy Policy | Shafiq Law Associates"
+      description="Privacy Policy for Shafiq Law Associates. Learn how we collect, use, and protect your personal information when using our legal services and website."
+      canonical={Astro.url.href}
+      openGraph={{
+        basic: {
+          title: "Privacy Policy | Shafiq Law Associates",
+          type: "website",
+          image: ogImageUrl,
+          url: Astro.url.href,
+        },
+        optional: {
+          siteName: userConfig.SITE_TITLE,
+        },
+      }}
+      twitter={{
+        card: "summary_large_image",
+        title: "Privacy Policy | Shafiq Law Associates",
+        description: "Privacy Policy for Shafiq Law Associates.",
+        image: ogImageUrl,
+      }}
+    />
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        name: "Privacy Policy - Shafiq Law Associates",
+        description: "Privacy Policy for Shafiq Law Associates",
+        url: Astro.url.href,
+      })}
     />
     <Analytics />
   </head>

@@ -5,6 +5,9 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import FormattedDate from "../components/FormattedDate.astro";
 import FeatureFlag from "../config/FeatureFlag/featureflag.json";
+import { ArrowLeft, Calendar, Clock, Tag } from "lucide-react";
+import { GoogleFontsOptimizer } from "astro-google-fonts-optimizer";
+import { SEO } from "astro-seo";
 export const prerender = true;
 
 try {
@@ -16,46 +19,156 @@ try {
 }
 type Props = CollectionEntry<"blog">["data"];
 
-const { title, description, pubDate, tags } = Astro.props;
+const {
+  title,
+  description,
+  pubDate,
+  tags,
+  seoTitle,
+  seoDescription,
+  seoKeywords,
+  seoImage,
+} = Astro.props;
+
+const siteUrl = Astro.site;
+const ogImageUrl = new URL(
+  seoImage ?? "/ShafiqLawAssociates.png",
+  siteUrl,
+).toString();
+
+const readingTime = "5 min read";
 ---
 
 <html lang="en">
   <head>
     <BaseHead title={title} description={description} />
+    <SEO
+      title={seoTitle ?? title}
+      description={seoDescription ?? description}
+      canonical={Astro.url.href}
+      openGraph={{
+        basic: {
+          title: seoTitle ?? title,
+          type: "article",
+          image: ogImageUrl,
+          url: Astro.url.href,
+        },
+        article: {
+          publishedTime: pubDate.toISOString(),
+          tags: tags ?? [],
+        },
+      }}
+      twitter={{
+        title: seoTitle ?? title,
+        description: seoDescription ?? description,
+        image: ogImageUrl,
+      }}
+      extend={{
+        meta:
+          seoKeywords && seoKeywords.length > 0
+            ? [
+                {
+                  name: "keywords",
+                  content: seoKeywords.join(", "),
+                },
+              ]
+            : [],
+      }}
+    />
+    <GoogleFontsOptimizer
+      url="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+    />
   </head>
 
   <body class="bg-dracula-bg text-dracula-foreground leading-relaxed">
     <Header />
 
-    <main class="max-w-5xl mx-auto px-8 sm:px-14 py-20">
-      <article class="relative bg-white shadow-lg rounded-2xl p-10 sm:p-14">
-        <div class="text-center mb-6">
-          <h1
-            class="text-4xl font-extrabold text-gray-900 leading-snug text-center mb-6"
+    <main class="min-h-screen">
+      <!-- Hero Section -->
+      <div class="bg-dracula-cyan py-16 sm:py-24">
+        <div class="max-w-4xl mx-auto px-6 sm:px-8">
+          <a
+            href="/blog"
+            class="inline-flex items-center gap-2 text-dracula-bg/80 hover:text-dracula-bg transition-colors mb-8 group"
           >
-            {title}
-          </h1>
-          <p class="text-base text-dracula-comment">
-            <FormattedDate date={pubDate} />
-          </p>
+            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+            <span class="text-sm font-medium">Back to Case Law</span>
+          </a>
+
           {
             tags && tags.length > 0 && (
-              <div class="mt-4 flex flex-wrap justify-center gap-2">
+              <div class="flex flex-wrap gap-2 mb-6">
                 {tags.map((tag) => (
-                  <span class="px-3 py-1 text-lg font-semibold text-white bg-dracula-pink  rounded-lg">
+                  <span class="px-3 py-1 text-xs font-semibold uppercase tracking-wider text-dracula-cyan bg-dracula-bg/90 rounded-full">
                     {tag}
                   </span>
                 ))}
               </div>
             )
           }
+
+          <h1
+            class="text-3xl sm:text-4xl lg:text-5xl font-bold text-dracula-bg leading-tight mb-6"
+            style="font-family: 'Playfair Display', serif;"
+          >
+            {title}
+          </h1>
+
+          <p
+            class="text-lg text-dracula-bg/80 leading-relaxed mb-8 max-w-3xl"
+            style="font-family: 'Inter', sans-serif;"
+          >
+            {description}
+          </p>
+
+          <div
+            class="flex flex-wrap items-center gap-6 text-sm text-dracula-bg/70"
+          >
+            <div class="flex items-center gap-2">
+              <Calendar className="w-4 h-4" />
+              <FormattedDate date={pubDate} />
+            </div>
+            <div class="flex items-center gap-2">
+              <Clock className="w-4 h-4" />
+              <span>{readingTime}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Article Content -->
+      <article class="max-w-4xl mx-auto px-6 sm:px-8 py-12 sm:py-16">
+        <div
+          class="bg-white rounded-2xl shadow-xl border border-dracula-current-line overflow-hidden"
+        >
+          <!-- Decorative top border -->
+          <div class="h-1 bg-gradient-to-r from-dracula-cyan via-dracula-green to-dracula-pink"></div>
+
+          <div class="p-8 sm:p-12 lg:p-16">
+            <div class="blog-content prose-lg">
+              <slot />
+            </div>
+          </div>
         </div>
 
-        <hr class="border-dracula-current-line my-6 w-24 mx-auto" />
-        <div
-          class="blog-content text-[20px] text-gray-800 leading-[1.8] text-justify"
-        >
-          <slot />
+        <!-- Article Footer -->
+        <div class="mt-12 pt-8 border-t border-dracula-current-line">
+          <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div class="text-center sm:text-left">
+              <p class="text-sm text-dracula-comment mb-1">Published on</p>
+              <p class="font-semibold text-dracula-foreground">
+                <FormattedDate date={pubDate} />
+              </p>
+            </div>
+
+            <a
+              href="/blog"
+              class="inline-flex items-center gap-2 px-6 py-3 bg-dracula-cyan text-dracula-bg font-semibold rounded-lg hover:bg-dracula-orange transition-colors"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              View All Articles
+            </a>
+          </div>
         </div>
       </article>
     </main>

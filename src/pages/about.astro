@@ -10,6 +10,9 @@ import CoreValueSection from "../components/React/AboutUS/CoreValues";
 import CallItAction from "../components/React/AboutUS/CallItAction";
 import FeatureFlag from "../config/FeatureFlag/featureflag.json";
 import SpeedInsights from "@vercel/speed-insights/astro";
+import { SEO } from "astro-seo";
+import { generatePersonSchema } from "../utils/seoHelpers";
+
 export const prerender = true;
 try {
   if (!FeatureFlag.AboutUs) {
@@ -18,17 +21,65 @@ try {
 } catch (error) {
   return Astro.redirect("/404");
 }
+
+const siteUrl = (Astro.site?.toString() || Astro.url.origin) as string;
+const ogImageUrl = new URL(userConfig.CEoImage, siteUrl).toString();
+const ceoSchema = generatePersonSchema(
+  {
+    name: "Saqib Shafiq",
+    position: "Founder & CEO",
+    description:
+      "With over 20 years of experience, Shafiq specializes in criminal law and has a proven track record in high-profile cases.",
+    image: userConfig.CEoImage,
+  },
+  siteUrl
+);
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <SpeedInsights />
-    <BaseHead
-      title={`About US | ${userConfig.SITE_TITLE}`}
-      description="Learn more about us and our team."
+    <BaseHead />
+    <SEO
+      title="About Us | Experienced Legal Team | Shafiq Law Associates"
+      description="Learn about Shafiq Law Associates - a trusted legal firm in Rawalpindi, Pakistan with over 20 years of experience. Expert lawyers specializing in criminal defense, family law, corporate law, and more."
+      canonical={Astro.url.href}
+      openGraph={{
+        basic: {
+          title: "About Us | Experienced Legal Team | Shafiq Law Associates",
+          type: "website",
+          image: ogImageUrl,
+          url: Astro.url.href,
+        },
+        optional: {
+          siteName: userConfig.SITE_TITLE,
+        },
+      }}
+      twitter={{
+        card: "summary_large_image",
+        title: "About Us | Experienced Legal Team | Shafiq Law Associates",
+        description:
+          "Learn about Shafiq Law Associates - a trusted legal firm in Rawalpindi, Pakistan with over 20 years of experience.",
+        image: ogImageUrl,
+      }}
+    />
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "AboutPage",
+        name: `About - ${userConfig.SITE_TITLE}`,
+        description:
+          "Learn about Shafiq Law Associates - a trusted legal firm in Rawalpindi, Pakistan.",
+        url: Astro.url.href,
+      })}
+    />
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(ceoSchema)}
     />
     <Analytics />
   </head>

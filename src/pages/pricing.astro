@@ -4,10 +4,13 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import userConfig from "../config//SiteConfig/config.json";
 import Analytics from "@vercel/analytics/astro";
-export const prerender = true;
 import PricingPage from "../components/React/Pricing/PricingPackage";
 import FeatureFlag from "../config/FeatureFlag/featureflag.json";
 import SpeedInsights from "@vercel/speed-insights/astro";
+import { SEO } from "astro-seo";
+import { generateServiceSchema } from "../utils/seoHelpers";
+
+export const prerender = true;
 try {
   if (!FeatureFlag.Pricing) {
     return Astro.redirect("/access-denied");
@@ -15,26 +18,60 @@ try {
 } catch (error) {
   return Astro.redirect("/404");
 }
+
+const siteUrl = (Astro.site?.toString() || Astro.url.origin) as string;
+const ogImageUrl = new URL("/ShafiqLawAssociates.png", siteUrl).toString();
+const pricingSchema = generateServiceSchema(
+  "Legal Consultation Services",
+  "Transparent pricing plans for legal services including consultation, document drafting, and court representation.",
+  userConfig.pricingPlans.map((plan) => ({
+    name: plan.name,
+    price: plan.monthly,
+    currency: "PKR",
+  })),
+  siteUrl
+);
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <SpeedInsights />
-    <BaseHead
-      title={userConfig.SITE_TITLE}
-      description={userConfig.SITE_DESCRIPTION}
+    <BaseHead />
+    <SEO
+      title="Legal Service Pricing Plans | Transparent Fees | Shafiq Law Associates"
+      description="Transparent pricing for legal services in Pakistan. Choose from Basic (PKR 5,000/month), Professional (PKR 15,000/month), or Premium (PKR 35,000/month) plans. Flexible consultation and representation options."
+      canonical={Astro.url.href}
+      openGraph={{
+        basic: {
+          title: "Legal Service Pricing Plans | Transparent Fees | Shafiq Law Associates",
+          type: "website",
+          image: ogImageUrl,
+          url: Astro.url.href,
+        },
+        optional: {
+          siteName: userConfig.SITE_TITLE,
+        },
+      }}
+      twitter={{
+        card: "summary_large_image",
+        title: "Legal Service Pricing Plans | Transparent Fees | Shafiq Law Associates",
+        description:
+          "Transparent pricing for legal services in Pakistan. Choose from Basic, Professional, or Premium plans.",
+        image: ogImageUrl,
+      }}
+    />
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(pricingSchema)}
     />
     <Analytics />
   </head>
   <body>
     <Header />
-    <main>
-      <div>
-        <section>
-          <PricingPage pricingPlans={userConfig.pricingPlans} client:load />
-        </section>
-      </div>
+    <main class="bg-dracula-bg">
+      <PricingPage pricingPlans={userConfig.pricingPlans} client:load />
     </main>
     <Footer />
   </body>

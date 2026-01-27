@@ -1,0 +1,156 @@
+---
+import BaseHead from "../../components/BaseHead.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import userConfig from "../../config/SiteConfig/config.json";
+import Analytics from "@vercel/analytics/astro";
+import SpeedInsights from "@vercel/speed-insights/astro";
+import { SEO } from "astro-seo";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <SpeedInsights />
+    <BaseHead />
+    <SEO
+      title="Payment Successful | Shafiq Law Associates"
+      description="Your payment has been processed successfully. Welcome to Shafiq Law Associates."
+      noindex={true}
+    />
+    <Analytics />
+  </head>
+  <body class="bg-dracula-bg">
+    <Header />
+    <main class="min-h-screen flex items-center justify-center px-6 py-20">
+      <div class="max-w-lg w-full text-center">
+        <!-- Success Icon -->
+        <div class="w-24 h-24 bg-dracula-green/20 rounded-full flex items-center justify-center mx-auto mb-8">
+          <svg
+            class="w-12 h-12 text-dracula-green"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M5 13l4 4L19 7"></path>
+          </svg>
+        </div>
+
+        <!-- Content -->
+        <h1
+          class="text-3xl sm:text-4xl font-bold text-dracula-foreground mb-4"
+          style="font-family: 'Playfair Display', Georgia, serif;"
+        >
+          Payment Successful!
+        </h1>
+
+        <p class="text-lg text-dracula-comment mb-8">
+          Thank you for subscribing to our legal services. We've received your
+          payment and will be in touch shortly to get you started.
+        </p>
+
+        <!-- What's Next -->
+        <div
+          class="bg-white rounded-2xl p-6 sm:p-8 shadow-lg border border-dracula-current-line mb-8 text-left"
+        >
+          <h2
+            class="text-xl font-bold text-dracula-foreground mb-4"
+            style="font-family: 'Playfair Display', Georgia, serif;"
+          >
+            What happens next?
+          </h2>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+              <div
+                class="w-8 h-8 rounded-full bg-dracula-cyan/10 flex items-center justify-center flex-shrink-0 mt-0.5"
+              >
+                <span class="text-dracula-cyan font-bold text-sm">1</span>
+              </div>
+              <div>
+                <p class="font-semibold text-dracula-foreground">
+                  Confirmation Email
+                </p>
+                <p class="text-sm text-dracula-comment">
+                  You'll receive a confirmation email with your subscription
+                  details.
+                </p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <div
+                class="w-8 h-8 rounded-full bg-dracula-cyan/10 flex items-center justify-center flex-shrink-0 mt-0.5"
+              >
+                <span class="text-dracula-cyan font-bold text-sm">2</span>
+              </div>
+              <div>
+                <p class="font-semibold text-dracula-foreground">
+                  Team Assignment
+                </p>
+                <p class="text-sm text-dracula-comment">
+                  Our team will review your subscription and assign a dedicated
+                  legal advisor.
+                </p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <div
+                class="w-8 h-8 rounded-full bg-dracula-cyan/10 flex items-center justify-center flex-shrink-0 mt-0.5"
+              >
+                <span class="text-dracula-cyan font-bold text-sm">3</span>
+              </div>
+              <div>
+                <p class="font-semibold text-dracula-foreground">
+                  Initial Consultation
+                </p>
+                <p class="text-sm text-dracula-comment">
+                  We'll schedule your first consultation within 24-48 hours.
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="bg-dracula-cyan/10 rounded-xl p-4 mb-8">
+          <p class="text-sm text-dracula-foreground">
+            Have questions? Contact us at
+            <a
+              href={`mailto:${userConfig.EmailAdress}`}
+              class="text-dracula-cyan font-semibold hover:text-dracula-green"
+            >
+              {userConfig.EmailAdress}
+            </a>
+            or call
+            <a
+              href={`tel:${userConfig.PhoneNumber01}`}
+              class="text-dracula-cyan font-semibold hover:text-dracula-green"
+            >
+              {userConfig.PhoneNumber01}
+            </a>
+          </p>
+        </div>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="/"
+            class="inline-flex items-center justify-center gap-2 bg-dracula-cyan text-dracula-bg font-semibold py-3 px-6 rounded-xl hover:bg-dracula-pink transition-colors"
+          >
+            Return to Home
+          </a>
+          <a
+            href="/contact"
+            class="inline-flex items-center justify-center gap-2 bg-dracula-bg text-dracula-foreground font-semibold py-3 px-6 rounded-xl border border-dracula-current-line hover:border-dracula-cyan transition-colors"
+          >
+            Contact Us
+          </a>
+        </div>
+      </div>
+    </main>
+    <Footer />
+  </body>
+</html>

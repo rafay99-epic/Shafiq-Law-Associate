@@ -7,6 +7,8 @@ import CaseLawReact from "../../components/React/CaseLaw/CaseLaw";
 import FeatureFlag from "../../config/FeatureFlag/featureflag.json";
 import SpeedInsights from "@vercel/speed-insights/astro";
 import { getCollection } from "astro:content";
+import { SEO } from "astro-seo";
+
 export const prerender = true;
 try {
   if (!FeatureFlag.CaseLaw) {
@@ -29,15 +31,72 @@ const posts = rawPosts
       tags: post.data.tags || [],
     },
   }));
+
+const siteUrl = (Astro.site?.toString() || Astro.url.origin) as string;
+const ogImageUrl = new URL("/ShafiqLawAssociates.png", siteUrl).toString();
+const blogSchema = {
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  name: `${userConfig.SITE_TITLE} - Case Law & Legal Articles`,
+  description: "Legal insights, case law analysis, and legal articles from Shafiq Law Associates",
+  url: new URL("/blog", siteUrl).toString(),
+  publisher: {
+    "@type": "LegalService",
+    name: userConfig.SITE_TITLE,
+  },
+  blogPost: posts.map((post) => ({
+    "@type": "BlogPosting",
+    headline: post.data.title,
+    description: post.data.description,
+    datePublished: post.data.pubDate.toISOString(),
+    url: new URL(`/blog/${post.id}`, siteUrl).toString(),
+  })),
+};
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <SpeedInsights />
-    <BaseHead
-      title={`CaseLaw | ${userConfig.SITE_TITLE}`}
-      description="A CaseLaw page provides detailed information about a specific legal case, including its summary, facts, issues, holding, reasoning, and related legal citations."
+    <BaseHead />
+    <SEO
+      title="Case Law & Legal Articles | Shafiq Law Associates Blog"
+      description="Expert legal insights and case law analysis from Shafiq Law Associates. Learn about Pakistan family law, property disputes, criminal defense, corporate law, and more through our comprehensive legal articles."
+      canonical={Astro.url.href}
+      openGraph={{
+        basic: {
+          title: "Case Law & Legal Articles | Shafiq Law Associates Blog",
+          type: "website",
+          image: ogImageUrl,
+          url: Astro.url.href,
+        },
+        optional: {
+          siteName: userConfig.SITE_TITLE,
+        },
+      }}
+      twitter={{
+        card: "summary_large_image",
+        title: "Case Law & Legal Articles | Shafiq Law Associates Blog",
+        description:
+          "Expert legal insights and case law analysis from Shafiq Law Associates.",
+        image: ogImageUrl,
+      }}
+    />
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        name: `Case Law - ${userConfig.SITE_TITLE}`,
+        description: "Collection of legal articles and case law analysis",
+        url: Astro.url.href,
+      })}
+    />
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(blogSchema)}
     />
   </head>
 

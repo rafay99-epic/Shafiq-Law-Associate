@@ -3,17 +3,17 @@
 @tailwind utilities;
 
 :root {
-    --dracula-bg: #ffffff;
-    --dracula-current-line: #d9d9d9;
-    --dracula-foreground: #222222;
-    --dracula-comment: #888888;
-    --dracula-cyan: #3a506b;
-    --dracula-green: #d35400;
-    --dracula-orange: #4a4a4a;
-    --dracula-pink: #d35400;
-    --dracula-purple: #3a506b;
-    --dracula-red: #c0392b;
-    --dracula-yellow: #222222;
+    --dracula-bg: #F5F0E8;
+    --dracula-current-line: #E8E0D5;
+    --dracula-foreground: #2B2826;
+    --dracula-comment: #7F7670;
+    --dracula-cyan: #3D5233;
+    --dracula-green: #A67A4F;
+    --dracula-orange: #5C7352;
+    --dracula-pink: #C09970;
+    --dracula-purple: #3D5233;
+    --dracula-red: #B54040;
+    --dracula-yellow: #2B2826;
 }
 
 
@@ -30,10 +30,10 @@ main {
 
 /* General Typography */
 .blog-content {
-    font-family: "Arial", sans-serif;
-    line-height: 1.8;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    line-height: 1.9;
     color: var(--dracula-foreground);
-    background-color: var(--dracula-bg);
+    font-size: 1.125rem;
 }
 
 /* Headings */
@@ -43,140 +43,284 @@ main {
 .blog-content h4,
 .blog-content h5,
 .blog-content h6 {
-    font-weight: bold;
-    margin: 1.2em 0 0.8em;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 600;
+    line-height: 1.3;
     color: var(--dracula-foreground);
+    margin-top: 2.5em;
+    margin-bottom: 1em;
 }
 
 .blog-content h1 {
-    font-size: 2rem;
-    border-bottom: 2px solid var(--dracula-current-line);
-    padding-bottom: 0.3rem;
+    font-size: 2.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--dracula-cyan);
+    margin-top: 0;
 }
 
 .blog-content h2 {
-    font-size: 1.75rem;
+    font-size: 1.875rem;
     color: var(--dracula-cyan);
+    position: relative;
+    padding-left: 1rem;
+}
+
+.blog-content h2::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.25em;
+    bottom: 0.25em;
+    width: 4px;
+    background: linear-gradient(to bottom, var(--dracula-cyan), var(--dracula-green));
+    border-radius: 2px;
 }
 
 .blog-content h3 {
     font-size: 1.5rem;
-    color: var(--dracula-green);
+    color: var(--dracula-orange);
 }
 
 .blog-content h4 {
     font-size: 1.25rem;
-    color: var(--dracula-orange);
+    color: var(--dracula-comment);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 /* Paragraphs */
 .blog-content p {
-    font-size: 1rem;
-    margin: 0 0 1.5em;
+    font-size: 1.125rem;
+    margin: 0 0 1.75em;
     color: var(--dracula-foreground);
+    text-align: justify;
+    hyphens: auto;
+}
+
+.blog-content p:first-of-type {
+    font-size: 1.25rem;
+    color: var(--dracula-comment);
+    line-height: 1.8;
+}
+
+/* Drop Cap for first paragraph */
+.blog-content > p:first-of-type::first-letter {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 4rem;
+    font-weight: 700;
+    float: left;
+    line-height: 0.8;
+    margin-right: 0.75rem;
+    margin-top: 0.1em;
+    color: var(--dracula-cyan);
 }
 
 /* Links */
 .blog-content a {
     color: var(--dracula-green);
     text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s ease-in-out;
+    font-weight: 500;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
 }
 
 .blog-content a:hover {
     color: var(--dracula-pink);
-    text-decoration: underline;
+    border-bottom-color: var(--dracula-pink);
 }
 
 /* Blockquotes */
 .blog-content blockquote {
-    border-left: 4px solid var(--dracula-cyan);
-    padding: 0.5em 1em;
-    color: var(--dracula-comment);
-    background-color: var(--dracula-current-line);
+    position: relative;
+    border: none;
+    padding: 2rem 2.5rem;
+    margin: 2.5em 0;
+    background: linear-gradient(135deg, var(--dracula-current-line) 0%, rgba(61, 82, 51, 0.08) 100%);
+    border-radius: 12px;
     font-style: italic;
-    margin: 1.5em 0;
+    font-size: 1.2rem;
+    color: var(--dracula-comment);
+}
+
+.blog-content blockquote::before {
+    content: '"';
+    position: absolute;
+    top: -0.25rem;
+    left: 1rem;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 5rem;
+    font-weight: 700;
+    color: var(--dracula-cyan);
+    opacity: 0.3;
+    line-height: 1;
+}
+
+.blog-content blockquote p {
+    margin-bottom: 0;
+    text-align: left;
+}
+
+.blog-content blockquote cite {
+    display: block;
+    margin-top: 1rem;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--dracula-cyan);
 }
 
 /* Lists */
 .blog-content ul,
 .blog-content ol {
-    list-style-type: disc;
     color: var(--dracula-foreground);
-    ;
-    padding-left: 1.5rem;
-    margin-bottom: 1.5em;
+    padding-left: 0;
+    margin-bottom: 2em;
+    list-style: none;
 }
 
-.blog-content li {
-    margin-bottom: 0.5em;
+.blog-content ul li,
+.blog-content ol li {
+    position: relative;
+    padding-left: 2rem;
+    margin-bottom: 0.75em;
+    line-height: 1.7;
+}
+
+.blog-content ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 8px;
+    height: 8px;
+    background: var(--dracula-cyan);
+    border-radius: 50%;
+}
+
+.blog-content ol {
+    counter-reset: list-counter;
+}
+
+.blog-content ol li {
+    counter-increment: list-counter;
+}
+
+.blog-content ol li::before {
+    content: counter(list-counter);
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--dracula-cyan);
+}
+
+/* Nested lists */
+.blog-content ul ul,
+.blog-content ol ol,
+.blog-content ul ol,
+.blog-content ol ul {
+    margin-top: 0.75em;
+    margin-bottom: 0;
+}
+
+.blog-content ul ul li::before {
+    background: var(--dracula-green);
+    width: 6px;
+    height: 6px;
 }
 
 /* Tables */
 .blog-content table {
     width: 100%;
-    border-collapse: collapse;
-    margin: 1.5em 0;
-    background: var(--dracula-bg);
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 2.5em 0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(43, 40, 38, 0.08);
 }
 
 .blog-content th,
 .blog-content td {
-    border: 1px solid var(--dracula-current-line);
-    padding: 0.75em;
+    padding: 1rem 1.25rem;
     text-align: left;
+    border-bottom: 1px solid var(--dracula-current-line);
 }
 
 .blog-content th {
     background: var(--dracula-cyan);
     color: var(--dracula-bg);
-    font-weight: bold;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 .blog-content td {
-    background: var(--dracula-bg);
+    background: white;
     color: var(--dracula-foreground);
 }
 
-/* Striped Table Rows */
-.blog-content tr:nth-child(even) {
+.blog-content tr:last-child td {
+    border-bottom: none;
+}
+
+.blog-content tr:nth-child(even) td {
     background-color: var(--dracula-current-line);
+}
+
+.blog-content tr:hover td {
+    background-color: rgba(61, 82, 51, 0.06);
 }
 
 /* Code Blocks */
 .blog-content pre {
-
-    padding: 1rem;
-    border-radius: 8px;
+    background: var(--dracula-foreground);
+    padding: 1.5rem;
+    border-radius: 12px;
     overflow-x: auto;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+    margin: 2em 0;
+    box-shadow: 0 4px 20px rgba(43, 40, 38, 0.15);
+}
+
+.blog-content pre code {
+    background: none;
+    padding: 0;
+    color: var(--dracula-bg);
+    font-size: 0.9rem;
 }
 
 .blog-content code {
-
-
-    padding: 0.2em 0.4em;
-    border-radius: 4px;
-    font-family: "Courier New", monospace;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+    background: var(--dracula-current-line);
+    padding: 0.2em 0.5em;
+    border-radius: 6px;
+    font-size: 0.9em;
+    color: var(--dracula-cyan);
 }
 
 /* Inline Code */
 .blog-content p code,
 .blog-content li code,
 .blog-content td code {
-    font-size: 0.9rem;
-    color: var(--dracula-foreground);
-    padding: 0.2em 0.4em;
-    border-radius: 4px;
+    font-size: 0.875em;
+    background: var(--dracula-current-line);
+    color: var(--dracula-cyan);
+    padding: 0.2em 0.5em;
+    border-radius: 6px;
+    font-weight: 500;
 }
 
 /* Horizontal Rule */
 .blog-content hr {
     border: 0;
     height: 1px;
-    background: var(--dracula-current-line);
-    margin: 2rem 0;
+    background: linear-gradient(to right, transparent, var(--dracula-cyan), var(--dracula-green), var(--dracula-pink), transparent);
+    margin: 3rem 0;
 }
 
 /* Images */
@@ -184,15 +328,89 @@ main {
     max-width: 100%;
     height: auto;
     display: block;
-    margin: 1.5em auto;
-    border-radius: 8px;
+    margin: 2.5em auto;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(43, 40, 38, 0.12);
+}
+
+.blog-content figure {
+    margin: 2.5em 0;
+}
+
+.blog-content figcaption {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--dracula-comment);
+    margin-top: 1rem;
+    font-style: italic;
 }
 
 /* Highlighted Text */
 .blog-content mark {
-    background-color: var(--dracula-yellow);
-    color: var(--dracula-bg);
-    padding: 0.2em 0.4em;
+    background: linear-gradient(120deg, rgba(166, 122, 79, 0.3) 0%, rgba(166, 122, 79, 0.3) 100%);
+    color: var(--dracula-foreground);
+    padding: 0.1em 0.3em;
     border-radius: 4px;
-    font-weight: bold;
+    font-weight: 500;
+}
+
+/* Strong and Emphasis */
+.blog-content strong {
+    font-weight: 700;
+    color: var(--dracula-foreground);
+}
+
+.blog-content em {
+    font-style: italic;
+    color: var(--dracula-comment);
+}
+
+/* Definition Lists */
+.blog-content dl {
+    margin: 2em 0;
+}
+
+.blog-content dt {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--dracula-cyan);
+    margin-top: 1.5em;
+}
+
+.blog-content dd {
+    margin-left: 0;
+    padding-left: 1.5rem;
+    border-left: 3px solid var(--dracula-current-line);
+    color: var(--dracula-comment);
+}
+
+/* Footnotes */
+.blog-content .footnotes {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 2px solid var(--dracula-current-line);
+    font-size: 0.9rem;
+}
+
+.blog-content .footnotes ol li {
+    color: var(--dracula-comment);
+}
+
+/* Print styles */
+@media print {
+    .blog-content {
+        font-size: 12pt;
+        line-height: 1.6;
+    }
+
+    .blog-content a {
+        color: var(--dracula-foreground);
+        text-decoration: underline;
+    }
+
+    .blog-content blockquote {
+        border-left: 3px solid var(--dracula-foreground);
+        background: none;
+    }
 }

@@ -7,6 +7,7 @@ import "../styles/global.css";
 import userConfig from "../config//SiteConfig/config.json";
 import FeatureFlag from "../config/FeatureFlag/featureflag.json";
 import SpeedInsights from "@vercel/speed-insights/astro";
+import { SEO } from "astro-seo";
 
 try {
   if (!FeatureFlag.TermsAndConditions) {
@@ -15,15 +16,47 @@ try {
 } catch (error) {
   return Astro.redirect("/404");
 }
+
+const siteUrl = (Astro.site?.toString() || Astro.url.origin) as string;
+const ogImageUrl = new URL("/ShafiqLawAssociates.png", siteUrl).toString();
 ---
 
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
     <SpeedInsights />
-    <BaseHead
-      title="Terms and Conditions | Shafiq Law Associate"
-      description="Terms and Conditions for Shafiq Law Associates"
+    <BaseHead />
+    <SEO
+      title="Terms and Conditions | Shafiq Law Associates"
+      description="Terms and Conditions for Shafiq Law Associates. Learn about our intellectual property rights, user responsibilities, and website usage policies."
+      canonical={Astro.url.href}
+      openGraph={{
+        basic: {
+          title: "Terms and Conditions | Shafiq Law Associates",
+          type: "website",
+          image: ogImageUrl,
+          url: Astro.url.href,
+        },
+        optional: {
+          siteName: userConfig.SITE_TITLE,
+        },
+      }}
+      twitter={{
+        card: "summary_large_image",
+        title: "Terms and Conditions | Shafiq Law Associates",
+        description: "Terms and Conditions for Shafiq Law Associates.",
+        image: ogImageUrl,
+      }}
+    />
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        name: "Terms and Conditions - Shafiq Law Associates",
+        description: "Terms and Conditions for Shafiq Law Associates",
+        url: Astro.url.href,
+      })}
     />
     <Analytics />
   </head>

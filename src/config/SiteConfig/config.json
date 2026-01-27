@@ -2,9 +2,10 @@
     "SITE_TITLE": "Shafiq Law Associate",
     "SITE_DESCRIPTION": "Shafiq Law Associate is a legal consulting firm focused on providing personalized advice and legal services.",
     "SITE_KEYWORDS": "legal services, personalized advice, Shafiq Law Chamber",
-    "landingPageHeroImages": "/Images/landing_image.png",
-    "LandingPageIntroText": "Protect Your Rights",
-    "LandingPageSecondLineText": "Get the legal help and advice you need from Shafiq Law Chamber",
+    "founderImage": "/Images/slc-Copy.png",
+    "founderName": "Saqib Shafiq",
+    "heroTagline": "When Everything Is On The Line",
+    "heroSubheadline": "You Deserve a Fighter, Not a Filer",
     "organizationLogo": "/Images/shafiqLawchamber.jpeg",
     "CEoImage": "/Images/slc-Copy.png",
     "EmailAdress": "slclaw@gmail.com",
@@ -14,8 +15,7 @@
     "InstagramLink": "",
     "TwitterLink": "",
     "LinkedInLink": "",
-    "offices": [
-        {
+    "offices": [{
             "name": "Morning Office",
             "address": "16 Ground Floor, Zamrud Block, District Court, Rawalpindi, Pakistan",
             "phone": "+92 0300 9817389",
@@ -28,8 +28,7 @@
             "hours": "6:00 PM - 9:00 PM"
         }
     ],
-    "faq": [
-        {
+    "faq": [{
             "question": "How can I register a company in Pakistan?",
             "answer": "To register a company in Pakistan, you need to submit an application to SECP, reserve a company name, draft the memorandum and articles of association, and complete the incorporation process."
         },
@@ -50,11 +49,12 @@
             "answer": "To file a criminal case, visit your local police station to register an FIR. If the police refuse, you can approach the Magistrate under Section 22-A of the CrPC for complaint registration."
         }
     ],
-    "pricingPlans": [
-        {
+    "pricingPlans": [{
             "name": "Basic",
             "monthly": "PKR 5,000/month",
             "yearly": "PKR 50,000/year",
+            "monthlyVariantId": "1255891",
+            "yearlyVariantId": "",
             "features": [
                 "Legal Consultation (2 Sessions)",
                 "Drafting Basic Legal Documents",
@@ -65,6 +65,8 @@
             "name": "Professional",
             "monthly": "PKR 15,000/month",
             "yearly": "PKR 150,000/year",
+            "monthlyVariantId": "1255910 ",
+            "yearlyVariantId": "",
             "features": [
                 "Legal Consultation (5 Sessions)",
                 "Contract Drafting & Review",
@@ -76,6 +78,8 @@
             "name": "Premium",
             "monthly": "PKR 35,000/month",
             "yearly": "PKR 350,000/year",
+            "monthlyVariantId": "1255908",
+            "yearlyVariantId": "",
             "features": [
                 "Unlimited Legal Consultation",
                 "Comprehensive Contract Drafting",
@@ -85,45 +89,248 @@
             ]
         }
     ],
-    "services": [
-        {
+    "services": [{
             "title": "Criminal Defense",
             "description": "Defend your rights with expert legal representation. We ensure the best possible outcome for your case.",
-            "icon": "Shield"
+            "icon": "Shield",
+            "subServices": [{
+                    "title": "Bail Applications",
+                    "description": "Pre-arrest and post-arrest bail applications in all courts."
+                },
+                {
+                    "title": "Trial Defense",
+                    "description": "Complete trial representation from filing to judgment."
+                },
+                {
+                    "title": "Appeals",
+                    "description": "Criminal appeals in High Court and Supreme Court."
+                },
+                {
+                    "title": "FIR Quashing",
+                    "description": "Applications to quash false or malicious FIRs."
+                },
+                {
+                    "title": "White Collar Crimes",
+                    "description": "Defense in fraud, embezzlement, and financial crimes."
+                },
+                {
+                    "title": "Cybercrime Defense",
+                    "description": "Legal defense under PECA and cybercrime laws."
+                }
+            ]
         },
         {
             "title": "Family Law",
             "description": "Compassionate legal support for divorce, custody, and family matters. We guide you through every step.",
-            "icon": "Users"
+            "icon": "Users",
+            "subServices": [{
+                    "title": "Divorce & Khula",
+                    "description": "Legal proceedings for divorce, khula, and separation."
+                },
+                {
+                    "title": "Child Custody",
+                    "description": "Custody disputes and visitation rights matters."
+                },
+                {
+                    "title": "Maintenance Claims",
+                    "description": "Wife and children maintenance applications."
+                },
+                {
+                    "title": "Dower Recovery",
+                    "description": "Recovery of haq mehr and dowry articles."
+                },
+                {
+                    "title": "Domestic Violence",
+                    "description": "Protection orders and legal action against abuse."
+                },
+                {
+                    "title": "Guardianship",
+                    "description": "Legal guardianship for minors and dependents."
+                }
+            ]
         },
         {
             "title": "Personal Injury",
             "description": "We help you secure the compensation you deserve for injuries caused by negligence or accidents.",
-            "icon": "HandHelping"
+            "icon": "HandHelping",
+            "subServices": [{
+                    "title": "Motor Accidents",
+                    "description": "Claims for road accident injuries and damages."
+                },
+                {
+                    "title": "Workplace Injuries",
+                    "description": "Compensation for injuries at workplace."
+                },
+                {
+                    "title": "Medical Malpractice",
+                    "description": "Cases against negligent medical professionals."
+                },
+                {
+                    "title": "Product Liability",
+                    "description": "Claims for injuries from defective products."
+                },
+                {
+                    "title": "Insurance Claims",
+                    "description": "Assistance with injury insurance claims."
+                },
+                {
+                    "title": "Wrongful Death",
+                    "description": "Compensation claims for fatal accidents."
+                }
+            ]
         },
         {
             "title": "Civil Corporate Law",
             "description": "Comprehensive legal guidance for businesses, covering contracts, compliance, and corporate matters.",
-            "icon": "Building"
+            "icon": "Building",
+            "subServices": [{
+                    "title": "Company Formation",
+                    "description": "Registration of private, public, and SMC companies."
+                },
+                {
+                    "title": "Contract Drafting",
+                    "description": "Drafting and reviewing commercial contracts."
+                },
+                {
+                    "title": "Corporate Compliance",
+                    "description": "SECP filings, annual returns, and regulatory compliance."
+                },
+                {
+                    "title": "Mergers & Acquisitions",
+                    "description": "Legal support for business mergers and acquisitions."
+                },
+                {
+                    "title": "Shareholder Disputes",
+                    "description": "Resolution of disputes between shareholders."
+                },
+                {
+                    "title": "Business Licensing",
+                    "description": "Obtaining licenses and permits for businesses."
+                }
+            ]
         },
         {
-            "title": "Arbitration & Mediation",
-            "description": "Resolve disputes efficiently outside of court through arbitration and mediation with expert facilitators.",
-            "icon": "Scale"
+            "title": "Taxation Law",
+            "description": "Expert guidance on income tax, sales tax, FBR matters, tax planning, and compliance for individuals and businesses.",
+            "icon": "Calculator",
+            "subServices": [{
+                    "title": "Income Tax",
+                    "description": "Personal and corporate income tax filing and planning."
+                },
+                {
+                    "title": "Sales Tax",
+                    "description": "Sales tax registration, compliance, and returns filing."
+                },
+                {
+                    "title": "Tax Audit Defense",
+                    "description": "Representation during FBR tax audits and assessments."
+                },
+                {
+                    "title": "NTN/STRN Registration",
+                    "description": "Tax registration for individuals and businesses."
+                },
+                {
+                    "title": "Tax Appeals",
+                    "description": "Appeals before Commissioner and Appellate Tribunal."
+                },
+                {
+                    "title": "Withholding Tax",
+                    "description": "Compliance with withholding tax requirements."
+                }
+            ]
+        },
+        {
+            "title": "Property & Real Estate",
+            "description": "Complete legal services for property transactions, disputes, and real estate matters.",
+            "icon": "Scale",
+            "subServices": [{
+                    "title": "Property Disputes",
+                    "description": "Litigation for ownership and possession disputes."
+                },
+                {
+                    "title": "Sale & Purchase",
+                    "description": "Drafting sale agreements and transfer deeds."
+                },
+                {
+                    "title": "Title Verification",
+                    "description": "Due diligence and title search services."
+                },
+                {
+                    "title": "Mutation & Registry",
+                    "description": "Property mutation and registration procedures."
+                },
+                {
+                    "title": "Tenant Disputes",
+                    "description": "Eviction suits and rent recovery matters."
+                },
+                {
+                    "title": "Land Acquisition",
+                    "description": "Compensation claims for acquired land."
+                }
+            ]
         },
         {
             "title": "Estate Planning",
             "description": "Plan for the future with wills, trusts, and estate management services to protect your assets.",
-            "icon": "FileText"
+            "icon": "FileText",
+            "subServices": [{
+                    "title": "Will Drafting",
+                    "description": "Preparation of legally valid wills and testaments."
+                },
+                {
+                    "title": "Succession Certificates",
+                    "description": "Obtaining succession and legal heir certificates."
+                },
+                {
+                    "title": "Inheritance Distribution",
+                    "description": "Fair distribution of estate as per Islamic law."
+                },
+                {
+                    "title": "Trust Formation",
+                    "description": "Setting up family and charitable trusts."
+                },
+                {
+                    "title": "Probate Matters",
+                    "description": "Probate applications and estate administration."
+                },
+                {
+                    "title": "Gift Deeds",
+                    "description": "Drafting and registration of gift deeds."
+                }
+            ]
         },
         {
             "title": "Immigration Law",
-            "description": "Navigate the complexities of immigration law with expert assistance for visas, green cards, and citizenship.",
-            "icon": "Globe"
+            "description": "Navigate the complexities of immigration law with expert assistance for visas and international matters.",
+            "icon": "Globe",
+            "subServices": [{
+                    "title": "Visa Applications",
+                    "description": "Assistance with work, study, and family visas."
+                },
+                {
+                    "title": "Immigration Appeals",
+                    "description": "Appeals against visa refusals and deportation."
+                },
+                {
+                    "title": "Citizenship Matters",
+                    "description": "Dual nationality and citizenship applications."
+                },
+                {
+                    "title": "Work Permits",
+                    "description": "Work permit applications for foreigners in Pakistan."
+                },
+                {
+                    "title": "Deportation Defense",
+                    "description": "Legal defense against deportation orders."
+                },
+                {
+                    "title": "Travel Documents",
+                    "description": "Emergency travel documents and passport issues."
+                }
+            ]
         }
     ],
-    "WhyChooseUs": [
-        {
+    "WhyChooseUs": [{
             "icon": "ShieldCheck",
             "title": "Proven Legal Expertise",
             "description": "With years of experience, we have successfully handled complex cases across various legal domains."
@@ -139,24 +346,32 @@
             "description": "Our reputation is built on integrity, professionalism, and a commitment to justice."
         }
     ],
-    "MeetOurTeam": [
-        {
+    "MeetOurTeam": [{
             "name": "Saqib Shafiq",
-            "position": "Founder & CEO",
-            "description": "With over 20 years of experience, Shafiq specializes in criminal law and has a proven track record in high-profile cases.",
-            "image": "/Images/slc-Copy.png"
+            "position": "Founder & Senior Advocate",
+            "description": "With over 20 years of experience, Saqib has built a reputation for excellence in criminal defense and civil litigation. He has successfully represented clients in high-profile cases at the High Court and Supreme Court of Pakistan.",
+            "image": "/Images/slc-Copy.png",
+            "specializations": ["Criminal Defense", "Civil Litigation", "Constitutional Law"],
+            "experience": "20+ Years Experience",
+            "education": "LLB, Punjab University"
         },
         {
             "name": "Sara Khan",
-            "position": "Family Law Expert",
-            "description": "Sara is dedicated to helping families navigate legal challenges with compassion and expertise.",
-            "image": "/Images/slc-Copy.png"
+            "position": "Family Law Specialist",
+            "description": "Sara is dedicated to helping families navigate complex legal challenges with compassion and expertise. She specializes in divorce, custody disputes, and domestic matters with a client-centered approach.",
+            "image": "/Images/slc-Copy.png",
+            "specializations": ["Family Law", "Child Custody", "Divorce"],
+            "experience": "12+ Years Experience",
+            "education": "LLM, International Islamic University"
         },
         {
             "name": "Ali Raza",
-            "position": "Corporate Lawyer",
-            "description": "Ali provides comprehensive legal support for businesses, ensuring compliance and protecting interests.",
-            "image": "/Images/slc-Copy.png"
+            "position": "Corporate & Tax Counsel",
+            "description": "Ali provides comprehensive legal support for businesses, from company formation to complex corporate transactions. He ensures full regulatory compliance and protects business interests.",
+            "image": "/Images/slc-Copy.png",
+            "specializations": ["Corporate Law", "Tax Law", "M&A"],
+            "experience": "15+ Years Experience",
+            "education": "LLB, Quaid-i-Azam University"
         }
     ]
 }

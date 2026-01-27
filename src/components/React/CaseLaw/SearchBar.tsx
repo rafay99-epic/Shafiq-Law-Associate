@@ -1,4 +1,4 @@
-import { Search } from "lucide-react";
+import { Search, X } from "lucide-react";
 
 interface SearchBarProps {
   searchQuery: string;
@@ -10,15 +10,24 @@ const SearchBar: React.FC<SearchBarProps> = ({
   setSearchQuery,
 }) => {
   return (
-    <div className="relative w-full md:w-1/2">
-      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-dracula-comment" />
+    <div className="relative w-full lg:w-96">
+      <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-dracula-comment w-5 h-5" />
       <input
         type="text"
-        placeholder="Search posts..."
+        placeholder="Search articles..."
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
-        className="w-full pl-10 pr-4 py-2 text-dracula-foreground bg-dracula-current-line rounded-lg border border-dracula-comment focus:outline-none focus:ring-2 focus:ring-dracula-pink"
+        className="w-full pl-12 pr-10 py-3.5 text-dracula-foreground bg-dracula-bg rounded-xl border-2 border-dracula-current-line focus:border-dracula-cyan focus:outline-none transition-colors placeholder:text-dracula-comment/60"
       />
+      {searchQuery && (
+        <button
+          onClick={() => setSearchQuery("")}
+          className="absolute right-4 top-1/2 transform -translate-y-1/2 text-dracula-comment hover:text-dracula-foreground transition-colors"
+          aria-label="Clear search"
+        >
+          <X className="w-4 h-4" />
+        </button>
+      )}
     </div>
   );
 };

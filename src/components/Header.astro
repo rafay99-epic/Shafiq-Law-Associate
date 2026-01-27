@@ -12,23 +12,94 @@ try {
 }
 ---
 
-<nav class="bg-dracula-bg sticky top-0 z-50">
+<!-- Top Bar -->
+<div class="hidden lg:block bg-dracula-foreground text-dracula-bg/80 text-sm">
+  <div class="max-w-7xl mx-auto px-6 py-2.5 flex items-center justify-between">
+    <div class="flex items-center gap-6">
+      <a
+        href={`mailto:${userConfig.EmailAdress}`}
+        class="flex items-center gap-2 hover:text-dracula-bg transition-colors"
+      >
+        <svg
+          class="w-4 h-4"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+          ></path>
+        </svg>
+        <span>{userConfig.EmailAdress}</span>
+      </a>
+      <a
+        href={`tel:${userConfig.PhoneNumber01}`}
+        class="flex items-center gap-2 hover:text-dracula-bg transition-colors"
+      >
+        <svg
+          class="w-4 h-4"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+          ></path>
+        </svg>
+        <span>{userConfig.PhoneNumber01}</span>
+      </a>
+    </div>
+    <div class="flex items-center gap-4">
+      <span class="text-dracula-bg/60">Mon - Sat: 9:00 AM - 9:00 PM</span>
+    </div>
+  </div>
+</div>
+
+<!-- Main Navigation -->
+<nav class="sticky top-0 z-50 bg-dracula-bg/95 backdrop-blur-md border-b border-dracula-current-line shadow-sm">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-20">
       <!-- Logo & Title -->
-      <a href="/" class="flex items-center space-x-3">
-        <img
-          src={userConfig.organizationLogo}
-          alt={userConfig.SITE_TITLE}
-          class="h-14 w-14 rounded-full object-cover"
-        />
-        <span class="text-dracula-foreground text-xl sm:text-2xl font-semibold">
-          {userConfig.SITE_TITLE}
-        </span>
+      <a href="/" class="flex items-center gap-4 group">
+        <div class="relative">
+          <div
+            class="absolute -inset-1 bg-gradient-to-r from-dracula-cyan to-dracula-green rounded-full opacity-0 group-hover:opacity-100 blur transition-opacity duration-300"
+          >
+          </div>
+          <img
+            src={userConfig.organizationLogo}
+            alt={userConfig.SITE_TITLE}
+            class="relative h-14 w-14 rounded-full object-cover border-2 border-dracula-current-line group-hover:border-dracula-cyan transition-colors"
+          />
+        </div>
+        <div class="flex flex-col">
+          <span
+            class="text-dracula-foreground text-xl font-bold leading-tight"
+            style="font-family: 'Playfair Display', Georgia, serif;"
+          >
+            {userConfig.SITE_TITLE}
+          </span>
+          <span class="text-dracula-comment text-xs font-medium tracking-wider">
+            ADVOCATES & LEGAL CONSULTANTS
+          </span>
+        </div>
       </a>
 
       <!-- Desktop Nav Links -->
-      <div class="hidden sm:flex items-center space-x-6">
+      <div class="hidden lg:flex items-center gap-1">
+        {
+          FeatureFlag.HomePage && (
+            <HeaderLink href="/" class="nav-link">
+              Home
+            </HeaderLink>
+          )
+        }
         {
           FeatureFlag.AboutUs && (
             <HeaderLink href="/about" class="nav-link">
@@ -59,29 +130,69 @@ try {
         }
       </div>
 
-      <!-- Appointment (Desktop) -->
+      <!-- CTA Button (Desktop) -->
       {
         FeatureFlag.ContactUS && (
-          <div class="hidden sm:block">
+          <div class="hidden lg:flex items-center gap-4">
+            <a
+              href={`tel:${userConfig.PhoneNumber01}`}
+              class="flex items-center gap-2 text-dracula-foreground hover:text-dracula-cyan transition-colors"
+            >
+              <div class="w-10 h-10 rounded-full bg-dracula-cyan/10 flex items-center justify-center">
+                <svg
+                  class="w-5 h-5 text-dracula-cyan"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                  />
+                </svg>
+              </div>
+              <div class="hidden xl:block text-left">
+                <span class="text-xs text-dracula-comment block">Call Now</span>
+                <span class="text-sm font-semibold">
+                  {userConfig.PhoneNumber01}
+                </span>
+              </div>
+            </a>
             <a href="/contact" class="btn-primary">
-              Appointment
+              <span>Free Consultation</span>
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
             </a>
           </div>
         )
       }
 
       <!-- Mobile Menu Button -->
-      <div class="sm:hidden">
+      <div class="lg:hidden">
         <button
           id="mobile-menu-button"
           type="button"
           aria-controls="mobile-menu"
           aria-expanded="false"
-          class="p-2 rounded-md text-dracula-foreground hover:bg-dracula-current-line focus:outline-none focus:ring-2 focus:ring-dracula-pink"
+          class="relative w-10 h-10 flex items-center justify-center rounded-xl bg-dracula-current-line text-dracula-foreground hover:bg-dracula-cyan hover:text-dracula-bg focus:outline-none focus:ring-2 focus:ring-dracula-cyan transition-all"
         >
+          <span class="sr-only">Open menu</span>
           <svg
-            id="menu-icon"
-            class="h-6 w-6"
+            id="menu-icon-open"
+            class="h-5 w-5"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -93,6 +204,20 @@ try {
               stroke-width="2"
               d="M4 6h16M4 12h16M4 18h16"></path>
           </svg>
+          <svg
+            id="menu-icon-close"
+            class="h-5 w-5 hidden"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
         </button>
       </div>
     </div>
@@ -101,84 +226,259 @@ try {
   <!-- Mobile Navigation -->
   <div
     id="mobile-menu"
-    class="hidden sm:hidden transition-all duration-300 ease-in-out bg-dracula-bg px-4 pt-4 pb-6"
+    class="hidden lg:hidden border-t border-dracula-current-line bg-dracula-bg"
   >
-    <div class="space-y-2">
+    <div class="px-4 py-6 space-y-1">
       {
         FeatureFlag.HomePage && (
           <HeaderLink href="/" class="mobile-link">
-            Home
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+              />
+            </svg>
+            <span>Home</span>
           </HeaderLink>
         )
       }
       {
         FeatureFlag.AboutUs && (
           <HeaderLink href="/about" class="mobile-link">
-            About
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            <span>About</span>
           </HeaderLink>
         )
       }
       {
         FeatureFlag.Services && (
           <HeaderLink href="/services" class="mobile-link">
-            Services
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+              />
+            </svg>
+            <span>Services</span>
           </HeaderLink>
         )
       }
       {
         FeatureFlag.CaseLaw && (
           <HeaderLink href="/blog" class="mobile-link">
-            Case Law
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+              />
+            </svg>
+            <span>Case Law</span>
           </HeaderLink>
         )
       }
       {
         FeatureFlag.Pricing && (
           <HeaderLink href="/pricing" class="mobile-link">
-            Pricing
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            <span>Pricing</span>
           </HeaderLink>
         )
       }
+
+      <!-- Mobile Contact Info -->
+      <div class="pt-4 mt-4 border-t border-dracula-current-line space-y-3">
+        <a
+          href={`tel:${userConfig.PhoneNumber01}`}
+          class="flex items-center gap-3 text-dracula-comment hover:text-dracula-cyan transition-colors px-4 py-2"
+        >
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+            ></path>
+          </svg>
+          <span class="font-medium">{userConfig.PhoneNumber01}</span>
+        </a>
+        <a
+          href={`mailto:${userConfig.EmailAdress}`}
+          class="flex items-center gap-3 text-dracula-comment hover:text-dracula-cyan transition-colors px-4 py-2"
+        >
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+            ></path>
+          </svg>
+          <span class="font-medium">{userConfig.EmailAdress}</span>
+        </a>
+      </div>
+
+      <!-- Mobile CTA -->
       {
         FeatureFlag.ContactUS && (
-          <a href="/contact" class="btn-primary w-full text-center block mt-2">
-            Appointment
-          </a>
+          <div class="pt-4">
+            <a href="/contact" class="btn-primary-mobile">
+              <span>Free Consultation</span>
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </a>
+          </div>
         )
       }
     </div>
   </div>
 </nav>
 
-<script lang="js" is:inline>
+<script is:inline>
   document.addEventListener("DOMContentLoaded", () => {
     const button = document.getElementById("mobile-menu-button");
     const menu = document.getElementById("mobile-menu");
-    const icon = document.getElementById("menu-icon");
+    const iconOpen = document.getElementById("menu-icon-open");
+    const iconClose = document.getElementById("menu-icon-close");
 
     let menuOpen = false;
 
     button.addEventListener("click", () => {
-      menu.classList.toggle("hidden");
       menuOpen = !menuOpen;
+      menu.classList.toggle("hidden");
+      iconOpen.classList.toggle("hidden");
+      iconClose.classList.toggle("hidden");
+    });
 
-      icon.innerHTML = menuOpen
-        ? '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />'
-        : '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />';
+    // Close menu when clicking a link
+    const links = menu.querySelectorAll("a");
+    links.forEach((link) => {
+      link.addEventListener("click", () => {
+        menuOpen = false;
+        menu.classList.add("hidden");
+        iconOpen.classList.remove("hidden");
+        iconClose.classList.add("hidden");
+      });
     });
   });
 </script>
 
 <style>
   .nav-link {
-    @apply text-dracula-foreground hover:text-dracula-pink px-3 py-2 rounded-md text-lg font-medium transition-colors;
+    @apply relative text-dracula-foreground px-4 py-2 text-sm font-medium transition-colors;
+  }
+
+  .nav-link:hover {
+    @apply text-dracula-cyan;
+  }
+
+  .nav-link::after {
+    content: "";
+    @apply absolute bottom-0 left-4 right-4 h-0.5 bg-dracula-cyan transform scale-x-0 transition-transform duration-300 origin-left;
+  }
+
+  .nav-link:hover::after {
+    @apply scale-x-100;
+  }
+
+  .nav-link.active {
+    @apply text-dracula-cyan;
+  }
+
+  .nav-link.active::after {
+    @apply scale-x-100;
   }
 
   .mobile-link {
-    @apply block text-dracula-foreground hover:text-dracula-pink px-4 py-2 rounded-md text-base font-medium transition-colors;
+    @apply flex items-center gap-3 text-dracula-foreground px-4 py-3 rounded-xl text-base font-medium transition-all;
+  }
+
+  .mobile-link:hover {
+    @apply bg-dracula-current-line text-dracula-cyan;
+  }
+
+  .mobile-link.active {
+    @apply bg-dracula-cyan/10 text-dracula-cyan;
   }
 
   .btn-primary {
-    @apply bg-dracula-pink text-dracula-bg hover:bg-dracula-foreground hover:text-dracula-bg px-4 py-2 rounded-md text-lg font-semibold transition-colors;
+    @apply inline-flex items-center gap-2 bg-dracula-cyan text-dracula-bg px-6 py-3 rounded-xl text-sm font-semibold transition-all duration-300;
+  }
+
+  .btn-primary:hover {
+    @apply bg-dracula-orange shadow-lg;
+  }
+
+  .btn-primary-mobile {
+    @apply flex items-center justify-center gap-2 w-full bg-dracula-cyan text-dracula-bg px-6 py-4 rounded-xl text-base font-semibold transition-all duration-300;
+  }
+
+  .btn-primary-mobile:hover {
+    @apply bg-dracula-orange;
   }
 </style>

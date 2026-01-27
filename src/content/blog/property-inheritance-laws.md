@@ -7,6 +7,7 @@ description: >-
   ownership rights, legal procedures, and case examples.
 pubDate: 2025-02-23T19:00:00.000Z
 draft: false
+prerender: true
 tags:
   - InheritanceLaw
 ---

@@ -2,17 +2,25 @@
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import LandingPageHeroReact from "../components/React/Home/Landing";
-import userConfig from "../config//SiteConfig/config.json";
+import LandingPageHero from "../components/React/Home/Landing";
+import userConfig from "../config/SiteConfig/config.json";
 import Analytics from "@vercel/analytics/astro";
 import WhyChooseUS from "../components/React/Home/WhyChooseUS";
-import Services from "../components/React/Services/Services";
-import ContactForm from "../components/React/Home/Contact";
-import LastestBlog from "../components/React/Home/LatestBlog";
+import ServicesPreview from "../components/React/Home/ServicesPreview";
+import ContactSection from "../components/React/Home/Contact";
+import LatestBlog from "../components/React/Home/LatestBlog";
 import FAQ from "../components/React/Home/FAQ";
-import PricingPage from "../components/React/Pricing/PricingPackage";
+import PricingPreview from "../components/React/Home/Pricing";
+import TeamPreview from "../components/React/Home/TeamPreview";
 import FeatureFlag from "../config/FeatureFlag/featureflag.json";
 import SpeedInsights from "@vercel/speed-insights/astro";
+import { GoogleFontsOptimizer } from "astro-google-fonts-optimizer";
+import { SEO } from "astro-seo";
+import {
+  generateOrganizationSchema,
+  generateWebSiteSchema,
+} from "../utils/seoHelpers";
+
 export const prerender = true;
 
 try {
@@ -36,73 +44,147 @@ const posts = rawPosts
     tags: post.data.tags || [],
   }))
   .sort((a, b) => b.pubDate.getTime() - a.pubDate.getTime());
+
+const siteUrl = (Astro.site?.toString() || Astro.url.origin) as string;
+const ogImageUrl = new URL(userConfig.organizationLogo, siteUrl).toString();
+const organizationSchema = generateOrganizationSchema(siteUrl, userConfig);
+const websiteSchema = generateWebSiteSchema(siteUrl, userConfig.SITE_TITLE);
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <SpeedInsights />
-    <BaseHead
-      title={userConfig.SITE_TITLE}
-      description={userConfig.SITE_DESCRIPTION}
+    <BaseHead />
+    <SEO
+      title="Expert Legal Services in Pakistan | Shafiq Law Associates"
+      description="Shafiq Law Associates provides expert legal services in Pakistan including criminal defense, family law, corporate law, property disputes, and more. Trusted legal representation in Rawalpindi."
+      canonical={Astro.url.href}
+      openGraph={{
+        basic: {
+          title: "Expert Legal Services in Pakistan | Shafiq Law Associates",
+          type: "website",
+          image: ogImageUrl,
+          url: Astro.url.href,
+        },
+        optional: {
+          siteName: userConfig.SITE_TITLE,
+          description:
+            "Shafiq Law Associates provides expert legal services in Pakistan including criminal defense, family law, corporate law, property disputes, and more. Trusted legal representation in Rawalpindi.",
+        },
+      }}
+      twitter={{
+        card: "summary_large_image",
+        title: "Expert Legal Services in Pakistan | Shafiq Law Associates",
+        description:
+          "Shafiq Law Associates provides expert legal services in Pakistan including criminal defense, family law, corporate law, property disputes, and more.",
+        image: ogImageUrl,
+      }}
+      extend={{
+        meta: [
+          {
+            name: "keywords",
+            content:
+              "legal services Pakistan, criminal defense, family law, corporate law, property disputes, Rawalpindi lawyer, legal consultation Pakistan",
+          },
+        ],
+      }}
+    />
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(organizationSchema)}
+    />
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(websiteSchema)}
     />
     <Analytics />
+    <GoogleFontsOptimizer
+      url="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+    />
   </head>
-  <body>
+  <body class="bg-dracula-bg">
     <Header />
-    <main class="bg-dracula-bg">
-      <div class="max-w-10xl mx-auto px-6">
-        <section>
-          <!-- Landing Page Hero -->
-          {
-            FeatureFlag.HomePageComponent[0].LandingPage && (
-              <LandingPageHeroReact
-                imageUrl={userConfig.landingPageHeroImages}
-                LandingPageIntroText={userConfig.LandingPageIntroText}
-                LandingPageSecondLineText={userConfig.LandingPageSecondLineText}
-                client:load
-              />
-            )
-          }
-        </section>
-        <section>
-          <!-- Why Choose Us section -->
-          {
-            FeatureFlag.HomePageComponent[0].WhyChooseUs && (
-              <WhyChooseUS reasons={userConfig.WhyChooseUs} client:load />
-            )
-          }
-        </section>
-        <section>
-          <!-- Services Section -->
-          <Services services={userConfig.services} client:load />
-        </section>
-        <section>
-          <!-- Top Case Studies section AKA Blogs -->
-          {FeatureFlag.CaseLaw && <LastestBlog posts={posts} client:load />}
-        </section>
-        <section>
-          <!-- FAQ section -->
-          {
-            FeatureFlag.HomePageComponent[0].FAQ && (
-              <FAQ faqData={userConfig.faq} client:load />
-            )
-          }
-        </section>
-        <section>
-          {
-            FeatureFlag.Pricing && (
-              <PricingPage pricingPlans={userConfig.pricingPlans} client:load />
-            )
-          }
-        </section>
-        <!-- Call to action section -->
-        {
-          FeatureFlag.HomePageComponent[0].ContactUS && (
-            <ContactForm offices={userConfig.offices} client:load />
-          )
-        }
-      </div>
+    <main>
+      <!-- Hero Section -->
+      {
+        FeatureFlag.HomePageComponent[0].LandingPage && (
+          <section class="px-6">
+            <LandingPageHero
+              tagline={userConfig.heroTagline}
+              subheadline={userConfig.heroSubheadline}
+              yearsExperience={20}
+              phoneNumber={userConfig.PhoneNumber01}
+              client:load
+            />
+          </section>
+        )
+      }
+
+      <!-- Why Choose Us Section -->
+      {
+        FeatureFlag.HomePageComponent[0].WhyChooseUs && (
+          <section class="px-6">
+            <WhyChooseUS reasons={userConfig.WhyChooseUs} client:load />
+          </section>
+        )
+      }
+
+      <!-- Services Preview Section -->
+      {
+        FeatureFlag.Services && (
+          <section class="px-6">
+            <ServicesPreview services={userConfig.services} client:load />
+          </section>
+        )
+      }
+
+      <!-- Latest Blog/Case Law Section -->
+      {
+        FeatureFlag.CaseLaw && posts.length > 0 && (
+          <section class="px-6">
+            <LatestBlog posts={posts} client:load />
+          </section>
+        )
+      }
+
+      <!-- FAQ Section -->
+      {
+        FeatureFlag.HomePageComponent[0].FAQ && (
+          <section class="px-6">
+            <FAQ faqData={userConfig.faq} client:load />
+          </section>
+        )
+      }
+
+      <!-- Meet Our Team Section -->
+      {
+        FeatureFlag.MeetTheTeam && userConfig.MeetOurTeam && (
+          <section class="px-6">
+            <TeamPreview team={userConfig.MeetOurTeam} client:visible />
+          </section>
+        )
+      }
+
+      <!-- Pricing Section -->
+      {
+        FeatureFlag.Pricing && (
+          <section class="px-6">
+            <PricingPreview pricingPlans={userConfig.pricingPlans} client:visible />
+          </section>
+        )
+      }
+
+      <!-- Contact Section -->
+      {
+        FeatureFlag.HomePageComponent[0].ContactUS && (
+          <section class="px-6">
+            <ContactSection offices={userConfig.offices} client:load />
+          </section>
+        )
+      }
     </main>
     <Footer />
   </body>
