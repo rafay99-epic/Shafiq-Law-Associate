@@ -7,6 +7,8 @@ import FeatureFlag from "../config/FeatureFlag/featureflag.json";
 import SpeedInsights from "@vercel/speed-insights/astro";
 import Analytics from "@vercel/analytics/astro";
 import MeetTeam from "../components/React/MeetTeam/meetTeam";
+import { SEO } from "astro-seo";
+import { generatePersonSchema } from "../utils/seoHelpers";
 
 try {
   if (!FeatureFlag.MeetTheTeam) {
@@ -15,16 +17,60 @@ try {
 } catch (error) {
   return Astro.redirect("/404");
 }
+
+const siteUrl = (Astro.site?.toString() || Astro.url.origin) as string;
+const ogImageUrl = new URL("/ShafiqLawAssociates.png", siteUrl).toString();
+const teamSchemas = userConfig.MeetOurTeam.map((member) =>
+  generatePersonSchema(member, siteUrl)
+);
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <SpeedInsights />
-    <BaseHead
-      title={userConfig.SITE_TITLE}
-      description={userConfig.SITE_DESCRIPTION}
+    <BaseHead />
+    <SEO
+      title="Meet Our Legal Team | Expert Lawyers | Shafiq Law Associates"
+      description="Meet the expert legal team at Shafiq Law Associates. Experienced lawyers specializing in criminal defense, family law, corporate law, and more. Trusted legal professionals in Rawalpindi, Pakistan."
+      canonical={Astro.url.href}
+      openGraph={{
+        basic: {
+          title: "Meet Our Legal Team | Expert Lawyers | Shafiq Law Associates",
+          type: "website",
+          image: ogImageUrl,
+          url: Astro.url.href,
+        },
+        optional: {
+          siteName: userConfig.SITE_TITLE,
+        },
+      }}
+      twitter={{
+        card: "summary_large_image",
+        title: "Meet Our Legal Team | Expert Lawyers | Shafiq Law Associates",
+        description:
+          "Meet the expert legal team at Shafiq Law Associates. Experienced lawyers specializing in criminal defense, family law, corporate law, and more.",
+        image: ogImageUrl,
+      }}
     />
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "AboutPage",
+        name: `Our Team - ${userConfig.SITE_TITLE}`,
+        description: "Meet the expert legal team at Shafiq Law Associates",
+        url: Astro.url.href,
+      })}
+    />
+    {teamSchemas.map((schema) => (
+      <script
+        is:inline
+        type="application/ld+json"
+        set:html={JSON.stringify(schema)}
+      />
+    ))}
     <Analytics />
   </head>
   <body>

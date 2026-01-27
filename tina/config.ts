@@ -43,6 +43,26 @@ export default defineConfig({
             required: true,
           },
           {
+            type: "string",
+            name: "seoTitle",
+            label: "SEO Title",
+            required: false,
+            ui: {
+              description:
+                "Optional. Custom SEO title (50–60 characters). Defaults to Article Title if left empty.",
+            },
+          },
+          {
+            type: "string",
+            name: "seoDescription",
+            label: "SEO Description",
+            required: false,
+            ui: {
+              description:
+                "Optional. Custom SEO description (120–160 characters). Defaults to Article Description if left empty.",
+            },
+          },
+          {
             type: "datetime",
             name: "pubDate",
             label: "Publish Date",
@@ -62,6 +82,28 @@ export default defineConfig({
             required: false,
             ui: {
               component: "tags",
+            },
+          },
+          {
+            type: "string",
+            name: "seoKeywords",
+            label: "SEO Keywords",
+            list: true,
+            required: false,
+            ui: {
+              component: "tags",
+              description:
+                "Optional. Focus keywords for this article (e.g. “pakistan family law”, “child custody rights”).",
+            },
+          },
+          {
+            type: "image",
+            name: "seoImage",
+            label: "SEO / Social Image",
+            required: false,
+            ui: {
+              description:
+                "Optional. Image used for social previews (Open Graph & Twitter). Recommended 1200x630px.",
             },
           },
           {

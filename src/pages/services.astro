@@ -4,10 +4,13 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import userConfig from "../config//SiteConfig/config.json";
 import Analytics from "@vercel/analytics/astro";
-export const prerender = true;
 import ServicesPage from "../components/React/Services/Services";
 import FeatureFlag from "../config/FeatureFlag/featureflag.json";
 import SpeedInsights from "@vercel/speed-insights/astro";
+import { SEO } from "astro-seo";
+import { generateLegalServiceSchema } from "../utils/seoHelpers";
+
+export const prerender = true;
 
 try {
   if (!FeatureFlag.Services) {
@@ -16,15 +19,54 @@ try {
 } catch (error) {
   return Astro.redirect("/404");
 }
+
+const siteUrl = (Astro.site?.toString() || Astro.url.origin) as string;
+const ogImageUrl = new URL("/ShafiqLawAssociates.png", siteUrl).toString();
+const serviceListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "Legal Services",
+  description: "Comprehensive legal services offered by Shafiq Law Associates",
+  itemListElement: userConfig.services.map((service, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    item: generateLegalServiceSchema(service, siteUrl),
+  })),
+};
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <SpeedInsights />
-    <BaseHead
-      title={userConfig.SITE_TITLE}
-      description={userConfig.SITE_DESCRIPTION}
+    <BaseHead />
+    <SEO
+      title="Legal Services in Pakistan | Criminal, Family, Corporate Law | Shafiq Law"
+      description="Expert legal services in Pakistan: Criminal Defense, Family Law, Corporate Law, Property Disputes, Tax Law, Estate Planning, Immigration Law, and Personal Injury. Trusted lawyers in Rawalpindi."
+      canonical={Astro.url.href}
+      openGraph={{
+        basic: {
+          title: "Legal Services in Pakistan | Criminal, Family, Corporate Law | Shafiq Law",
+          type: "website",
+          image: ogImageUrl,
+          url: Astro.url.href,
+        },
+        optional: {
+          siteName: userConfig.SITE_TITLE,
+        },
+      }}
+      twitter={{
+        card: "summary_large_image",
+        title: "Legal Services in Pakistan | Criminal, Family, Corporate Law | Shafiq Law",
+        description:
+          "Expert legal services in Pakistan: Criminal Defense, Family Law, Corporate Law, Property Disputes, Tax Law, Estate Planning, Immigration Law, and Personal Injury.",
+        image: ogImageUrl,
+      }}
+    />
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(serviceListSchema)}
     />
     <Analytics />
   </head>

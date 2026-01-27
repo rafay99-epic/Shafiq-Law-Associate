@@ -1,16 +1,7 @@
 ---
 import UserConfig from "../config/SiteConfig/config.json";
 
-interface Props {
-  title: string;
-  description: string;
-  image?: string;
-}
-
-const { title, description, image = "/ShafiqLawAssociates.png" } = Astro.props;
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const siteUrl = Astro.site;
-const fullImageUrl = new URL(image, siteUrl);
+const siteUrl = (Astro.site?.toString() || Astro.url.origin) as string;
 ---
 
 <meta charset="utf-8" />
@@ -19,63 +10,5 @@ const fullImageUrl = new URL(image, siteUrl);
 <link rel="sitemap" href="/sitemap-index.xml" />
 <link rel="alternate" type="application/rss+xml" title={UserConfig.SITE_TITLE} href={new URL("rss.xml", siteUrl)} />
 <meta name="generator" content={Astro.generator} />
-
-<!-- Canonical URL -->
-<link rel="canonical" href={canonicalURL} />
-
-<!-- Primary Meta Tags -->
-<title>{title}</title>
-<meta name="title" content={title} />
-<meta name="description" content={description} />
-
-<!-- Open Graph / Facebook / LinkedIn / Instagram -->
-<meta property="og:type" content="website" />
-<meta property="og:url" content={siteUrl} />
-<meta property="og:title" content={title} />
-<meta property="og:description" content={description} />
-<meta property="og:image" content={fullImageUrl} />
-
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content={siteUrl} />
-<meta property="twitter:title" content={title} />
-<meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={fullImageUrl} />
-
-<!-- LinkedIn -->
-<meta property="linkedin:title" content={title} />
-<meta property="linkedin:description" content={description} />
-<meta property="linkedin:image" content={fullImageUrl} />
-<meta property="linkedin:url" content={siteUrl} />
-
-<!-- Instagram -->
-<meta property="instagram:title" content={title} />
-<meta property="instagram:description" content={description} />
-<meta property="instagram:image" content={fullImageUrl} />
-<meta property="instagram:url" content={siteUrl} />
-
 <link rel="stylesheet" href="/src/styles/global.css" />
-
-<!-- JSON-LD Structured Data for Google -->
-<script is:inline  lang="json" type="application/ld+json">
-{JSON.stringify({
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "name": title,
-  "description": description,
-  "url": siteUrl,
-  "image": fullImageUrl,
-  "author": {
-    "@type": "Person",
-    "name": "Syntax Lab",
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Shafiq Law Associates",
-    "logo": `${siteUrl}/shafiqLawchamber.svg`
-  }
-})}
-</script>
-
-
 <script is:inline defer src="https://cloud.umami.is/script.js" data-website-id="c75d1132-dfac-451b-b32d-0930c96056cd"></script>

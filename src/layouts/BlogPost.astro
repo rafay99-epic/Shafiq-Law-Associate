@@ -7,6 +7,7 @@ import FormattedDate from "../components/FormattedDate.astro";
 import FeatureFlag from "../config/FeatureFlag/featureflag.json";
 import { ArrowLeft, Calendar, Clock, Tag } from "lucide-react";
 import { GoogleFontsOptimizer } from "astro-google-fonts-optimizer";
+import { SEO } from "astro-seo";
 export const prerender = true;
 
 try {
@@ -18,7 +19,22 @@ try {
 }
 type Props = CollectionEntry<"blog">["data"];
 
-const { title, description, pubDate, tags } = Astro.props;
+const {
+  title,
+  description,
+  pubDate,
+  tags,
+  seoTitle,
+  seoDescription,
+  seoKeywords,
+  seoImage,
+} = Astro.props;
+
+const siteUrl = Astro.site;
+const ogImageUrl = new URL(
+  seoImage ?? "/ShafiqLawAssociates.png",
+  siteUrl,
+).toString();
 
 const readingTime = "5 min read";
 ---
@@ -26,6 +42,39 @@ const readingTime = "5 min read";
 <html lang="en">
   <head>
     <BaseHead title={title} description={description} />
+    <SEO
+      title={seoTitle ?? title}
+      description={seoDescription ?? description}
+      canonical={Astro.url.href}
+      openGraph={{
+        basic: {
+          title: seoTitle ?? title,
+          type: "article",
+          image: ogImageUrl,
+          url: Astro.url.href,
+        },
+        article: {
+          publishedTime: pubDate.toISOString(),
+          tags: tags ?? [],
+        },
+      }}
+      twitter={{
+        title: seoTitle ?? title,
+        description: seoDescription ?? description,
+        image: ogImageUrl,
+      }}
+      extend={{
+        meta:
+          seoKeywords && seoKeywords.length > 0
+            ? [
+                {
+                  name: "keywords",
+                  content: seoKeywords.join(", "),
+                },
+              ]
+            : [],
+      }}
+    />
     <GoogleFontsOptimizer
       url="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
     />

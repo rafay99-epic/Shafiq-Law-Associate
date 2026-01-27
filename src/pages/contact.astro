@@ -8,6 +8,9 @@ import ContactForm from "../components/React/Contact/ContactForm";
 import FeatureFlag from "../config/FeatureFlag/featureflag.json";
 import SpeedInsights from "@vercel/speed-insights/astro";
 import { GoogleFontsOptimizer } from "astro-google-fonts-optimizer";
+import { SEO } from "astro-seo";
+import { generateContactPageSchema } from "../utils/seoHelpers";
+
 export const prerender = true;
 
 try {
@@ -17,15 +20,44 @@ try {
 } catch (error) {
   return Astro.redirect("/404");
 }
+
+const siteUrl = (Astro.site?.toString() || Astro.url.origin) as string;
+const ogImageUrl = new URL("/ShafiqLawAssociates.png", siteUrl).toString();
+const contactPageSchema = generateContactPageSchema(siteUrl, userConfig);
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <SpeedInsights />
-    <BaseHead
-      title={`Contact Us | ${userConfig.SITE_TITLE}`}
-      description="Get in touch with Shafiq Law Chamber for expert legal assistance. Schedule a free consultation today."
+    <BaseHead />
+    <SEO
+      title="Contact Us | Expert Legal Consultation | Shafiq Law Associates"
+      description="Contact Shafiq Law Associates in Rawalpindi, Pakistan. Two convenient office locations with flexible hours. Call +92 300 9817389 or email slclaw@gmail.com for expert legal consultation."
+      canonical={Astro.url.href}
+      openGraph={{
+        basic: {
+          title: "Contact Us | Expert Legal Consultation | Shafiq Law Associates",
+          type: "website",
+          image: ogImageUrl,
+          url: Astro.url.href,
+        },
+        optional: {
+          siteName: userConfig.SITE_TITLE,
+        },
+      }}
+      twitter={{
+        card: "summary_large_image",
+        title: "Contact Us | Expert Legal Consultation | Shafiq Law Associates",
+        description:
+          "Contact Shafiq Law Associates in Rawalpindi, Pakistan. Two convenient office locations with flexible hours.",
+        image: ogImageUrl,
+      }}
+    />
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(contactPageSchema)}
     />
     <Analytics />
     <GoogleFontsOptimizer

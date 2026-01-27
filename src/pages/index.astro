@@ -14,6 +14,12 @@ import PricingSection from "../components/React/Pricing/PricingPackage";
 import FeatureFlag from "../config/FeatureFlag/featureflag.json";
 import SpeedInsights from "@vercel/speed-insights/astro";
 import { GoogleFontsOptimizer } from "astro-google-fonts-optimizer";
+import { SEO } from "astro-seo";
+import {
+  generateOrganizationSchema,
+  generateWebSiteSchema,
+} from "../utils/seoHelpers";
+
 export const prerender = true;
 
 try {
@@ -37,15 +43,61 @@ const posts = rawPosts
     tags: post.data.tags || [],
   }))
   .sort((a, b) => b.pubDate.getTime() - a.pubDate.getTime());
+
+const siteUrl = (Astro.site?.toString() || Astro.url.origin) as string;
+const ogImageUrl = new URL(userConfig.organizationLogo, siteUrl).toString();
+const organizationSchema = generateOrganizationSchema(siteUrl, userConfig);
+const websiteSchema = generateWebSiteSchema(siteUrl, userConfig.SITE_TITLE);
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <SpeedInsights />
-    <BaseHead
-      title={userConfig.SITE_TITLE}
-      description={userConfig.SITE_DESCRIPTION}
+    <BaseHead />
+    <SEO
+      title="Expert Legal Services in Pakistan | Shafiq Law Associates"
+      description="Shafiq Law Associates provides expert legal services in Pakistan including criminal defense, family law, corporate law, property disputes, and more. Trusted legal representation in Rawalpindi."
+      canonical={Astro.url.href}
+      openGraph={{
+        basic: {
+          title: "Expert Legal Services in Pakistan | Shafiq Law Associates",
+          type: "website",
+          image: ogImageUrl,
+          url: Astro.url.href,
+        },
+        optional: {
+          siteName: userConfig.SITE_TITLE,
+          description:
+            "Shafiq Law Associates provides expert legal services in Pakistan including criminal defense, family law, corporate law, property disputes, and more. Trusted legal representation in Rawalpindi.",
+        },
+      }}
+      twitter={{
+        card: "summary_large_image",
+        title: "Expert Legal Services in Pakistan | Shafiq Law Associates",
+        description:
+          "Shafiq Law Associates provides expert legal services in Pakistan including criminal defense, family law, corporate law, property disputes, and more.",
+        image: ogImageUrl,
+      }}
+      extend={{
+        meta: [
+          {
+            name: "keywords",
+            content:
+              "legal services Pakistan, criminal defense, family law, corporate law, property disputes, Rawalpindi lawyer, legal consultation Pakistan",
+          },
+        ],
+      }}
+    />
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(organizationSchema)}
+    />
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(websiteSchema)}
     />
     <Analytics />
     <GoogleFontsOptimizer
