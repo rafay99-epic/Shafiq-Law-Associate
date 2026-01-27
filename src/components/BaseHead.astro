@@ -1,5 +1,6 @@
 ---
 import UserConfig from "../config/SiteConfig/config.json";
+import "../styles/global.css";
 
 const siteUrl = (Astro.site?.toString() || Astro.url.origin) as string;
 ---
@@ -18,7 +19,6 @@ const siteUrl = (Astro.site?.toString() || Astro.url.origin) as string;
   href={new URL("rss.xml", siteUrl)}
 />
 <meta name="generator" content={Astro.generator} />
-<link rel="stylesheet" href="/src/styles/global.css" />
 <script
   is:inline
   defer
