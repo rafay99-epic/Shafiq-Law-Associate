@@ -6,9 +6,21 @@ const siteUrl = (Astro.site?.toString() || Astro.url.origin) as string;
 
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<link rel="icon" type="image/svg+xml" href="/shafiqLawchamber.svg" />
+<!-- Primary favicon: firm logo -->
+<link rel="icon" type="image/svg+xml" href="/Images/logo-2.svg" />
+<!-- Fallback for older browsers (uses the same logo as SVG converted to PNG if needed) -->
+<link rel="alternate icon" href="/favicon.svg" />
 <link rel="sitemap" href="/sitemap-index.xml" />
-<link rel="alternate" type="application/rss+xml" title={UserConfig.SITE_TITLE} href={new URL("rss.xml", siteUrl)} />
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  title={UserConfig.SITE_TITLE}
+  href={new URL("rss.xml", siteUrl)}
+/>
 <meta name="generator" content={Astro.generator} />
 <link rel="stylesheet" href="/src/styles/global.css" />
-<script is:inline defer src="https://cloud.umami.is/script.js" data-website-id="c75d1132-dfac-451b-b32d-0930c96056cd"></script>
+<script
+  is:inline
+  defer
+  src="https://cloud.umami.is/script.js"
+  data-website-id="c75d1132-dfac-451b-b32d-0930c96056cd"></script>
